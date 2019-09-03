@@ -8,10 +8,6 @@ import com.tokyonth.weather.model.bean.entity.Index;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class Weather {
 
     private int status;

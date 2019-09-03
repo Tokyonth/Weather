@@ -2,10 +2,6 @@ package com.tokyonth.weather.model.bean;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2017/8/27 0027.
- */
-
 public class DefaultCity extends DataSupport {
 
     private String cityName;

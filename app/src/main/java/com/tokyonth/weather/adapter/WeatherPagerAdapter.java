@@ -6,10 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class WeatherPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragmentList;

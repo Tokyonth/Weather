@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.activity;
+package com.tokyonth.weather.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +12,6 @@ import com.tokyonth.weather.adapter.WarningAdapter;
 
 public class WarningActivity extends AppCompatActivity {
 
-    private WarningAdapter mWarningAdapter;
-    private RecyclerView mWarningRv;
-    private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +20,14 @@ public class WarningActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mWarningRv = (RecyclerView) findViewById(R.id.warning_rv);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        RecyclerView mWarningRv = (RecyclerView) findViewById(R.id.warning_rv);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("气象预警");
 
-        mWarningAdapter = new WarningAdapter(this);
+        WarningAdapter mWarningAdapter = new WarningAdapter(this);
         mWarningRv.setLayoutManager(new LinearLayoutManager(this));
         mWarningRv.setAdapter(mWarningAdapter);
     }

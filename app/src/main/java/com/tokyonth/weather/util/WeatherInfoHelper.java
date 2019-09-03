@@ -1,6 +1,7 @@
 package com.tokyonth.weather.util;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
@@ -9,10 +10,6 @@ import com.tokyonth.weather.model.bean.entity.Hourly;
 
 import java.util.Calendar;
 import java.util.List;
-
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
 
 public class WeatherInfoHelper {
 
@@ -117,29 +114,36 @@ public class WeatherInfoHelper {
         return weatherImagePath;
     }
 
-    public static int getWeatherColor(String img){
+    public static Drawable getWeatherColor(String img){
         Resources resources = BaseApplication.getContext().getResources();
-        int weatherColor = 0;
+        Drawable weatherDrawable = null;
         if (!img.isEmpty()) {
             int imgCode = Integer.parseInt(img);
             if(imgCode == 0){
-                weatherColor = resources.getColor(R.color.sunny);
+              //  weatherColor = resources.getColor(R.color.sunny);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_sunny);
             }else if(imgCode == 1 || imgCode == 2){
-                weatherColor = resources.getColor(R.color.cloudy_overcast);
+                //weatherColor = resources.getColor(R.color.cloudy_overcast);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_cloudy);
             }else if(imgCode >= 3 && imgCode <= 12 || imgCode == 19 || imgCode>= 21 && imgCode <= 25 || imgCode == 301){
-                weatherColor = resources.getColor(R.color.rain);
+                //weatherColor = resources.getColor(R.color.rain);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_rain);
             }else if(imgCode >= 13 && imgCode <= 17 || imgCode >= 26 && imgCode <= 28 || imgCode == 302){
-                weatherColor = resources.getColor(R.color.snow);
+               // weatherColor = resources.getColor(R.color.snow);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_snow);
             }else if(imgCode == 18 || imgCode == 32 || imgCode == 49 || imgCode == 57 || imgCode == 58){
-                weatherColor = resources.getColor(R.color.fog);
+                //weatherColor = resources.getColor(R.color.fog);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_fog);
             }else if(imgCode == 20 || imgCode == 29 || imgCode == 30 || imgCode == 31){
-                weatherColor = resources.getColor(R.color.sand);
+               // weatherColor = resources.getColor(R.color.sand);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_sandstorm);
             }else if(imgCode >= 53 && imgCode <= 56){
-                weatherColor = resources.getColor(R.color.haze);
+               // weatherColor = resources.getColor(R.color.haze);
+                weatherDrawable = resources.getDrawable(R.drawable.bkg_haze);
             }
-            return weatherColor;
+            return weatherDrawable;
         }
-        return weatherColor;
+        return weatherDrawable;
     }
 
     public static int getAirqualityColor(String airquality){

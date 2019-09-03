@@ -7,7 +7,6 @@ import com.tokyonth.weather.presenter.OnWeatherListener;
 public interface WeatherModel {
 
     void loadCityWeather(SavedCity savedCity, OnWeatherListener listener);
-
     void loadLocationWeather(DefaultCity defaultCity, OnWeatherListener listener);
 
 }

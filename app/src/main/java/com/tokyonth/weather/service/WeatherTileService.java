@@ -15,7 +15,7 @@ import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.presenter.OnWeatherListener;
 import com.tokyonth.weather.util.WeatherInfoHelper;
-import com.tokyonth.weather.view.activity.MainActivity;
+import com.tokyonth.weather.activity.MainActivity;
 
 import org.litepal.crud.DataSupport;
 
@@ -68,4 +68,5 @@ public class WeatherTileService extends TileService implements OnWeatherListener
     public void loadOffline() {
 
     }
+
 }

@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.fragment.component.base;
+package com.tokyonth.weather.fragment.component.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,10 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-/**
- * Created by Administrator on 2017/9/6 0006.
- */
 
 public abstract class BaseFragment extends Fragment {
 

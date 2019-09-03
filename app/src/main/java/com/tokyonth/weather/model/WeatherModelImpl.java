@@ -1,7 +1,5 @@
 package com.tokyonth.weather.model;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
@@ -35,7 +33,6 @@ public class WeatherModelImpl implements WeatherModel {
                         public void onSubscribe(Disposable d) {
 
                         }
-
                         @Override
                         public void onNext(Weather weather) {
                             listener.loadSuccess(weather);
@@ -44,7 +41,6 @@ public class WeatherModelImpl implements WeatherModel {
                         @Override
                         public void onError(Throwable e) {
                         }
-
                         @Override
                         public void onComplete() {
 
@@ -53,7 +49,6 @@ public class WeatherModelImpl implements WeatherModel {
         } else {
             listener.loadFailure("网络访问错误，请检查网络连接是否正常。");
         }
-
     }
 
     @Override
@@ -97,7 +92,7 @@ public class WeatherModelImpl implements WeatherModel {
                         public void onComplete() {
                         }
                     });
-        }else {
+        } else {
             listener.loadFailure("网络访问错误，请检查网络连接是否正常。");
         }
 

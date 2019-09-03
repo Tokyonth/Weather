@@ -8,10 +8,6 @@ import com.tokyonth.weather.BaseApplication;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
-/**
- * Created by Administrator on 2017/4/18.
- */
-
 public class NetworkUtil {
 
     public static boolean isNetworkConnected(){
@@ -40,7 +36,5 @@ public class NetworkUtil {
         }
         return false;
     }
-
-
 
 }

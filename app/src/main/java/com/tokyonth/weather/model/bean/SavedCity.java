@@ -2,10 +2,6 @@ package com.tokyonth.weather.model.bean;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2017/8/20 0020.
- */
-
 public class SavedCity extends DataSupport {
 
     private String cityId;
@@ -14,6 +10,7 @@ public class SavedCity extends DataSupport {
     private String cityName;
 
     public SavedCity() {
+
     }
 
     public SavedCity(String cityId, String parentId, String cityCode, String cityName) {

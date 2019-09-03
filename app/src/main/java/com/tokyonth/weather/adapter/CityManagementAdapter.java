@@ -1,6 +1,7 @@
 package com.tokyonth.weather.adapter;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
@@ -31,13 +33,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/8/22 0022.
- */
-
 public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final String TAG = "CityManagementAdapter";
 
     private static final int HEADER = 0;
     private static final int NORMAL = 1;
@@ -80,11 +76,12 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((DefaultCityViewHolder)holder).cityName.setText(defaultCity.getCityName());
             int temp = PreferencesLoader.getInt(PreferencesLoader.DEFAULT_CITY_TEMP,0);
             int img = PreferencesLoader.getInt(PreferencesLoader.DEFAULT_CITY_IMG,0);
-            ((DefaultCityViewHolder)holder).tempTv.setText(String.valueOf(temp));
-            int color = WeatherInfoHelper.getWeatherColor(String.valueOf(img));
+            ((DefaultCityViewHolder)holder).tempTv.setText(String.valueOf(temp) + " °C");
+            Drawable drawable = WeatherInfoHelper.getWeatherColor(String.valueOf(img));
             int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(String.valueOf(img));
-            ((DefaultCityViewHolder)holder).cardView.setCardBackgroundColor(color);
+            ((DefaultCityViewHolder)holder).weatherBg.setImageDrawable(drawable);
             ((DefaultCityViewHolder)holder).weatherImageIv.setImageResource(weatherImagePath);
+        //    ((DefaultCityViewHolder)holder).imageViewLocal.setImageDrawable(BaseApplication.getContext().getResources().getDrawable(R.drawable.ic_location));
             ((DefaultCityViewHolder)holder).view.setOnClickListener(v -> {
                 EventBus.getDefault().post(defaultCity);
                 defaultClickListener.onClick();
@@ -121,9 +118,9 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                     @Override
                     public void onNext(Weather weather) {
-                        int color = WeatherInfoHelper.getWeatherColor(weather.getInfo().getImg());
-                        holder.cardView.setCardBackgroundColor(color);
-                        holder.tempTv.setText(weather.getInfo().getTemp());
+                        Drawable drawable = WeatherInfoHelper.getWeatherColor(weather.getInfo().getImg());
+                        holder.weatherBg.setImageDrawable(drawable);
+                        holder.tempTv.setText(weather.getInfo().getTemp() + " °C");
                         int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
                         holder.weatherImageIv.setImageResource(weatherImagePath);
                     }
@@ -154,12 +151,12 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView cityName;
         private EnglishTextView tempTv;
         private ImageView weatherImageIv;
-        private CardView cardView;
+        private ImageView weatherBg;
 
         public CityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            cardView = (CardView) itemView.findViewById(R.id.city_management_cv);
+            weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);
             cityName = (TextView) itemView.findViewById(R.id.city_management_city_name_tv);
             tempTv = (EnglishTextView) itemView.findViewById(R.id.city_management_weather_temp_tv);
             weatherImageIv = (ImageView) itemView.findViewById(R.id.city_management_weather_image_iv);
@@ -173,12 +170,12 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView cityName;
         private EnglishTextView tempTv;
         private ImageView weatherImageIv;
-        private CardView cardView;
+        private ImageView weatherBg;
 
         public DefaultCityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            cardView = (CardView) itemView.findViewById(R.id.city_management_default_cv);
+            weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);
             cityName = (TextView) itemView.findViewById(R.id.city_management_default_city_name_tv);
             tempTv = (EnglishTextView) itemView.findViewById(R.id.city_management_default_weather_temp_tv);
             weatherImageIv = (ImageView) itemView.findViewById(R.id.city_management_default_weather_image_iv);

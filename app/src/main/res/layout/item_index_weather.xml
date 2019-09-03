@@ -12,6 +12,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="12dp"
+            android:tint="@android:color/white"
             tools:src="@drawable/index_air_conditioning"/>
 
         <LinearLayout
@@ -28,7 +29,7 @@
                 android:textSize="16sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 tools:text="较适宜"/>
 
             <TextView
@@ -40,6 +41,7 @@
                 android:paddingBottom="6dp"
                 android:lineSpacingExtra="2dp"
                 android:textSize="12sp"
+                android:textColor="@android:color/white"
                 tools:text="天气较好，无雨水困扰，较适宜进行各种运动，但因气温较低，在户外运动请注意增减衣物。"/>
 
         </LinearLayout>

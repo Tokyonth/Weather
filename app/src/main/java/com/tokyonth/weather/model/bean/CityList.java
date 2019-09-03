@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/20 0020.
- */
-
 public class CityList {
 
     private int status;

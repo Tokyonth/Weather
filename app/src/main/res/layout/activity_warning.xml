@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_background"
-    tools:context=".view.activity.WarningActivity">
+    tools:context=".activity.WarningActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

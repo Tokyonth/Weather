@@ -18,6 +18,13 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
+        <ImageView
+            android:id="@+id/city_management_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/city_other_cloudy"
+            android:scaleType="fitXY"/>
+
         <TextView
             android:id="@+id/city_management_default_city_name_tv"
             android:layout_width="wrap_content"

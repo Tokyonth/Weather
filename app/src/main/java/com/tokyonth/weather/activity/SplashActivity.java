@@ -1,14 +1,8 @@
-package com.tokyonth.weather.view.activity;
+package com.tokyonth.weather.activity;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -22,7 +16,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -43,10 +36,7 @@ import java.util.List;
 public class SplashActivity extends AppCompatActivity {
 
     private static final int PERMISSION = 1;
-    private ImageView loadingIv;
-    private TextView loadingTextTv;
     private RelativeLayout containerRl;
-    private CityPresenter cityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +64,13 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         containerRl = (RelativeLayout) findViewById(R.id.splash_container_rl);
-        loadingIv = (ImageView) findViewById(R.id.splash_loading_iv);
-        loadingTextTv = (TextView) findViewById(R.id.splash_loading_text_tv);
+        ImageView loadingIv = (ImageView) findViewById(R.id.splash_loading_iv);
+        //loadingTextTv = (TextView) findViewById(R.id.splash_loading_text_tv);
 
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         loadingIv.startAnimation(rotateAnimation);
 
-        cityPresenter = new CityPresenterImpl();
+        CityPresenter cityPresenter = new CityPresenterImpl();
         cityPresenter.saveCityList(new LoadCitySituationListener() {
             @Override
             public void Success() {
@@ -148,22 +138,20 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION:
-                if (grantResults.length > 0) {
-                    for (int result : grantResults) {
-                        if (result != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(this, "必须同意所有权限才能使用本应用程序！", Toast.LENGTH_SHORT).show();
-                            finish();
-                            return;
-                        }
+        if (requestCode == PERMISSION) {
+            if (grantResults.length > 0) {
+                for (int result : grantResults) {
+                    if (result != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(this, "必须同意所有权限才能使用本应用程序！", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
                     }
-                    startHomeActivity();
-                } else {
-                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
-                break;
+                startHomeActivity();
+            } else {
+                Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 

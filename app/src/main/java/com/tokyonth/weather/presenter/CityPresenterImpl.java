@@ -4,7 +4,6 @@ import com.tokyonth.weather.model.CityLoadModel;
 import com.tokyonth.weather.model.CityModel;
 import com.tokyonth.weather.model.CityModelImpl;
 
-
 public class CityPresenterImpl implements CityPresenter {
 
     private CityModel cityModel;

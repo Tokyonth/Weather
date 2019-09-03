@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/transparent">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="22dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_temp"
+                android:layout_width="@dimen/default_weather_image_view_size"
+                android:layout_height="@dimen/default_weather_image_view_size"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentLeft="true"
+                android:tint="@android:color/white"
+                android:src="@drawable/icon_temp"/>
+
+            <com.tokyonth.weather.util.EnglishTextView
+                android:id="@+id/weather_temp_max_min_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                tools:text="7:00\n18:54" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/weather_airquality_image_iv"
+                    android:layout_width="@dimen/default_weather_image_view_size"
+                    android:layout_height="@dimen/default_weather_image_view_size"
+                    android:tint="@android:color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="6dp"
+                    android:src="@drawable/icon_airquality"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/weather_airquality_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="6dp"
+                tools:text="轻度污染"
+                android:textColor="@color/colorWhite"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/weather_weather_text_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorWhite"
+                tools:text="多云"/>
+
+            <ImageView
+                android:id="@+id/weather_weather_text_image_iv"
+                android:layout_width="@dimen/default_weather_image_view_size"
+                android:layout_height="@dimen/default_weather_image_view_size"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:tint="@android:color/white"
+                android:layout_marginRight="12dp"
+                android:layout_toLeftOf="@id/weather_weather_text_tv"
+                android:src="@drawable/weather_cloudy"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="22dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/default_weather_image_view_size"
+                android:layout_height="@dimen/default_weather_image_bottom_size"
+                android:tint="@android:color/white"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_humidity"/>
+
+            <com.tokyonth.weather.util.EnglishTextView
+                android:id="@+id/weather_humidity_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/text_view_padding"
+                android:textColor="@color/colorWhite"
+                tools:text="86%"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="@dimen/default_weather_image_view_size"
+                    android:layout_height="@dimen/default_weather_image_bottom_size"
+                    android:layout_weight="1"
+                    android:tint="@android:color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="6dp"
+                    android:src="@drawable/icon_wind"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/weather_wind_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="6dp"
+                tools:text="东北风\n4级"
+                android:textColor="@color/colorWhite"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.tokyonth.weather.util.EnglishTextView
+                android:id="@+id/weather_sun_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorWhite"
+                tools:text="7:00\n18:54"/>
+
+            <ImageView
+                android:layout_width="@dimen/default_weather_image_view_size"
+                android:layout_height="@dimen/default_weather_image_view_size"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:tint="@android:color/white"
+                android:layout_toLeftOf="@id/weather_sun_tv"
+                android:src="@drawable/icon_sun"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

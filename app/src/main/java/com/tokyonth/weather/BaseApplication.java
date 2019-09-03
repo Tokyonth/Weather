@@ -4,14 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.squareup.leakcanary.LeakCanary;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.util.data.FileUtil;
 
 import org.litepal.LitePal;
-
-/**
- * Created by Administrator on 2017/8/20 0020.
- */
 
 public class BaseApplication extends Application {
 
@@ -23,11 +20,11 @@ public class BaseApplication extends Application {
         super.onCreate();
         LitePal.initialize(this);
         context = getApplicationContext();
-        LeakCanary.install(this);
 
         if (!FileUtil.isFile("save_weather.json")) {
             FileUtil.saveFile("", "save_weather.json");
         }
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static Context getContext(){

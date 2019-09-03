@@ -14,6 +14,4 @@ import java.io.File;
 
 public class WeatherSystemBarService {
 
-
-
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_background"
-    tools:context=".view.activity.SettingsActivity">
+    tools:context=".activity.SettingsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -28,6 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/settingsFragment"
-        android:name="com.tokyonth.weather.view.fragment.SettingsFragment"/>
+        android:name="com.tokyonth.weather.fragment.SettingsFragment"/>
 
 </LinearLayout>

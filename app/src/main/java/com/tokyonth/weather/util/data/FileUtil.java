@@ -15,7 +15,7 @@ public class FileUtil {
     private static Context context = BaseApplication.getContext();
     private static File file_path = context.getExternalCacheDir();
 
-    //本地保存文件名字。。
+    //本地保存文件名字
     public static String SAVE_WEATHER_NAME = "save_weather.json";
     public static String PRECISE_LOCATION_NAME = "precise_location";
 
@@ -95,7 +95,6 @@ public class FileUtil {
             e.printStackTrace();
             return null;
         }
-
     }
 
 }

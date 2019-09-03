@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.activity;
+package com.tokyonth.weather.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,8 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

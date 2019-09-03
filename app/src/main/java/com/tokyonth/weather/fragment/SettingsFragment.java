@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.fragment;
+package com.tokyonth.weather.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

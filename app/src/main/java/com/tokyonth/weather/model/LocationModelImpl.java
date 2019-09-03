@@ -7,6 +7,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.util.data.FileUtil;
@@ -38,7 +39,7 @@ public class LocationModelImpl implements LocationModel {
         AMapLocationClientOption mOption = new AMapLocationClientOption();
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
         mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
-        mOption.setHttpTimeOut(10000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效(已设置10秒超时)
+        mOption.setHttpTimeOut(8000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效(已设置8秒超时)
         mOption.setInterval(1000);//可选，设置定位间隔。默认为2秒(已设置1秒)
         mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
         mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
@@ -65,7 +66,9 @@ public class LocationModelImpl implements LocationModel {
                     String districtName = aMapLocation.getDistrict();
                     String longitude = String.valueOf(aMapLocation.getLongitude());
                     String latitude = String.valueOf(aMapLocation.getLatitude());
-                    DefaultCity defaultCity = new DefaultCity(districtName,cityName,longitude,latitude);
+                //    DefaultCity defaultCity = new DefaultCity(districtName,cityName,longitude,latitude);
+
+                    DefaultCity defaultCity = new DefaultCity(cityName,districtName,longitude,latitude);
 
                     if(DataSupport.count(DefaultCity.class) == 0){
                         defaultCity.save();
@@ -78,14 +81,14 @@ public class LocationModelImpl implements LocationModel {
                     String precise_location = aMapLocation.getAddress().substring(aMapLocation.getAddress().indexOf(aMapLocation.getDistrict())
                             + aMapLocation.getDistrict().length(), aMapLocation.getAddress().lastIndexOf(""));
                     FileUtil.saveFile(precise_location, FileUtil.PRECISE_LOCATION_NAME);
-                    Log.d("高德定位", "定位成功");
-                    Log.d("经纬度--------->", districtName  + "----" + longitude + "," + latitude);
+                    Logger.d("高德定位 定位成功");
+                    Logger.d("经纬度 " + districtName  + "----" + longitude + "," + latitude);
                 } else {
                     //定位失败
-                    Log.d("高德定位", "定位失败");
+                    Logger.d("高德定位 定位失败");
                 }
             } else {
-                Log.d("高德定位", "定位失败");
+                Logger.d("高德定位 定位失败");
             }
 
             if (!location_tag) {
@@ -96,7 +99,6 @@ public class LocationModelImpl implements LocationModel {
         }
 
     }
-
         /**
          * 开始定位
          *

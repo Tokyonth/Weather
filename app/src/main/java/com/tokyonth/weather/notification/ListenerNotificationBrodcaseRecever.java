@@ -16,7 +16,6 @@ public class ListenerNotificationBrodcaseRecever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int key = intent.getIntExtra("key", -1);
         NotificationTools.getInstance(context);
-
         mCallBack.callBack(key);
     }
 

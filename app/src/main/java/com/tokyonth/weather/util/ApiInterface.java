@@ -19,7 +19,4 @@ public interface ApiInterface {
     @GET("query")
     Observable<ResponseBody> getLocationWeather(@Query("appkey") String appkey, @Query("city") String location);
 
-   // @GET("query")
-  //  Observable<ResponseBody> getLocationWeatherJson(@Query("appkey") String appkey, @Query("location") String location);
-
 }

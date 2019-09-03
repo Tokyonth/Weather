@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2017/8/20 0020.
- */
-
 public class City extends DataSupport {
 
     @SerializedName("cityid")

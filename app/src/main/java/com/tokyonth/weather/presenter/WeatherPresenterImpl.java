@@ -7,10 +7,6 @@ import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.view.WeatherView;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class WeatherPresenterImpl implements WeatherPresenter, OnWeatherListener {
 
     private WeatherModel weatherModel;
@@ -30,8 +26,6 @@ public class WeatherPresenterImpl implements WeatherPresenter, OnWeatherListener
     public void getLocationWeather(DefaultCity defaultCity) {
         weatherModel.loadLocationWeather(defaultCity,this);
     }
-
-
 
     @Override
     public void loadSuccess(Weather weather) {

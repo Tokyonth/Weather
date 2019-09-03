@@ -32,7 +32,7 @@
             android:value="c8db2524c8687ebd2919d7942e9f8409"/>
 
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,14 +41,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SplashActivity" />
+        <activity android:name=".activity.SplashActivity" />
         <activity
-            android:name=".view.activity.WarningActivity"
+            android:name=".activity.WarningActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.CityActivity"
+            android:name=".activity.CityActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.SettingsActivity"/>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.SettingsActivity"/>
 
         <service android:name="com.amap.api.location.APSService" />
 

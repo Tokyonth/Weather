@@ -23,7 +23,9 @@ import android.widget.TextView;
 /**
  * @author kiva
  */
+
 final class StatusBarView {
+
     private static final float DEFAULT_TEXT_SIZE = 11f;
     private static final float DEFAULT_STATUS_BAR_HEIGHT = 25f;
     private static final long START_DELAY_SHOW = 350;

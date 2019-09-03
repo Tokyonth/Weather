@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.fragment.component;
+package com.tokyonth.weather.fragment.component;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -11,12 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.view.fragment.component.base.BaseFragment;
-
-
-/**
- * Created by Administrator on 2017/9/3 0003.
- */
+import com.tokyonth.weather.fragment.component.base.BaseFragment;
 
 public class SupportFragment extends BaseFragment {
 

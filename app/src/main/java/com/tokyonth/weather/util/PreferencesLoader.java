@@ -5,10 +5,6 @@ import android.preference.PreferenceManager;
 
 import com.tokyonth.weather.BaseApplication;
 
-/**
- * Created by Administrator on 2017/4/7.
- */
-
 public class PreferencesLoader {
 
     public static final String IMPORT_DATA = "import_data";
@@ -37,6 +33,5 @@ public class PreferencesLoader {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseApplication.getContext());
         return sp.getInt(name,strData);
     }
-
 
 }

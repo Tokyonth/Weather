@@ -14,6 +14,7 @@
         android:padding="@dimen/text_view_padding"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/colorWhite"
         android:textSize="16sp"
         tools:text="17"/>
 
@@ -25,6 +26,7 @@
         android:paddingTop="@dimen/text_view_padding"
         android:paddingBottom="@dimen/text_view_padding"
         android:layout_centerVertical="true"
+        android:textColor="@color/colorWhite"
         tools:text="星期一"/>
 
     <ImageView
@@ -34,6 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
+        android:tint="@color/colorWhite"
         tools:src="@drawable/weather_cloudy"/>
 
     <com.tokyonth.weather.util.EnglishTextView
@@ -45,7 +48,7 @@
         android:layout_marginRight="24dp"
         android:textSize="26sp"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         tools:text="26"/>
 
 </RelativeLayout>

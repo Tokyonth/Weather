@@ -12,6 +12,7 @@
 
     <color name="card_daily_night">#212121</color>
     <color name="color_background">#F5F5F5</color>
+    <color name="transparent_gray">#90000000</color>
 
     <color name="sunny">#80d8ff</color>
     <color name="cloudy_overcast">#757575</color>

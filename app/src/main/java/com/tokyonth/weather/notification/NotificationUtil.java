@@ -19,7 +19,6 @@ public class NotificationUtil {
     private static String CHECK_OP_NO_THROW = "checkOpNoThrow";
     private static String OP_POST_NOTIFICATION = "OP_POST_NOTIFICATION";
 
-
     public static boolean isOpenPermission(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//API19+
             if (!NotificationUtil.isNotifacationEnabled( context )) {

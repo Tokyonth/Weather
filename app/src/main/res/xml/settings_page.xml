@@ -52,6 +52,10 @@
             android:key="prefAndroid"
             android:title="捐赠" />
 
+        <Preference
+            android:key="prefAndroid"
+            android:title="检查更新" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

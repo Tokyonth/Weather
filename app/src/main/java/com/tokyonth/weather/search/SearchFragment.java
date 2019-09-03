@@ -83,7 +83,6 @@ public class SearchFragment extends DialogFragment implements
         ivSearchBack = view.findViewById(R.id.iv_search_back);
         etSearchKeyword = view.findViewById(R.id.et_search_keyword);
         rvSearchCity = view.findViewById(R.id.rv_search_history);
-        //searchUnderline = view.findViewById(R.id.search_underline);
         ivSearchClean = view.findViewById(R.id.iv_search_clean);
         viewSearchOutside = view.findViewById(R.id.view_search_outside);
 

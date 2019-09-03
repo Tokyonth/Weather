@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/transparent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weather_daily_day_weather_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
-    </android.support.v7.widget.RecyclerView>
+        android:overScrollMode="never"/>
 
 </FrameLayout>

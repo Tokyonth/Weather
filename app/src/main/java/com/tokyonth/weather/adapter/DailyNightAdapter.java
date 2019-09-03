@@ -15,10 +15,6 @@ import com.tokyonth.weather.util.WeatherInfoHelper;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/23 0023.
- */
-
 public class DailyNightAdapter extends RecyclerView.Adapter<DailyNightAdapter.NightViewHolder> {
 
     private List<Daily> dailyList;

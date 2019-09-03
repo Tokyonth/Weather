@@ -1,9 +1,6 @@
 package com.tokyonth.weather.model;
 
-import android.util.Log;
-
 import com.tokyonth.weather.model.bean.CityList;
-import com.tokyonth.weather.presenter.LoadCitySituationListener;
 import com.tokyonth.weather.util.Api;
 import com.tokyonth.weather.util.RetrofitFactory;
 
@@ -13,8 +10,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
-
 
 public class CityModelImpl implements CityModel {
 

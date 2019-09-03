@@ -5,9 +5,6 @@ import android.graphics.Typeface;
 
 import java.util.HashMap;
 
-/**
- * Created by Administrator on 2017/6/9.
- */
 
 public class FontHelper {
 

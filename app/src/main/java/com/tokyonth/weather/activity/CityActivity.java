@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.activity;
+package com.tokyonth.weather.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +32,9 @@ import java.util.List;
 
 public class CityActivity extends AppCompatActivity {
 
-    private RecyclerView cityRv;
-    private CoordinatorLayout cityManagementCoor;
+    private CoordinatorLayout cityManagement;
     private CityManagementAdapter adapter;
     private List<SavedCity> savedCityList;
-    private Toolbar toolbar;
-    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +49,10 @@ public class CityActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        cityManagementCoor = (CoordinatorLayout) findViewById(R.id.city_management_con);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        cityRv = (RecyclerView) findViewById(R.id.city_management_rv);
+        cityManagement = (CoordinatorLayout) findViewById(R.id.city_management_con);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        FloatingActionButton addCity = (FloatingActionButton) findViewById(R.id.fab);
+        RecyclerView cityRv = (RecyclerView) findViewById(R.id.city_management_rv);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,7 +65,7 @@ public class CityActivity extends AppCompatActivity {
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        fab.setOnClickListener(v -> {
+        addCity.setOnClickListener(v -> {
             SearchFragment searchFragment = SearchFragment.newInstance();
             searchFragment.showFragment(getSupportFragmentManager(),SearchFragment.TAG);
             searchFragment.setCitySelect(city -> {
@@ -77,7 +73,7 @@ public class CityActivity extends AppCompatActivity {
                     saveCity(city);
                     searchFragment.dismiss();
                 }else {
-                    Snackbar.make(cityManagementCoor,"该城市/省份没有天气代码，不能添加",Snackbar.LENGTH_LONG)
+                    Snackbar.make(cityManagement,"该城市/省份没有天气代码，不能添加",Snackbar.LENGTH_LONG)
                             .show();
                 }
             });
@@ -100,12 +96,12 @@ public class CityActivity extends AppCompatActivity {
             SavedCity savedCity = new SavedCity(city.getCityId(),city.getParentId(),city.getCityCode(),city.getCityName());
             if(!compareTwoCities(savedCity)){
                 savedCity.save();
-                Snackbar.make(cityManagementCoor,"添加成功",Snackbar.LENGTH_LONG)
+                Snackbar.make(cityManagement,"添加成功",Snackbar.LENGTH_LONG)
                         .show();
                 savedCityList.add(savedCity);
                 adapter.notifyDataSetChanged();
             }else {
-                Snackbar.make(cityManagementCoor,"该城市已经存在",Snackbar.LENGTH_LONG)
+                Snackbar.make(cityManagement,"该城市已经存在",Snackbar.LENGTH_LONG)
                         .show();
             }
         }
@@ -137,14 +133,12 @@ public class CityActivity extends AppCompatActivity {
         }
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()){
-                case R.id.city_management_popup_menu_delete:
-                    savedCityList.get(position).delete();
-                    savedCityList.remove(position);
-                    adapter.notifyItemRemoved(position);
-                    Snackbar.make(cityManagementCoor,"已删除",Snackbar.LENGTH_SHORT)
-                            .show();
-                    break;
+            if (item.getItemId() == R.id.city_management_popup_menu_delete) {
+                savedCityList.get(position).delete();
+                savedCityList.remove(position);
+                adapter.notifyItemRemoved(position);
+                Snackbar.make(cityManagement, "已删除", Snackbar.LENGTH_SHORT)
+                        .show();
             }
             return true;
         });

@@ -4,14 +4,9 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-/**
- * Created by Administrator on 2017/6/27.
- */
-
 public class EnglishTextView extends android.support.v7.widget.AppCompatTextView {
 
     public static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
-
 
     public EnglishTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,7 +35,5 @@ public class EnglishTextView extends android.support.v7.widget.AppCompatTextView
                 return FontHelper.getTypeface("DINPro_Regular.otf", context);
         }
     }
-
-
 
 }

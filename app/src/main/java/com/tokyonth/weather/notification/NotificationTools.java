@@ -14,7 +14,7 @@ import android.widget.RemoteViews;
 
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.view.activity.MainActivity;
+import com.tokyonth.weather.activity.MainActivity;
 
 import static android.app.Notification.VISIBILITY_SECRET;
 

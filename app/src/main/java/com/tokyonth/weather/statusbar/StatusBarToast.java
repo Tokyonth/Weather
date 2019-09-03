@@ -8,7 +8,9 @@ import android.support.v4.content.ContextCompat;
 /**
  * @author kiva
  */
+
 public class StatusBarToast {
+
     public static final long DURATION_UNLIMITED = 0;
     public static final long DURATION_SHORT = 1000;
     public static final long DURATION_LONG = 3000;
