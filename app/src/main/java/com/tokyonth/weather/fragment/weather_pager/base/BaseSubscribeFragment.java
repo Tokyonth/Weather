@@ -51,7 +51,7 @@ public class BaseSubscribeFragment extends Fragment {
 
     private RecyclerView hourlyRv;
     private HourlyAdapter hourlyAdapter;
- //   private LLineChartView lineChart;
+    //   private LLineChartView lineChart;
 
     private TextView levelTv , primaryPolluteTv , affectTv , pm25Tv , pm10Tv;
 //    private EnglishTextView updateTimeTv0;
@@ -84,8 +84,8 @@ public class BaseSubscribeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pager_default_weather,container,false);
-       // initView(view,savedInstanceState);
-       // lineChart = (LLineChartView) view.findViewById(R.id.line_chart);
+        // initView(view,savedInstanceState);
+        // lineChart = (LLineChartView) view.findViewById(R.id.line_chart);
         hourlyRv = (RecyclerView) view.findViewById(R.id.weather_hourly_rv);
         updateTimeTv = (EnglishTextView) view.findViewById(R.id.weather_update_time_tv);
         airQualityTv = (TextView) view.findViewById(R.id.weather_airquality_tv);
@@ -105,7 +105,7 @@ public class BaseSubscribeFragment extends Fragment {
         levelTv = (TextView) view.findViewById(R.id.aqi_quality_level_tv);
         primaryPolluteTv = (TextView) view.findViewById(R.id.aqi_primary_pollute_tv);
         affectTv = (TextView) view.findViewById(R.id.aqi_affect_tv);
-      //  updateTimeTv = (EnglishTextView) view.findViewById(R.id.aqi_update_time_tv);
+        //  updateTimeTv = (EnglishTextView) view.findViewById(R.id.aqi_update_time_tv);
         pm25Tv = (TextView) view.findViewById(R.id.aqi_pm25_tv);
         pm10Tv = (TextView) view.findViewById(R.id.aqi_pm10_tv);
 
@@ -125,7 +125,7 @@ public class BaseSubscribeFragment extends Fragment {
 
     @Subscribe
     public void setWeatherInfo(Weather weather){
-       // setWeather(weather);
+        // setWeather(weather);
         DefaultCity defaultCity = DataSupport.find(DefaultCity.class,1);
         String parentCityName = defaultCity.getParentCityName();
         //   if(weather.getInfo().getCityName().equals(parentCityName.substring(0,parentCityName.length()-1))
@@ -228,8 +228,8 @@ public class BaseSubscribeFragment extends Fragment {
                 leftInSet.setTarget(dailyNightFl);
                 rightOutSet.start();
                 leftInSet.start();
-             //   swtciRl.setBackgroundColor(getResources().getColor(R.color.card_daily_night));
-             //   titleTv.setTextColor(Color.WHITE);
+                //   swtciRl.setBackgroundColor(getResources().getColor(R.color.card_daily_night));
+                //   titleTv.setTextColor(Color.WHITE);
                 day_title_tv.setText("夜晚");
                 isShownBack = true;
 
@@ -243,8 +243,8 @@ public class BaseSubscribeFragment extends Fragment {
                 leftInSet.start();
                 isShownBack = false;
                 day_title_tv.setText("白天");
-              //  swtciRl.setBackgroundColor(Color.WHITE);
-              //  titleTv.setTextColor(Color.BLACK);
+                //  swtciRl.setBackgroundColor(Color.WHITE);
+                //  titleTv.setTextColor(Color.BLACK);
             }
         });
     }
