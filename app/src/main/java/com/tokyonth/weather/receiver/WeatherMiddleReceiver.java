@@ -14,7 +14,7 @@ import com.tokyonth.weather.model.WeatherModelImpl;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.presenter.OnWeatherListener;
-import com.tokyonth.weather.util.WeatherInfoHelper;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.activity.MainActivity;
 
 import org.litepal.crud.DataSupport;

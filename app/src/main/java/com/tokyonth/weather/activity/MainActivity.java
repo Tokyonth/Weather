@@ -4,35 +4,33 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.text.format.Time;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.BaseActivity;
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.adapter.HourlyAdapter;
 import com.tokyonth.weather.adapter.WeatherPagerAdapter;
-import com.tokyonth.weather.dynamicweather.BaseDrawer;
-import com.tokyonth.weather.dynamicweather.DynamicWeatherView;
-import com.tokyonth.weather.fragment.component.SupportFragment;
-import com.tokyonth.weather.fragment.weather_pager.base.BaseSubscribeFragment;
-import com.tokyonth.weather.listener.WeatherViewPagerListener;
+import com.tokyonth.weather.dynamic.BaseDrawer;
+import com.tokyonth.weather.dynamic.DynamicWeatherView;
+import com.tokyonth.weather.entirety.FragmentLifecycle;
+import com.tokyonth.weather.fragment.WeatherPageBrief;
+import com.tokyonth.weather.fragment.WeatherPageDetailed;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
@@ -40,11 +38,11 @@ import com.tokyonth.weather.presenter.LocationPresenter;
 import com.tokyonth.weather.presenter.LocationPresenterImpl;
 import com.tokyonth.weather.presenter.WeatherPresenter;
 import com.tokyonth.weather.presenter.WeatherPresenterImpl;
-import com.tokyonth.weather.util.PhoneUtil;
-import com.tokyonth.weather.util.PreferencesLoader;
-import com.tokyonth.weather.util.RefreshWeather;
-import com.tokyonth.weather.util.WeatherInfoHelper;
-import com.tokyonth.weather.util.data.FileUtil;
+import com.tokyonth.weather.utils.sundry.PhoneUtil;
+import com.tokyonth.weather.utils.sundry.PreferencesLoader;
+import com.tokyonth.weather.utils.RefreshWeather;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
+import com.tokyonth.weather.utils.file.FileUtil;
 import com.tokyonth.weather.view.WeatherView;
 import com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout;
 
@@ -60,8 +58,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
 
     private WeatherPresenter weather_presenter;
     private DynamicWeatherView weatherView;
- //   private ViewPager weatherViewPager;
-    private WeatherPagerAdapter adapter;
     private VerticalSwipeRefreshLayout weatherRefresh;
     private CoordinatorLayout weatherBasic;
 
@@ -70,8 +66,11 @@ public class MainActivity extends BaseActivity implements WeatherView {
     private Weather offline_weather;
 
     private boolean isDefaultCity = true;
-    public List<Fragment> fragmentList;
-   // public ImageButton toStartIb, toEndIb;
+    private ViewPager2 weather_page;
+    private WeatherPagerAdapter weather_page_adapter;
+
+    public LinearLayout main_ll;
+    private ImageView default_city_iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +103,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
         }
     }
 
-
     private void initLayout() {
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -114,58 +112,46 @@ public class MainActivity extends BaseActivity implements WeatherView {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        /*SummaryFragment dwf = new SummaryFragment();
-        HourlyFragment hourlyFragment = new HourlyFragment();
-        DailyFragment dailyFragment = new DailyFragment();
-        AqiFragment aqiFragment = new AqiFragment();
-        IndexFragment indexFragment = new IndexFragment();
-        fragmentList = new ArrayList<>();
-        fragmentList.add(dwf);
-        fragmentList.add(hourlyFragment);
-        fragmentList.add(dailyFragment);
-        fragmentList.add(aqiFragment);
-        fragmentList.add(indexFragment);*/
-       // adapter = new WeatherPagerAdapter(getSupportFragmentManager(),fragmentList);
+        WeatherPageBrief weatherPageBrief = new WeatherPageBrief();
+        WeatherPageDetailed weatherPageDetailed = new WeatherPageDetailed();
+        List<Fragment> page_list = new ArrayList<>();
+        page_list.add(weatherPageBrief);
+        page_list.add(weatherPageDetailed);
+        weather_page_adapter = new WeatherPagerAdapter(getSupportFragmentManager(), new FragmentLifecycle(), page_list);
 
-       // SummaryFragment dwf = new SummaryFragment();
-        BaseSubscribeFragment supportFragment = null;
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (supportFragment == null){
-            supportFragment = new BaseSubscribeFragment();
-            transaction.add(R.id.main_frame_layout, supportFragment);
-        }
-        if(supportFragment != null){
-            transaction.hide(supportFragment);
-        }
-        transaction.show(supportFragment);
-        transaction.commit();
     }
 
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_title_more));
         setSupportActionBar(toolbar);
-        setTitle("");
+        setTitle(null);
 
+        default_city_iv = (ImageView) findViewById(R.id.default_city_iv);
+        main_ll = (LinearLayout) findViewById(R.id.main_ll);
         toolbar_tv_city = (TextView) findViewById(R.id.weather_city_name_tv);
         weatherBasic = (CoordinatorLayout) findViewById(R.id.weather_basic_coor);
         weatherRefresh = (VerticalSwipeRefreshLayout) findViewById(R.id.refresh_city);
         weatherView = (DynamicWeatherView) findViewById(R.id.weather_weatherview_container_rl);
-       // weatherViewPager = (ViewPager) findViewById(R.id.weather_view_pager);
-       // weatherViewPager.setAdapter(adapter);
-       // weatherViewPager.setOffscreenPageLimit(5);
-       // toStartIb = (ImageButton) findViewById(R.id.weather_to_start_ib);
-      //  toStartIb.setOnClickListener(v -> weatherViewPager.setCurrentItem(0));
-      //  toEndIb = (ImageButton) findViewById(R.id.weather_to_end_ib);
-      //  toEndIb.setOnClickListener(v -> weatherViewPager.setCurrentItem(fragmentList.size() - 1));
-     //   if (weatherViewPager.getCurrentItem() == 0) {
-         //  toStartIb.setVisibility(View.INVISIBLE);
-      //  }
-      //  weatherViewPager.addOnPageChangeListener(new WeatherViewPagerListener(this));
+        weather_page = (ViewPager2) findViewById(R.id.viewpager2);
+        weather_page.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        weather_page.setAdapter(weather_page_adapter);
+        weather_page.setOffscreenPageLimit(2);
+        weather_page.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Log.d("2.page滑动---->", position + "");
+                if (position == 1) {
+                    weatherRefresh.setEnabled(false);
+                } else if (position == 0) {
+                    weatherRefresh.setEnabled(true);
+                }
+            }
 
-       // ScrollView scroll_home = findViewById(R.id.main_sl);
+        });
+
         weatherRefresh.setOnRefreshListener(this::WeatherRefresh);
-      //  weatherRefresh.setScrollUpChild(scroll_home);
-
     }
 
     private void startSplashActivity() {
@@ -211,6 +197,7 @@ public class MainActivity extends BaseActivity implements WeatherView {
         weather_presenter.getLocationWeather(defaultCity);
         city = defaultCity.getCityName();
         isDefaultCity = true;
+        default_city_iv.setVisibility(View.VISIBLE);
     }
 
     @Subscribe
@@ -218,8 +205,8 @@ public class MainActivity extends BaseActivity implements WeatherView {
         weather_presenter.getWeather(savedCity);
         city = savedCity.getCityCode();
         isDefaultCity = false;
+        default_city_iv.setVisibility(View.GONE);
     }
-
 
     @Override
     protected void onResume() {
@@ -253,7 +240,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
                 break;
             }
         }
-
         //toolbar_tv_city.setText(FileUtil.getFile(FileUtil.PRECISE_LOCATION_NAME));
     }
 
@@ -270,13 +256,11 @@ public class MainActivity extends BaseActivity implements WeatherView {
     public void setWeatherBackground(Weather weather) {
 
         String img = weather.getInfo().getImg();
-        //int weatherColor = WeatherInfoHelper.getWeatherColor(img);
         int weatherType = WeatherInfoHelper.getWeatherType(img);
-
-        Time time = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
+        // or Time t=new Time("GMT+8"); 加上Time Zone资料
+        Time time = new Time();
         time.setToNow(); // 取得
         int hour = time.hour;
-        Logger.d("当前时间" + hour + "h");
 
         if (hour <= 18) {
             switch (weatherType) {
@@ -328,7 +312,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
             }
 
         }
-
         //PreferencesLoader.putInt(PreferencesLoader.WEATHER_COLOR, weatherColor);
     }
 
@@ -349,6 +332,5 @@ public class MainActivity extends BaseActivity implements WeatherView {
             }
         });
     }
-
 
 }

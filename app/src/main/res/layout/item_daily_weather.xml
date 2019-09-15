@@ -6,7 +6,7 @@
     android:paddingBottom="4dp"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.tokyonth.weather.util.EnglishTextView
+    <com.tokyonth.weather.view.widget.EnglishTextView
         android:id="@+id/item_daily_time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:tint="@color/colorWhite"
         tools:src="@drawable/weather_cloudy"/>
 
-    <com.tokyonth.weather.util.EnglishTextView
+    <com.tokyonth.weather.view.widget.EnglishTextView
         android:id="@+id/item_daily_temp_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -11,24 +11,23 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.presenter.CityPresenter;
 import com.tokyonth.weather.presenter.CityPresenterImpl;
 import com.tokyonth.weather.presenter.LoadCitySituationListener;
-import com.tokyonth.weather.util.PreferencesLoader;
+import com.tokyonth.weather.utils.sundry.PreferencesLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,6 @@ public class SplashActivity extends AppCompatActivity {
         }
         containerRl = (RelativeLayout) findViewById(R.id.splash_container_rl);
         ImageView loadingIv = (ImageView) findViewById(R.id.splash_loading_iv);
-        //loadingTextTv = (TextView) findViewById(R.id.splash_loading_text_tv);
 
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         loadingIv.startAnimation(rotateAnimation);

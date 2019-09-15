@@ -8,7 +8,7 @@ public class Hourly{
 
     private String time;
     private String weather;
-    private String temp;
+    private int temp;
     private String img;
 
     public String getTime() {
@@ -27,11 +27,11 @@ public class Hourly{
         this.weather = weather;
     }
 
-    public String getTemp() {
+    public int getTemp() {
         return temp;
     }
 
-    public void setTemp(String temp) {
+    public void setTemp(int temp) {
         this.temp = temp;
     }
 

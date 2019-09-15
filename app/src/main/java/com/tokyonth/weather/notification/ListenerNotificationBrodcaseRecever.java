@@ -3,6 +3,7 @@ package com.tokyonth.weather.notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class ListenerNotificationBrodcaseRecever extends BroadcastReceiver {
 
@@ -14,9 +15,13 @@ public class ListenerNotificationBrodcaseRecever extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int key = intent.getIntExtra("key", -1);
-        NotificationTools.getInstance(context);
-        mCallBack.callBack(key);
+        String action = intent.getAction();
+        if (action.equals("com.tokyonth.weather.receiver")) {
+            int key = intent.getIntExtra("key", -1);
+            NotificationTools.getInstance(context);
+            mCallBack.callBack(key);
+        }
+
     }
 
     interface ICallBack {

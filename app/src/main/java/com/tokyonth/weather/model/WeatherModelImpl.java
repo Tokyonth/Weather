@@ -5,11 +5,11 @@ import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.presenter.OnWeatherListener;
-import com.tokyonth.weather.util.Api;
-import com.tokyonth.weather.util.NetworkUtil;
-import com.tokyonth.weather.util.PreferencesLoader;
-import com.tokyonth.weather.util.RetrofitFactory;
-import com.tokyonth.weather.util.data.FileUtil;
+import com.tokyonth.weather.utils.api.Api;
+import com.tokyonth.weather.utils.network.NetworkUtil;
+import com.tokyonth.weather.utils.sundry.PreferencesLoader;
+import com.tokyonth.weather.utils.RetrofitFactory;
+import com.tokyonth.weather.utils.file.FileUtil;
 
 import java.io.IOException;
 

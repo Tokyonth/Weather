@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/transparent">
+    android:padding="@dimen/weather_view_pager_margin"
+    android:layout_margin="16dp"
+    android:background="@drawable/frame">
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -28,7 +30,7 @@
                 android:tint="@android:color/white"
                 android:src="@drawable/icon_temp"/>
 
-            <com.tokyonth.weather.util.EnglishTextView
+            <com.tokyonth.weather.view.widget.EnglishTextView
                 android:id="@+id/weather_temp_max_min_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,13 +75,14 @@
 
         </LinearLayout>
 
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/weather_weather_text_tv"
+                android:id="@+id/weather_forecast_hourly_tips_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -96,7 +99,7 @@
                 android:layout_centerVertical="true"
                 android:tint="@android:color/white"
                 android:layout_marginRight="12dp"
-                android:layout_toLeftOf="@id/weather_weather_text_tv"
+                android:layout_toLeftOf="@id/weather_forecast_hourly_tips_tv"
                 android:src="@drawable/weather_cloudy"/>
 
         </RelativeLayout>
@@ -121,7 +124,7 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/icon_humidity"/>
 
-            <com.tokyonth.weather.util.EnglishTextView
+            <com.tokyonth.weather.view.widget.EnglishTextView
                 android:id="@+id/weather_humidity_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -172,8 +175,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.tokyonth.weather.util.EnglishTextView
-                android:id="@+id/weather_sun_tv"
+            <com.tokyonth.weather.view.widget.EnglishTextView
+                android:id="@+id/weather_forecast_day_tips_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -188,7 +191,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
                 android:tint="@android:color/white"
-                android:layout_toLeftOf="@id/weather_sun_tv"
+                android:layout_toLeftOf="@id/weather_forecast_day_tips_tv"
                 android:src="@drawable/icon_sun"/>
 
         </RelativeLayout>

@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.util.HttpUtil;
+import com.tokyonth.weather.utils.network.HttpUtil;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

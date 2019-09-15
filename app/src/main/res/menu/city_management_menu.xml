@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.CityActivity">
+
+    <item
+        android:id="@+id/action_city_menu_tips"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_city_menu_tips"
+        app:showAsAction="always"
+        android:title="提示"/>
+
+</menu>

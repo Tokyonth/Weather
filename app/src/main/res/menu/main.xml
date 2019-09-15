@@ -7,7 +7,7 @@
         android:id="@+id/action_warning"
         android:orderInCategory="0"
         android:icon="@drawable/bt_warning"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="预警"/>
     
     <item

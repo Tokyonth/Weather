@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#109D58</color>
-    <color name="colorPrimaryDark">#109D58</color>
+    <color name="colorPrimary">#F5F5F5</color>
+    <color name="colorPrimaryDark">#F5F5F5</color>
     <color name="colorAccent">#448AFF</color>
     <color name="accent">#FFFF0000</color>
     <color name="transparent">#0000</color>
@@ -9,6 +9,7 @@
     <color name="text_grey">#9DA0A3</color>
     <color name="colorWhite">#FFF</color>
     <color name="divider">#e6e6e6</color>
+    <color name="sun_view_shadow_color">#75757575</color>
 
     <color name="card_daily_night">#212121</color>
     <color name="color_background">#F5F5F5</color>

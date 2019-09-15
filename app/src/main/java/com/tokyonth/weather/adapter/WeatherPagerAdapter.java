@@ -1,27 +1,32 @@
 package com.tokyonth.weather.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
-public class WeatherPagerAdapter extends FragmentPagerAdapter {
+public class WeatherPagerAdapter extends FragmentStateAdapter {
 
-    private List<Fragment> fragmentList;
+    private List<Fragment> list_fragment;
 
-    public WeatherPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
-        super(fm);
-        this.fragmentList = fragmentList;
+    public WeatherPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> list_fragment) {
+        super(fragmentManager, lifecycle);
+        this.list_fragment = list_fragment;
+    }
+
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return list_fragment.get(position);
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return fragmentList.get(position);
+    public int getItemCount() {
+        return list_fragment.size();
     }
 
-    @Override
-    public int getCount() {
-        return fragmentList.size();
-    }
 }
+

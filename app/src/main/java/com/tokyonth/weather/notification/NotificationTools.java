@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.tokyonth.weather.BaseApplication;
@@ -31,8 +33,10 @@ public class NotificationTools {
             if (key == CLOSE_WEATHER_NOTIFICATION) {
                 NotificationUtil.getNotificationManager(context).cancel(notificationId);
                 isCreate = false;
+                Log.d("开关-------->","0");
             } else if (key == OPEN_WEATHER_NOTIFICATION) {
                 sendCustomNotification();
+                Log.d("开关-------->","1");
             }
         });
     }
@@ -41,10 +45,11 @@ public class NotificationTools {
         if (utils == null) {
             synchronized (NotificationTools.class) {
                 if (utils == null) {
-                    utils = new NotificationTools( context );
+                    utils = new NotificationTools(context);
                 }
             }
         }
+
         return utils;
     }
 
@@ -56,21 +61,21 @@ public class NotificationTools {
             //是否绕过请勿打扰模式
            // channel.canBypassDnd();
             //闪光灯
-            channel.enableLights( true );
+            channel.enableLights(false);
             //锁屏显示通知
-            channel.setLockscreenVisibility( VISIBILITY_SECRET );
+            channel.setLockscreenVisibility(VISIBILITY_SECRET);
             //闪关灯的灯光颜色
-            channel.setLightColor( Color.RED );
+            channel.setLightColor(Color.RED);
             //桌面launcher的消息角标
             channel.canShowBadge();
             //是否允许震动
-            channel.enableVibration( true );
+            channel.enableVibration(false);
             //获取系统通知响铃声音的配置
             channel.getAudioAttributes();
             //获取通知取到组
             channel.getGroup();
             //设置可绕过  请勿打扰模式
-            channel.setBypassDnd( true );
+            channel.setBypassDnd(true);
             //设置震动模式
            // channel.setVibrationPattern( new long[]{100, 100, 200} );
             //是否会有灯光

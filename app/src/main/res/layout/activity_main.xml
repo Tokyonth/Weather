@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/weather_basic_coor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tokyonth.weather.dynamicweather.DynamicWeatherView
+    <com.tokyonth.weather.dynamic.DynamicWeatherView
         android:id="@+id/weather_weatherview_container_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout
-        android:id="@+id/refresh_city"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar"
-        android:visibility="visible">
-
     <include layout="@layout/content_main"/>
 
-    </com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

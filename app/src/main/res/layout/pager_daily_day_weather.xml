@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/transparent">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/weather_daily_day_weather_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

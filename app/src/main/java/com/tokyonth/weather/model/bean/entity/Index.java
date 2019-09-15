@@ -1,6 +1,6 @@
 package com.tokyonth.weather.model.bean.entity;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 

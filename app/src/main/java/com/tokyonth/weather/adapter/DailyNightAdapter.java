@@ -1,7 +1,7 @@
 package com.tokyonth.weather.adapter;
 
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.model.bean.entity.Daily;
-import com.tokyonth.weather.util.EnglishTextView;
-import com.tokyonth.weather.util.WeatherInfoHelper;
+import com.tokyonth.weather.view.widget.EnglishTextView;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class DailyNightAdapter extends RecyclerView.Adapter<DailyNightAdapter.Ni
     public DailyNightAdapter(List<Daily> dailyList){
         this.dailyList = dailyList;
     }
-
 
     @Override
     public NightViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

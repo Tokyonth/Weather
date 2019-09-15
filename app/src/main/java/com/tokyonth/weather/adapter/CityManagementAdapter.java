@@ -2,26 +2,25 @@ package com.tokyonth.weather.adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
-import com.tokyonth.weather.util.Api;
-import com.tokyonth.weather.util.EnglishTextView;
-import com.tokyonth.weather.util.PreferencesLoader;
-import com.tokyonth.weather.util.RetrofitFactory;
-import com.tokyonth.weather.util.WeatherInfoHelper;
+import com.tokyonth.weather.utils.api.Api;
+import com.tokyonth.weather.view.widget.EnglishTextView;
+import com.tokyonth.weather.utils.sundry.PreferencesLoader;
+import com.tokyonth.weather.utils.RetrofitFactory;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
@@ -138,12 +137,10 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 });
     }
 
-
     @Override
     public int getItemCount() {
         return savedCityList.size() + 1;
     }
-
 
     class CityViewHolder extends RecyclerView.ViewHolder {
 

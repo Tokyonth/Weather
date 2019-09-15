@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tokyonth.weather">
-    <!-- 用于进行网络定位 -->
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
@@ -29,7 +29,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="c8db2524c8687ebd2919d7942e9f8409"/>
+            android:value="c8db2524c8687ebd2919d7942e9f8409" />
 
         <activity
             android:name=".activity.MainActivity"
@@ -49,11 +49,10 @@
             android:name=".activity.CityActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".activity.SettingsActivity"/>
+            android:name=".activity.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name="com.amap.api.location.APSService" />
-
         <service
             android:name=".service.WeatherTileService"
             android:icon="@drawable/tile_icon"
@@ -66,10 +65,9 @@
 
         <receiver android:name=".notification.ListenerNotificationBrodcaseRecever">
             <intent-filter>
-                <action android:name="weather.receiver"/>
+                <action android:name="weather.receiver" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".receiver.WeatherSmallReceiver">
             <meta-data
                 android:name="android.appwidget.provider"

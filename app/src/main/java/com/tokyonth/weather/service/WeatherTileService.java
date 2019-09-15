@@ -5,7 +5,7 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.widget.Toast;
 
 import com.tokyonth.weather.R;
@@ -14,7 +14,7 @@ import com.tokyonth.weather.model.WeatherModelImpl;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.presenter.OnWeatherListener;
-import com.tokyonth.weather.util.WeatherInfoHelper;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.activity.MainActivity;
 
 import org.litepal.crud.DataSupport;

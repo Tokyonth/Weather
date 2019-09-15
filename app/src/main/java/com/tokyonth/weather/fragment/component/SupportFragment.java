@@ -35,14 +35,11 @@ public class SupportFragment extends BaseFragment {
             }
         });
         alipayTv = (TextView) view.findViewById(R.id.support_alipay_tv);
-        alipayTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData cd = ClipData.newPlainText("alipay_account","chrissen0814@gmail.com");
-                cm.setPrimaryClip(cd);
-                Toast.makeText(getActivity(), "账户信息已经复制，请打开支付宝来完成捐赠！", Toast.LENGTH_SHORT).show();
-            }
+        alipayTv.setOnClickListener(v -> {
+            ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData cd = ClipData.newPlainText("alipay_account","chrissen0814@gmail.com");
+            cm.setPrimaryClip(cd);
+            Toast.makeText(getActivity(), "账户信息已经复制，请打开支付宝来完成捐赠！", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -50,7 +47,5 @@ public class SupportFragment extends BaseFragment {
     protected void initData() {
 
     }
-
-
 
 }

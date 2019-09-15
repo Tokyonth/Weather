@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/blur_transparent_container"
+    android:id="@+id/main_ll"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,42 +16,54 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:src="@drawable/ic_icon_location" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/weather_city_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="位置"
-                android:textColor="@color/colorWhite"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/default_city_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:tint="@color/colorWhite"
+                    android:src="@drawable/ic_titile_local" />
 
-        </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/weather_city_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="位置"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    </android.support.design.widget.AppBarLayout>
+            </LinearLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/main_sl"
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout
+        android:id="@+id/refresh_city"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        android:visibility="visible">
 
-        <FrameLayout
-            android:id="@+id/main_frame_layout"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout>
 
 </LinearLayout>

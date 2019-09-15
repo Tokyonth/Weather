@@ -1,7 +1,7 @@
 package com.tokyonth.weather.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,8 @@ import com.tokyonth.weather.search.IOnItemClickListener;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
+import static com.tokyonth.weather.BaseApplication.getContext;
 
 public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.ViewHolder> {
 

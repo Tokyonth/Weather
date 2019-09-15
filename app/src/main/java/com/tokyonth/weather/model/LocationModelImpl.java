@@ -1,7 +1,6 @@
 package com.tokyonth.weather.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -10,7 +9,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.model.bean.DefaultCity;
-import com.tokyonth.weather.util.data.FileUtil;
+import com.tokyonth.weather.utils.file.FileUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
