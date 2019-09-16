@@ -11,7 +11,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.animation.AnimationUtils;
 
-import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.dynamic.BaseDrawer.Type;
 
@@ -256,7 +255,7 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 						//logger.addSplit("unlockCanvasAndPost");
 						//logger.dumpToLog();
 					} else {
-						Logger.d("Failure locking canvas");
+						Log.d("DynamicWeatherView---->","Failure locking canvas");
 					}
 					final long drawTime = AnimationUtils.currentAnimationTimeMillis() - startTime;
 					final long needSleepTime = 16 - drawTime;

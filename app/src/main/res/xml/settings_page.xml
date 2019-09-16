@@ -39,22 +39,23 @@
         android:key="key_more"
         android:title="其他" >
 
-        <Preference
+        <com.tokyonth.weather.preference.CustPreference
             android:key="prefAndroid"
             android:title="更新城市"
             android:summary="更新城市数据"/>
 
-        <Preference
+        <com.tokyonth.weather.preference.CustPreference
+            android:key="prefAndroid"
+            android:title="检查更新"
+            android:summary="当前版本:1.0"/>
+
+        <com.tokyonth.weather.preference.CustPreference
             android:key="prefAndroid"
             android:title="关于" />
 
-        <Preference
+        <com.tokyonth.weather.preference.CustPreference
             android:key="prefAndroid"
             android:title="捐赠" />
-
-        <Preference
-            android:key="prefAndroid"
-            android:title="检查更新" />
 
     </PreferenceCategory>
 

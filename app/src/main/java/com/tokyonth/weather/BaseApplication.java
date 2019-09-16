@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.utils.file.FileUtil;
 
 import org.litepal.LitePal;
@@ -24,7 +22,7 @@ public class BaseApplication extends Application {
         if (!FileUtil.isFile("save_weather.json")) {
             FileUtil.saveFile("", "save_weather.json");
         }
-        Logger.addLogAdapter(new AndroidLogAdapter());
+        //Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static Context getContext(){

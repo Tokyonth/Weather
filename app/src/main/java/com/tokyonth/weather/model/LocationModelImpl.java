@@ -1,12 +1,12 @@
 package com.tokyonth.weather.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.utils.file.FileUtil;
@@ -80,14 +80,14 @@ public class LocationModelImpl implements LocationModel {
                     String precise_location = aMapLocation.getAddress().substring(aMapLocation.getAddress().indexOf(aMapLocation.getDistrict())
                             + aMapLocation.getDistrict().length(), aMapLocation.getAddress().lastIndexOf(""));
                     FileUtil.saveFile(precise_location, FileUtil.PRECISE_LOCATION_NAME);
-                    Logger.d("高德定位 定位成功");
-                    Logger.d("经纬度 " + districtName  + "----" + longitude + "," + latitude);
+                    Log.d(TAG, "高德定位 定位成功");
+                    Log.d(TAG, "经纬度 " + districtName  + "----" + longitude + "," + latitude);
                 } else {
                     //定位失败
-                    Logger.d("高德定位 定位失败");
+                    Log.d(TAG, "高德定位 定位失败");
                 }
             } else {
-                Logger.d("高德定位 定位失败");
+                Log.d(TAG, "高德定位 定位失败");
             }
 
             if (!location_tag) {

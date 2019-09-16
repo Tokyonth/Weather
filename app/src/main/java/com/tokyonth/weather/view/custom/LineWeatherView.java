@@ -143,7 +143,7 @@ public class LineWeatherView extends View {
 
     private void initPaint(Context c) {
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        linePaint.setStrokeWidth(dp2px(c, 1));
+        linePaint.setStrokeWidth(dp2px(c, 4));
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextSize(textSize);
@@ -151,7 +151,7 @@ public class LineWeatherView extends View {
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        circlePaint.setStrokeWidth(dp2pxF(c, 1));
+        circlePaint.setStrokeWidth(dp2pxF(c, 6));
     }
 
     @Override

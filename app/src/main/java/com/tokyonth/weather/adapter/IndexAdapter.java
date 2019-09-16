@@ -34,24 +34,31 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
             switch (index.getName()){
                 case "空调指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_air_conditioning);
+                    holder.titleTv.setText("空调指数");
                     break;
                 case "运动指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_sport);
+                    holder.titleTv.setText("运动指数");
                     break;
                 case "紫外线指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_uv);
+                    holder.titleTv.setText("紫外线指数");
                     break;
                 case "感冒指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_virus);
+                    holder.titleTv.setText("感冒指数");
                     break;
                 case "洗车指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_washing);
+                    holder.titleTv.setText("洗车指数");
                     break;
                 case "空气污染扩散指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_air_pollution);
+                    holder.titleTv.setText("空气污染指数");
                     break;
                 case "穿衣指数":
                     holder.indexImageIv.setImageResource(R.drawable.index_clothes);
+                    holder.titleTv.setText("穿衣指数");
                     break;
             }
             if(index.getValue() != null){
@@ -74,13 +81,14 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     }
 
     class IndexViewHolder extends ViewHolder{
-        private TextView valueTv , detailTv;
+        private TextView valueTv , detailTv, titleTv;
         private ImageView indexImageIv;
         public IndexViewHolder(View itemView) {
             super(itemView);
             indexImageIv = (ImageView) itemView.findViewById(R.id.item_index_image_iv);
             valueTv = (TextView) itemView.findViewById(R.id.item_index_value_tv);
             detailTv = (TextView) itemView.findViewById(R.id.item_index_detail_tv);
+            titleTv = (TextView) itemView.findViewById(R.id.item_index_title_tv);
         }
     }
 

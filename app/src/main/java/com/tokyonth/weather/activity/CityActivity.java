@@ -16,6 +16,8 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.tokyonth.weather.adapter.CityManagementAdapter;
 import com.tokyonth.weather.model.bean.City;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.search.SearchFragment;
+import com.tokyonth.weather.utils.CustomPopWindow;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
@@ -40,6 +43,7 @@ public class CityActivity extends AppCompatActivity {
     private CoordinatorLayout cityManagement;
     private CityManagementAdapter adapter;
     private List<SavedCity> savedCityList;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class CityActivity extends AppCompatActivity {
 
     private void initView() {
         cityManagement = (CoordinatorLayout) findViewById(R.id.city_management_con);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_title_arrow_left);
         FloatingActionButton addCity = (FloatingActionButton) findViewById(R.id.fab);
         RecyclerView cityRv = (RecyclerView) findViewById(R.id.city_management_rv);
@@ -101,14 +105,6 @@ public class CityActivity extends AppCompatActivity {
         adapter.setOnDefaultClickListener( () -> finish());
         adapter.setOnItemLongClickListener((view, position) -> showPopupMenu(view,position));
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.city_management_menu, menu);
-        return true;
-    }
-
-
 
     private void saveCity(City city) {
         if (city != null) {
@@ -164,10 +160,26 @@ public class CityActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.city_management_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+        } else if (id == R.id.action_city_menu_tips) {
+            View contentView = LayoutInflater.from(this).inflate(R.layout.city_menu_tips_content,null);
+            //处理popWindow 显示内容
+          //  handleLogic(contentView);
+            //创建并显示popWindow
+            new CustomPopWindow.PopupWindowBuilder(this)
+                    .setView(contentView)
+                    .create()
+                    .showAsDropDown(toolbar, Gravity.END,-50);
         }
         return super.onOptionsItemSelected(item);
     }

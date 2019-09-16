@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/transparent">
 
         <ImageView
             android:id="@+id/item_index_image_iv"
@@ -20,17 +21,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/item_index_value_tv"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/text_view_padding"
-                android:paddingTop="8dp"
-                android:textSize="16sp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                tools:text="较适宜"/>
+                android:orientation="horizontal"
+                android:gravity="start|center">
+
+                <TextView
+                    android:id="@+id/item_index_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@android:color/white"
+                    tools:text="项目"/>
+
+                <TextView
+                    android:id="@+id/item_index_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="14sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/frame_index_bj"
+                    tools:text="较适宜"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/item_index_detail_tv"
@@ -41,7 +63,7 @@
                 android:paddingBottom="6dp"
                 android:lineSpacingExtra="2dp"
                 android:textSize="12sp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_grey"
                 tools:text="天气较好，无雨水困扰，较适宜进行各种运动，但因气温较低，在户外运动请注意增减衣物。"/>
 
         </LinearLayout>

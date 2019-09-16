@@ -29,4 +29,12 @@
         <!-- Label horizontal gap -->
         <attr name="ssv_label_horizontal_offset" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="WeatherChartView">
+        <attr name="textColor" format="color"/>
+        <attr name="dayColor" format="color"/>
+        <attr name="nightColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+    </declare-styleable>
+
 </resources>

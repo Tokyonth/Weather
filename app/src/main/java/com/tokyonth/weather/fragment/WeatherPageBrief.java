@@ -15,6 +15,7 @@ import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.model.bean.WeatherBean;
 import com.tokyonth.weather.model.bean.entity.Hourly;
+import com.tokyonth.weather.view.custom.WeatherChartView;
 import com.tokyonth.weather.view.widget.EnglishTextView;
 import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.view.widget.TempTextView;
@@ -52,6 +53,13 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
 
         weatherTextTv = (TextView) view.findViewById(R.id.weather_weather_text_tv);
         weatherTextIv = (ImageView) view.findViewById(R.id.weather_weather_text_image_iv);
+
+        WeatherChartView chartView = (WeatherChartView) view.findViewById(R.id.line_char);
+        // set day
+        chartView.setTempDay(new int[]{14, 15, 16, 17, 9, 9,10,11});
+        // set night
+        chartView.setTempNight(new int[]{7, 5, 9, 10, 3, 2,5,6});
+        chartView.invalidate();
         setBlur();
     }
 

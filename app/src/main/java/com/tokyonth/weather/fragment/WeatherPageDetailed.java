@@ -122,7 +122,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
             }
 
             private String formatLabel(Time time) {
-                return String.format(Locale.getDefault(), "%02d时%02d分", time.hour, time.minute);
+                return String.format(Locale.getDefault(), "%02d : %02d", time.hour, time.minute);
             }
         });
 

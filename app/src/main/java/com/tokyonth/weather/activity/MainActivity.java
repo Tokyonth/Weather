@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.orhanobut.logger.Logger;
 import com.tokyonth.weather.BaseActivity;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.adapter.WeatherPagerAdapter;
@@ -141,7 +140,7 @@ public class MainActivity extends BaseActivity implements WeatherView {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                Log.d("2.page滑动---->", position + "");
+                //Log.d("2.page滑动---->", position + "");
                 if (position == 1) {
                     weatherRefresh.setEnabled(false);
                 } else if (position == 0) {

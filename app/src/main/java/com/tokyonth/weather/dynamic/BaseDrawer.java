@@ -5,8 +5,7 @@ import java.util.Random;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.GradientDrawable;
-
-import com.orhanobut.logger.Logger;
+import android.util.Log;
 
 public abstract class BaseDrawer {
 
@@ -162,7 +161,7 @@ public abstract class BaseDrawer {
 		if(this.width != width && this.height != height){
 			this.width = width;
 			this.height = height;
-			Logger.d(TAG, "setSize");
+			Log.d(TAG, "setSize");
 			if (this.skyDrawable != null) {
 				skyDrawable.setBounds(0, 0, width, height);
 			}
