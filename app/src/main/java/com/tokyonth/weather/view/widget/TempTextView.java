@@ -24,7 +24,7 @@ public class TempTextView extends androidx.appcompat.widget.AppCompatTextView {
     }
 
     private void init(Context context) {
-        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Temp.ttf");
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-ExtraLight.ttf");
         this.setTypeface(typeface);
     }
 
