@@ -38,7 +38,7 @@
                 android:layout_height="@dimen/default_weather_image_view_size"
                 android:layout_gravity="center"
                 android:tint="@android:color/white"
-                android:src="@drawable/weather_cloudy"/>
+                tools:src="@drawable/weather_cloudy"/>
 
             <TextView
                 android:id="@+id/weather_weather_text_tv"
