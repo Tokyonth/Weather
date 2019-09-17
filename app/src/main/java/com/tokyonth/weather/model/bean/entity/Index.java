@@ -4,10 +4,6 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class Index{
 
     @SerializedName("iname")

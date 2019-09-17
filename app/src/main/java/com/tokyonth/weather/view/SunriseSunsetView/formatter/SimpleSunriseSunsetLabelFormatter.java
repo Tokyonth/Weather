@@ -1,6 +1,5 @@
 package com.tokyonth.weather.view.SunriseSunsetView.formatter;
 
-
 import com.tokyonth.weather.view.SunriseSunsetView.model.Time;
 
 import java.util.Locale;
@@ -9,6 +8,7 @@ import java.util.Locale;
  * SunriseSunsetLabelFormatter 简单实现
  */
 public class SimpleSunriseSunsetLabelFormatter implements SunriseSunsetLabelFormatter {
+
     @Override
     public String formatSunriseLabel(Time sunrise) {
         return formatTime(sunrise);

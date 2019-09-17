@@ -57,7 +57,6 @@ public class WeatherModelImpl implements WeatherModel {
       //  String locationInfo = defaultCity.getLatitude() + "," + defaultCity.getLongitude();
         String city = defaultCity.getCityName();
         if (NetworkUtil.isWifiConnected() || NetworkUtil.isMobileConnected()) {
-          //  Log.d("地区----------->", city);
             new RetrofitFactory(Api.JISU_URL).getApiInterface()
                     .getLocationWeather(Api.JISU_APP_KEY, city)
                     .subscribeOn(Schedulers.io())
@@ -72,7 +71,6 @@ public class WeatherModelImpl implements WeatherModel {
                             try {
                                 jsonStr = new String(responseBody.bytes());
                                 FileUtil.saveFile(jsonStr, "save_weather.json");
-                              //  Log.d("----------->", jsonStr);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

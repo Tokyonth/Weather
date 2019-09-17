@@ -62,7 +62,9 @@ public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.Vi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
         private TextView cityInfoTv;
+
         ViewHolder(View view) {
             super(view);
             cityInfoTv = (TextView) view.findViewById(R.id.tv_item_search_city);

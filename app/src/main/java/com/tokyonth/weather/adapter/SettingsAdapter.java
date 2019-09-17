@@ -1,8 +1,6 @@
 package com.tokyonth.weather.adapter;
 
-import android.content.Context;
 import android.graphics.PorterDuff;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.model.SettingsModel;
+import com.tokyonth.weather.model.bean.SettingsItemBean;
 
 import java.util.List;
 
@@ -24,9 +22,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public static final int TYPE_SWITCH = 1;
     public static final int TYPE_TITLE = 2;
 
-    private List<SettingsModel> list;
+    private List<SettingsItemBean> list;
 
-    public SettingsAdapter(List<SettingsModel> list) {
+    public SettingsAdapter(List<SettingsItemBean> list) {
         this.list = list;
     }
 

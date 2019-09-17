@@ -16,6 +16,7 @@ public abstract class BaseDrawer {
 	}
 
 	public static final class SkyBackground {
+
 		public static final int[] BLACK = new int[] { 0xff000000, 0xff000000 };
 //		public static final int[] CLEAR_D = new int[] { 0xff3d99c2, 0xff4f9ec5 };
 //		public static final int[] CLEAR_N = new int[] { 0xff0d1229, 0xff262c42 };
@@ -102,7 +103,7 @@ public abstract class BaseDrawer {
 
 	static final String TAG = BaseDrawer.class.getSimpleName();
 	protected Context context;
-//	private float curPercent = 0f;
+	//	private float curPercent = 0f;
 	private final float desity;
 	protected int width, height;
 	private GradientDrawable skyDrawable;
@@ -116,6 +117,7 @@ public abstract class BaseDrawer {
 	}
 
 	protected void reset() {
+
 	}
 	
 	public GradientDrawable makeSkyBackground(){

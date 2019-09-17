@@ -11,7 +11,6 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.tokyonth.weather.BaseApplication;
@@ -33,10 +32,8 @@ public class NotificationTools {
             if (key == CLOSE_WEATHER_NOTIFICATION) {
                 NotificationUtil.getNotificationManager(context).cancel(notificationId);
                 isCreate = false;
-                Log.d("开关-------->","0");
             } else if (key == OPEN_WEATHER_NOTIFICATION) {
                 sendCustomNotification();
-                Log.d("开关-------->","1");
             }
         });
     }

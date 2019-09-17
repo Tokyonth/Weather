@@ -81,8 +81,10 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     }
 
     class IndexViewHolder extends ViewHolder{
+
         private TextView valueTv , detailTv, titleTv;
         private ImageView indexImageIv;
+
         public IndexViewHolder(View itemView) {
             super(itemView);
             indexImageIv = (ImageView) itemView.findViewById(R.id.item_index_image_iv);

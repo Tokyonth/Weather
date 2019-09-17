@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view;
+package com.tokyonth.weather.presenter;
 
 import com.tokyonth.weather.model.bean.Weather;
 

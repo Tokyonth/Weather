@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.adapter.SettingsAdapter;
-import com.tokyonth.weather.model.SettingsModel;
+import com.tokyonth.weather.model.bean.SettingsItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,23 +49,23 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        List<SettingsModel> list = new ArrayList<>();
-        list.add(new SettingsModel(2, "天气通知", null, Color.parseColor("#E91E63")));
-        list.add(new SettingsModel(1, "通知栏天气", "在通知栏显示天气", Color.BLUE));
-        list.add(new SettingsModel(0, "通知栏样式", "设置显示在通知栏天气的样式", Color.BLUE));
+        List<SettingsItemBean> list = new ArrayList<>();
+        list.add(new SettingsItemBean(2, "天气通知", null, Color.parseColor("#E91E63")));
+        list.add(new SettingsItemBean(1, "通知栏天气", "在通知栏显示天气", Color.BLUE));
+        list.add(new SettingsItemBean(0, "通知栏样式", "设置显示在通知栏天气的样式", Color.BLUE));
 
-        list.add(new SettingsModel(2, "个性化", null, Color.parseColor("#4CAF50")));
-        list.add(new SettingsModel(0, "使用高斯模糊背景", "这将会禁用动态天气背景", Color.BLUE));
+        list.add(new SettingsItemBean(2, "个性化", null, Color.parseColor("#4CAF50")));
+        list.add(new SettingsItemBean(0, "使用高斯模糊背景", "这将会禁用动态天气背景", Color.BLUE));
 
-        list.add(new SettingsModel(2, "数据源", null, Color.parseColor("#FF5722")));
-        list.add(new SettingsModel(1, "使用自己的KEY", null, Color.BLUE));
-        list.add(new SettingsModel(0, "自定义KEY", "输入自己所申请的KEY", Color.BLUE));
+        list.add(new SettingsItemBean(2, "数据源", null, Color.parseColor("#FF5722")));
+        list.add(new SettingsItemBean(1, "使用自己的KEY", null, Color.BLUE));
+        list.add(new SettingsItemBean(0, "自定义KEY", "输入自己所申请的KEY", Color.BLUE));
 
-        list.add(new SettingsModel(2, "其他", null, Color.parseColor("#2196F3")));
-        list.add(new SettingsModel(0, "更新城市", "更新城市数据库", Color.BLUE));
-        list.add(new SettingsModel(0, "检测更新", "当前版本：1.0", Color.BLUE));
-        list.add(new SettingsModel(0, "关于", null, Color.BLUE));
-        list.add(new SettingsModel(0, "捐赠", null, Color.BLUE));
+        list.add(new SettingsItemBean(2, "其他", null, Color.parseColor("#2196F3")));
+        list.add(new SettingsItemBean(0, "更新城市", "更新城市数据库", Color.BLUE));
+        list.add(new SettingsItemBean(0, "检测更新", "当前版本：1.0", Color.BLUE));
+        list.add(new SettingsItemBean(0, "关于", null, Color.BLUE));
+        list.add(new SettingsItemBean(0, "捐赠", null, Color.BLUE));
 
         adapter = new SettingsAdapter(list);
         rv.setLayoutManager(new LinearLayoutManager(this));

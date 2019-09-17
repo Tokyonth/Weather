@@ -12,14 +12,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.text.format.Time;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tokyonth.weather.BaseActivity;
@@ -42,7 +40,7 @@ import com.tokyonth.weather.utils.sundry.PreferencesLoader;
 import com.tokyonth.weather.utils.RefreshWeather;
 import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.utils.file.FileUtil;
-import com.tokyonth.weather.view.WeatherView;
+import com.tokyonth.weather.presenter.WeatherView;
 import com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout;
 
 
@@ -164,7 +162,7 @@ public class MainActivity extends BaseActivity implements WeatherView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.weather_menu_main, menu);
         return true;
     }
 

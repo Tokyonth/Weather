@@ -1,6 +1,5 @@
 package com.tokyonth.weather.view.SunriseSunsetView.formatter;
 
-
 import com.tokyonth.weather.view.SunriseSunsetView.model.Time;
 
 /**
@@ -11,4 +10,5 @@ public interface SunriseSunsetLabelFormatter {
     String formatSunriseLabel(Time sunrise);
 
     String formatSunsetLabel(Time sunset);
+
 }

@@ -5,7 +5,6 @@ import com.tokyonth.weather.model.WeatherModelImpl;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
-import com.tokyonth.weather.view.WeatherView;
 
 public class WeatherPresenterImpl implements WeatherPresenter, OnWeatherListener {
 

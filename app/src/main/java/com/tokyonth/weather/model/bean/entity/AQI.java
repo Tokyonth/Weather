@@ -4,11 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class AQI{
+
     private String so2;
     private String so224;
     private String no2;

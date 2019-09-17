@@ -106,15 +106,21 @@ public class BlurSingle extends Blur {
      * 此类为控件模糊处理类
      *
      */
-    public static class BlurLayout{
+    public static class BlurLayout {
 
         private int positionX,positionY;
         private View layoutView,layoutBkg;
 
         //毛玻璃效果参数,可以动态修改
-        private int RoundCorner = ConstValue.RoundCorner;
+
+        public static int RoundCorner=50;
+        public static int radius=10;
+        public static int scaleFactor=26;
+
+      /*  private int RoundCorner = ConstValue.RoundCorner;
         private int radius = ConstValue.radius;
         private int scaleFactor = ConstValue.scaleFactor;
+        */
 
         public BlurLayout(final View layoutView, final View layoutBkg){
             positionX=positionY=0;

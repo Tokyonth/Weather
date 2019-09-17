@@ -1,9 +1,5 @@
 package com.tokyonth.weather.model.bean.entity;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class Hourly{
 
     private String time;
@@ -42,4 +38,5 @@ public class Hourly{
     public void setImg(String img) {
         this.img = img;
     }
+
 }

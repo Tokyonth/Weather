@@ -24,4 +24,5 @@ public class Time {
     public int transformToMinutes() {
         return hour * MINUTES_PER_HOUR + minute;
     }
+
 }

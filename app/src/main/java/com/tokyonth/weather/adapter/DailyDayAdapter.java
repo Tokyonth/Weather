@@ -45,9 +45,11 @@ public class DailyDayAdapter extends RecyclerView.Adapter<DailyDayAdapter.DailyV
     }
 
     class DailyViewHolder extends RecyclerView.ViewHolder {
+
         private TextView weekTv;
         private EnglishTextView timeTv , tempTv ;
         private ImageView weatherImageIv;
+
         public DailyViewHolder(View itemView) {
             super(itemView);
             weekTv = (TextView) itemView.findViewById(R.id.item_daily_week_tv);

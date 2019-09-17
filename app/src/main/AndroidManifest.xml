@@ -62,12 +62,7 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
-        <receiver android:name=".notification.ListenerNotificationBrodcaseRecever">
-            <intent-filter>
-                <action android:name="weather.receiver" />
-            </intent-filter>
-        </receiver>
+        
         <receiver android:name=".receiver.WeatherSmallReceiver">
             <meta-data
                 android:name="android.appwidget.provider"

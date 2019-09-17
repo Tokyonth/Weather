@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:gravity="center"
     android:layout_marginStart="16dp"
@@ -23,6 +24,6 @@
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
-        android:text="基础设置"/>
+        tools:text="基础设置"/>
 
 </LinearLayout>

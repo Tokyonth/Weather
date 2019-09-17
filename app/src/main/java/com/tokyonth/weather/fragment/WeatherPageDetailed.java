@@ -5,11 +5,9 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +21,7 @@ import com.tokyonth.weather.adapter.DailyDayAdapter;
 import com.tokyonth.weather.adapter.DailyNightAdapter;
 import com.tokyonth.weather.adapter.IndexAdapter;
 import com.tokyonth.weather.blur.BlurSingle;
+import com.tokyonth.weather.fragment.component.base.BaseSubscribeFragment;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.view.SunriseSunsetView.formatter.SunriseSunsetLabelFormatter;
@@ -34,30 +33,26 @@ import java.util.Locale;
 
 public class WeatherPageDetailed extends BaseSubscribeFragment {
 
-    private TextView levelTv , primaryPolluteTv , affectTv , pm25Tv , pm10Tv;
-    private RelativeLayout swtciRl;
-    private FrameLayout dailyDayFl , dailyNightFl;
-    private TextView titleTv, day_title_tv , airQualityTv, windTv,forecastDayTv, forecastHourlyTv;
+    private TextView levelTv, primaryPolluteTv, affectTv, pm25Tv, pm10Tv;
+    private FrameLayout dailyDayFl, dailyNightFl;
+    private TextView day_title_tv, airQualityTv, windTv, forecastDayTv, forecastHourlyTv;
     private SwitchButton dayNightSwitch;
-    private RecyclerView dailyDayRv , dailyNightRv;
+    private RecyclerView dailyDayRv, dailyNightRv;
     private RecyclerView indexRv;
     private ImageView airqualityIv;
     private boolean isShownBack;
 
     private DailyDayAdapter dailyDayAdapter;
     private DailyNightAdapter dailyNightAdapter;
-
     private IndexAdapter indexAdapter;
-    private EnglishTextView tempMaxMinTv , humidityTv;
+    private EnglishTextView tempMaxMinTv, humidityTv;
 
     private SunriseSunsetView sunsetView;
-
     private View blur0, blur1, blur2,blur3, blur4;
     private BlurSingle.BlurLayout blur;
 
     private void setBlur(){
         final View view_test = ((MainActivity)getActivity()).main_ll;
-        //  if(((WeatherActivity) getActivity()).getIsBlur()){
         blur = new BlurSingle.BlurLayout(blur0,view_test);
         blur = new BlurSingle.BlurLayout(blur1,view_test);
         blur = new BlurSingle.BlurLayout(blur2,view_test);
@@ -79,15 +74,12 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         blur4 = view.findViewById(R.id.pager_index_weather);
         setBlur();
 
-
         levelTv = (TextView) view.findViewById(R.id.aqi_quality_level_tv);
         primaryPolluteTv = (TextView) view.findViewById(R.id.aqi_primary_pollute_tv);
         affectTv = (TextView) view.findViewById(R.id.aqi_affect_tv);
         pm25Tv = (TextView) view.findViewById(R.id.aqi_pm25_tv);
         pm10Tv = (TextView) view.findViewById(R.id.aqi_pm10_tv);
         dayNightSwitch = (SwitchButton) view.findViewById(R.id.daily_weather_switch_tb);
-        titleTv = (TextView) view.findViewById(R.id.daily_weather_title_tv);
-        swtciRl = (RelativeLayout) view.findViewById(R.id.daily_weather_swtch_rl);
         dailyDayFl = (FrameLayout) view.findViewById(R.id.daily_day_fl);
         dailyNightFl = (FrameLayout) view.findViewById(R.id.daily_night_fl);
         dailyDayRv = (RecyclerView) view.findViewById(R.id.weather_daily_day_weather_rv);
@@ -97,14 +89,9 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
         airQualityTv = (TextView) view.findViewById(R.id.weather_airquality_tv);
         windTv = (TextView) view.findViewById(R.id.weather_wind_tv);
-
-
         humidityTv = (EnglishTextView) view.findViewById(R.id.weather_humidity_tv);
-
         tempMaxMinTv = (EnglishTextView) view.findViewById(R.id.weather_temp_max_min_tv);
-      //  sunTv = (EnglishTextView) view.findViewById(R.id.weather_sun_tv);
         airqualityIv = (ImageView) view.findViewById(R.id.weather_airquality_image_iv);
-
         forecastHourlyTv = (TextView) view.findViewById(R.id.weather_forecast_hourly_tips_tv);
         forecastDayTv = (TextView) view.findViewById(R.id.weather_forecast_day_tips_tv);
 
@@ -137,7 +124,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
     protected void setWeather(Weather weather) {
         String levelInfo = "空气质量" + weather.getInfo().getAqi().getAqiInfo().getLevel();
         String primaryPolluteInfo = "首要污染物:" + weather.getInfo().getAqi().getPrimarypollutant();
-        String[] updateTimes = weather.getInfo().getAqi().getTimePoint().split(" ");
+        //String[] updateTimes = weather.getInfo().getAqi().getTimePoint().split(" ");
         String pm25Info = "PM2.5: " + weather.getInfo().getAqi().getPm2_5();
         String pm10Info = "PM10: " + weather.getInfo().getAqi().getPm10();
         //updateTimeTv.setText(updateTimes[1]);

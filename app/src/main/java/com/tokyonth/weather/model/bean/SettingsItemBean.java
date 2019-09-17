@@ -1,15 +1,13 @@
-package com.tokyonth.weather.model;
+package com.tokyonth.weather.model.bean;
 
-import android.graphics.Color;
-
-public class SettingsModel {
+public class SettingsItemBean {
 
     private int type;
     private String title;
     private String sub;
     private int color;
 
-    public SettingsModel(int type, String title, String sub, int color) {
+    public SettingsItemBean(int type, String title, String sub, int color) {
         this.type = type;
         this.title = title;
         this.sub = sub;

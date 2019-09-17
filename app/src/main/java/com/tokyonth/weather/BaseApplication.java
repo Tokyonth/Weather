@@ -22,7 +22,7 @@ public class BaseApplication extends Application {
         if (!FileUtil.isFile("save_weather.json")) {
             FileUtil.saveFile("", "save_weather.json");
         }
-        //Logger.addLogAdapter(new AndroidLogAdapter());
+
     }
 
     public static Context getContext(){

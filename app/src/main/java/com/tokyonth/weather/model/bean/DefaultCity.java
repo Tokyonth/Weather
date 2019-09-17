@@ -10,6 +10,7 @@ public class DefaultCity extends DataSupport {
     private String latitude;
 
     public DefaultCity() {
+
     }
 
     public DefaultCity(String cityName, String parentCityName, String longitude, String latitude) {

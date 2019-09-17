@@ -185,7 +185,6 @@ public class SunriseSunsetView extends View {
         mLabelPaint.setTextSize(mLabelTextSize);
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

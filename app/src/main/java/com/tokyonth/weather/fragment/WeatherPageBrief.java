@@ -1,7 +1,6 @@
 package com.tokyonth.weather.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.activity.MainActivity;
 import com.tokyonth.weather.blur.BlurSingle;
+import com.tokyonth.weather.fragment.component.base.BaseSubscribeFragment;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
@@ -35,7 +35,6 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
 
     private LinearLayout blur_line_ll;
     private BlurSingle.BlurLayout blur;
-
     private ImageView weatherTextIv;
 
     @Override
@@ -65,12 +64,8 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
 
     private void setBlur(){
         final View view_test=((MainActivity)getActivity()).main_ll;
-      //  if(((WeatherActivity) getActivity()).getIsBlur()){
-            blur=new BlurSingle.BlurLayout(blur_line_ll,view_test);
-       //     blur2=new BlurSingle.BlurLayout(layout_2,view_test);
-
-
-        }
+        blur=new BlurSingle.BlurLayout(blur_line_ll,view_test);
+    }
 
     @Override
     protected void setWeather(Weather weather) {
@@ -94,25 +89,19 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
         List<WeatherBean> data = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {
             Hourly hourly = weather.getInfo().getHourlyList().get(i);
-           // Log.d("------------>", hourly.getWeather());
             WeatherBean bean = new WeatherBean(hourly.getWeather(), hourly.getTemp(), hourly.getTime());
             data.add(bean);
         }
         lineWeatherView.setData(data);
-
         String updateTime = WeatherInfoHelper.getUpdateTime(weather.getInfo().getUpdateTime());
-       // String tempInfo = weather.getInfo().getTemp() + getResources().getString(R.string.celsius);
-
         String tempInfo = weather.getInfo().getTemp() + "°";
 
         updateTimeTv.setText("提供商数据更新时间:" + updateTime);
         tempTv.setText(tempInfo);
 
-
         int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
         weatherTextIv.setImageResource(weatherImagePath);
         weatherTextTv.setText(weather.getInfo().getWeather());
-
     }
 
 }

@@ -2,10 +2,6 @@ package com.tokyonth.weather.model.bean.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Administrator on 2017/8/21 0021.
- */
-
 public class Daily{
     private String date;
     private String week;

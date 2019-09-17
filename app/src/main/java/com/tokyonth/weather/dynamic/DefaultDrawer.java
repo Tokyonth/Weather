@@ -29,7 +29,6 @@ public class DefaultDrawer extends BaseDrawer{
 
 	@Override
 	protected int[] getSkyBackgroundGradient() {
-		// TODO Auto-generated method stub
 		return SkyBackground.BLACK;
 	}
 	

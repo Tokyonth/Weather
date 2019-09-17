@@ -1,9 +1,5 @@
 package com.tokyonth.weather.model.bean;
 
-/**
- * Created by ccy on 2017-07-28.
- */
-
 public class WeatherBean {
 
     public static final String SUN = "晴";

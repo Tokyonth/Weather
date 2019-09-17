@@ -1,4 +1,4 @@
-package com.tokyonth.weather.fragment;
+package com.tokyonth.weather.fragment.component.base;
 
 import android.app.Activity;
 import android.content.Context;
