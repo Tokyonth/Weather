@@ -4,10 +4,12 @@ import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kyleduo.switchbutton.SwitchButton;
@@ -16,16 +18,34 @@ import com.tokyonth.weather.model.bean.SettingsItemBean;
 
 import java.util.List;
 
+import static com.tokyonth.weather.model.bean.SettingsItemBean.TYPE_COMMON;
+import static com.tokyonth.weather.model.bean.SettingsItemBean.TYPE_SWITCH;
+import static com.tokyonth.weather.model.bean.SettingsItemBean.TYPE_TITLE;
+
 public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int TYPE_COMMON = 0;
-    public static final int TYPE_SWITCH = 1;
-    public static final int TYPE_TITLE = 2;
-
     private List<SettingsItemBean> list;
+    private OnItemClick onItemCommonClick;
+    private OnItemSwitchClick onItemSwitchClick;
 
     public SettingsAdapter(List<SettingsItemBean> list) {
         this.list = list;
+    }
+
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemCommonClick = onItemClick;
+    }
+
+    public void setOnItemSwitchClick(OnItemSwitchClick onItemSwitchClick) {
+        this.onItemSwitchClick = onItemSwitchClick;
+    }
+
+    public interface OnItemClick {
+        void onCommonClick(View view, int pos);
+    }
+
+    public interface OnItemSwitchClick {
+        void onSwitch(View view, boolean bool, int pos);
     }
 
     @NonNull
@@ -57,6 +77,12 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {
                 ((CommonViewHolder) holder).sub.setText(list.get(position).getSub());
             }
+            ((CommonViewHolder) holder).cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemCommonClick.onCommonClick(v, position);
+                }
+            });
         } else if (holder instanceof SwitchViewHolder) {
             ((SwitchViewHolder) holder).title.setText(list.get(position).getTitle());
             if (list.get(position).getSub() == null) {
@@ -64,6 +90,13 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {
                 ((SwitchViewHolder) holder).sub.setText(list.get(position).getSub());
             }
+            ((SwitchViewHolder) holder).switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    onItemSwitchClick.onSwitch(buttonView, isChecked, position);
+                }
+            });
+            ((SwitchViewHolder) holder).cardView.setOnClickListener(null);
         }
     }
 
@@ -94,11 +127,13 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         TextView title;
         TextView sub;
+        CardView cardView;
 
         public CommonViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.settings_item_title);
             sub = (TextView) itemView.findViewById(R.id.settings_item_sub);
+            cardView = (CardView) itemView.findViewById(R.id.common_content_card);
         }
 
     }
@@ -108,12 +143,14 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView title;
         TextView sub;
         SwitchButton switchButton;
+        CardView cardView;
 
         public SwitchViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.settings_item_title);
-            sub = (TextView) itemView.findViewById(R.id.settings_item_sub);
+            title = (TextView) itemView.findViewById(R.id.settings_item_switch_title);
+            sub = (TextView) itemView.findViewById(R.id.settings_item_switch_sub);
             switchButton = (SwitchButton) itemView.findViewById(R.id.sb_default);
+            cardView = (CardView) itemView.findViewById(R.id.switch_content_card);
         }
 
     }

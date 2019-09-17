@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginEnd="10dp"
     android:foreground="?android:attr/selectableItemBackground"
+    android:id="@+id/switch_content_card"
     app:cardCornerRadius="4dp"
     app:cardElevation="0dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    app:contentPadding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:contentPadding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +27,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
             android:gravity="center|start"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/settings_item_title"
+                android:id="@+id/settings_item_switch_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/black"
@@ -39,7 +40,7 @@
 
             <TextView
                 android:layout_marginTop="4dp"
-                android:id="@+id/settings_item_sub"
+                android:id="@+id/settings_item_switch_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Sub"/>

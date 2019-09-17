@@ -2,6 +2,8 @@ package com.tokyonth.weather.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.adapter.SettingsAdapter;
 import com.tokyonth.weather.model.bean.SettingsItemBean;
+import com.tokyonth.weather.notification.NotificationBrodcaseRecever;
+import com.tokyonth.weather.notification.NotificationTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private RecyclerView rv;
     private SettingsAdapter adapter;
+
+    private String actionStr = "com.tokyonth.weather.receiver";
+    private NotificationBrodcaseRecever receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +58,65 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initData() {
         List<SettingsItemBean> list = new ArrayList<>();
-        list.add(new SettingsItemBean(2, "天气通知", null, Color.parseColor("#E91E63")));
-        list.add(new SettingsItemBean(1, "通知栏天气", "在通知栏显示天气", Color.BLUE));
-        list.add(new SettingsItemBean(0, "通知栏样式", "设置显示在通知栏天气的样式", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "天气通知", null, Color.parseColor("#E91E63")));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_SWITCH, "通知栏天气", "在通知栏显示天气", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "通知栏样式", "设置显示在通知栏天气的样式", Color.BLUE));
 
-        list.add(new SettingsItemBean(2, "个性化", null, Color.parseColor("#4CAF50")));
-        list.add(new SettingsItemBean(0, "使用高斯模糊背景", "这将会禁用动态天气背景", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "个性化", null, Color.parseColor("#4CAF50")));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "使用高斯模糊背景", "这将会禁用动态天气背景", Color.BLUE));
 
-        list.add(new SettingsItemBean(2, "数据源", null, Color.parseColor("#FF5722")));
-        list.add(new SettingsItemBean(1, "使用自己的KEY", null, Color.BLUE));
-        list.add(new SettingsItemBean(0, "自定义KEY", "输入自己所申请的KEY", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "数据源", null, Color.parseColor("#FF5722")));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_SWITCH, "使用自己的KEY", null, Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "自定义KEY", "输入自己所申请的KEY", Color.BLUE));
 
-        list.add(new SettingsItemBean(2, "其他", null, Color.parseColor("#2196F3")));
-        list.add(new SettingsItemBean(0, "更新城市", "更新城市数据库", Color.BLUE));
-        list.add(new SettingsItemBean(0, "检测更新", "当前版本：1.0", Color.BLUE));
-        list.add(new SettingsItemBean(0, "关于", null, Color.BLUE));
-        list.add(new SettingsItemBean(0, "捐赠", null, Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "其他", null, Color.parseColor("#2196F3")));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "更新城市", "更新城市数据库", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "检测更新", "当前版本：1.0", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "关于", null, Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "捐赠", null, Color.BLUE));
 
         adapter = new SettingsAdapter(list);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+
+        adapter.setOnItemClick(new SettingsAdapter.OnItemClick() {
+            @Override
+            public void onCommonClick(View view, int pos) {
+                Toast.makeText(getBaseContext(), "点击第" + pos + "个", Toast.LENGTH_LONG).show();
+                switch (pos) {
+                    case 2:
+
+                        break;
+                }
+            }
+        });
+
+        adapter.setOnItemSwitchClick(new SettingsAdapter.OnItemSwitchClick() {
+
+            @Override
+            public void onSwitch(View view, boolean bool, int pos) {
+                Intent intent = new Intent();
+                intent.setAction(actionStr);
+                IntentFilter filter = new IntentFilter();
+                filter.addAction(actionStr);
+                receiver = new NotificationBrodcaseRecever();
+                registerReceiver(receiver, filter);
+
+                Toast.makeText(getBaseContext(), "点击第" + pos + "个,状态" + bool, Toast.LENGTH_LONG).show();
+                switch (pos) {
+                    case 1:
+                        if (bool) {
+                            intent.putExtra("key", NotificationTools.OPEN_WEATHER_NOTIFICATION);
+                            sendBroadcast(intent);
+
+                        } else {
+                            intent.putExtra("key", NotificationTools.CLOSE_WEATHER_NOTIFICATION);
+                            sendBroadcast(intent);
+                        }
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -81,4 +128,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (receiver != null) {
+            unregisterReceiver(receiver);
+        }
+    }
+
 }

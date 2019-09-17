@@ -2,6 +2,10 @@ package com.tokyonth.weather.model.bean;
 
 public class SettingsItemBean {
 
+    public static final int TYPE_COMMON = 0;
+    public static final int TYPE_SWITCH = 1;
+    public static final int TYPE_TITLE = 2;
+
     private int type;
     private String title;
     private String sub;

@@ -28,7 +28,7 @@ public class NotificationTools {
 
     public NotificationTools(Context context) {
         this.context = context;
-        ListenerNotificationBrodcaseRecever.setmCallBack(key -> {
+        NotificationBrodcaseRecever.setmCallBack(key -> {
             if (key == CLOSE_WEATHER_NOTIFICATION) {
                 NotificationUtil.getNotificationManager(context).cancel(notificationId);
                 isCreate = false;
@@ -137,7 +137,7 @@ public class NotificationTools {
         myIntentFilter.addAction( "next" );
         myIntentFilter.addAction( "previous" );
         //注册广播
-        con.registerReceiver( new ListenerNotificationBrodcaseRecever(), myIntentFilter );
+        con.registerReceiver( new NotificationBrodcaseRecever(), myIntentFilter );
     }
 }
 
