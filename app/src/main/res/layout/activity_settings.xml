@@ -34,10 +34,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/setting_rv"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/settingsFragment"
-        android:name="com.tokyonth.weather.fragment.component.SettingsFragment"/>
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

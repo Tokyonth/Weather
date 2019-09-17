@@ -244,7 +244,7 @@ public class SunriseSunsetView extends View {
 
         canvas.save();
         // 绘制日出时间
-        String sunriseStr = mLabelFormatter.formatSunriseLabel(mSunriseTime);
+        String sunriseStr = "日出" + mLabelFormatter.formatSunriseLabel(mSunriseTime);
 
         mLabelPaint.setTextAlign(Paint.Align.LEFT);
         Paint.FontMetricsInt metricsInt = mLabelPaint.getFontMetricsInt();
@@ -254,7 +254,7 @@ public class SunriseSunsetView extends View {
 
         // 绘制日落时间
         mLabelPaint.setTextAlign(Paint.Align.RIGHT);
-        String sunsetStr = mLabelFormatter.formatSunsetLabel(mSunsetTime);
+        String sunsetStr = "日落" + mLabelFormatter.formatSunsetLabel(mSunsetTime);
         baseLineX = mBoardRectF.right - mSunRadius - mLabelHorizontalOffset;
         canvas.drawText(sunsetStr, baseLineX, baseLineY, mLabelPaint);
         canvas.restore();

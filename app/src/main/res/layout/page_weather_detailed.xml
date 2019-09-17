@@ -46,6 +46,16 @@
             android:id="@+id/pager_index_weather"
             layout="@layout/pager_index_weather"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_grey"
+            android:text="数据来源于极数据"/>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
+

@@ -46,9 +46,9 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == TYPE_BODY){
-            View view = LayoutInflater.from(parent.getContext()).inflate(com.tokyonth.weather.R.layout.item_warning,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_warning,parent,false);
             return new ContentViewHolder(view);
-        }else {
+        } else {
             View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_warning_footer,parent,false);
             return new FooterViewHolder(footerView);
         }
@@ -81,7 +81,7 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         String duiliuUrl = "http://www.nmc.cn/publish/country/warning/strong_convection.html";
                         getWarningContent(duiliuUrl,((ContentViewHolder)holder));
                     }
-                }else if(((ContentViewHolder)holder).contentLl.getVisibility() == View.VISIBLE){
+                } else if(((ContentViewHolder)holder).contentLl.getVisibility() == View.VISIBLE){
                     ((ContentViewHolder)holder).animateClose(((ContentViewHolder)holder).contentLl);
 
                     ((ContentViewHolder)holder).iv_arrow.setImageDrawable(

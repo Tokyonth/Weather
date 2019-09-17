@@ -22,11 +22,5 @@
         android:orderInCategory="2"
         app:showAsAction="never"
         android:title="设置"/>
-    
-    <item
-        android:id="@+id/action_shard"
-        android:orderInCategory="3"
-        app:showAsAction="never"
-        android:title="分享"/>
 
 </menu>

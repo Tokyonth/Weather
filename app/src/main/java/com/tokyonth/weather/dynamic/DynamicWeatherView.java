@@ -242,12 +242,10 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 					//TimingLogger logger = new TimingLogger("DrawThread");
 					// Lock the canvas for drawing.
 					Canvas canvas = mSurface.lockCanvas();
-					//logger.addSplit("lockCanvas");
-					
+
 					if (canvas != null) {
 						canvas.drawColor(Color.TRANSPARENT, Mode.CLEAR);
 						// Update graphics.
-
 						drawSurface(canvas);
 						//logger.addSplit("drawSurface");
 						// All done!

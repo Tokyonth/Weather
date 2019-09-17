@@ -185,8 +185,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
                 intent.setClass(MainActivity.this, WarningActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.action_shard:
-                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -9,15 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kyleduo.switchbutton.SwitchButton;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.activity.MainActivity;
 import com.tokyonth.weather.adapter.DailyDayAdapter;
@@ -39,7 +38,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
     private RelativeLayout swtciRl;
     private FrameLayout dailyDayFl , dailyNightFl;
     private TextView titleTv, day_title_tv , airQualityTv, windTv,forecastDayTv, forecastHourlyTv;
-    private Switch dayNightSwitch;
+    private SwitchButton dayNightSwitch;
     private RecyclerView dailyDayRv , dailyNightRv;
     private RecyclerView indexRv;
     private ImageView airqualityIv;
@@ -86,7 +85,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         affectTv = (TextView) view.findViewById(R.id.aqi_affect_tv);
         pm25Tv = (TextView) view.findViewById(R.id.aqi_pm25_tv);
         pm10Tv = (TextView) view.findViewById(R.id.aqi_pm10_tv);
-        dayNightSwitch = (Switch) view.findViewById(R.id.daily_weather_switch_tb);
+        dayNightSwitch = (SwitchButton) view.findViewById(R.id.daily_weather_switch_tb);
         titleTv = (TextView) view.findViewById(R.id.daily_weather_title_tv);
         swtciRl = (RelativeLayout) view.findViewById(R.id.daily_weather_swtch_rl);
         dailyDayFl = (FrameLayout) view.findViewById(R.id.daily_day_fl);
@@ -122,7 +121,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
             }
 
             private String formatLabel(Time time) {
-                return String.format(Locale.getDefault(), "%02d : %02d", time.hour, time.minute);
+                return String.format(Locale.getDefault(), "%02d:%02d", time.hour, time.minute);
             }
         });
 
@@ -184,10 +183,6 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         String SunsetAfter = Sunset.substring(index+1);
 
         refreshSSV(Integer.parseInt(SunriseBefore), Integer.parseInt(SunriseAfter), Integer.parseInt(SunsetBefore), Integer.parseInt(SunsetAfter));
-
-        Log.d("日出----->", SunriseBefore + ":" + SunriseAfter);
-
-        Log.d("日落----->", SunsetBefore + ":" + SunsetAfter);
 
         dailyDayRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         dailyDayAdapter = new DailyDayAdapter(weather.getInfo().getDailyList());
