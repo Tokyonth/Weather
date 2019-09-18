@@ -15,7 +15,7 @@
             android:id="@+id/content_weather_msg"
             layout="@layout/content_weather_msg"/>
 
-        <com.tokyonth.weather.view.SunriseSunsetView.ssv.SunriseSunsetView
+        <com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView
             android:id="@+id/ssv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

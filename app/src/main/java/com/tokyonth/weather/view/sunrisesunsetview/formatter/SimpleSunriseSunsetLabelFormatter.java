@@ -1,6 +1,6 @@
-package com.tokyonth.weather.view.SunriseSunsetView.formatter;
+package com.tokyonth.weather.view.sunrisesunsetview.formatter;
 
-import com.tokyonth.weather.view.SunriseSunsetView.model.Time;
+import com.tokyonth.weather.view.sunrisesunsetview.model.Time;
 
 import java.util.Locale;
 

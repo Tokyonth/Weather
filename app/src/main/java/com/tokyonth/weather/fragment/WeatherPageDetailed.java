@@ -24,9 +24,9 @@ import com.tokyonth.weather.blur.BlurSingle;
 import com.tokyonth.weather.fragment.component.base.BaseSubscribeFragment;
 import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.utils.WeatherInfoHelper;
-import com.tokyonth.weather.view.SunriseSunsetView.formatter.SunriseSunsetLabelFormatter;
-import com.tokyonth.weather.view.SunriseSunsetView.model.Time;
-import com.tokyonth.weather.view.SunriseSunsetView.ssv.SunriseSunsetView;
+import com.tokyonth.weather.view.sunrisesunsetview.formatter.SunriseSunsetLabelFormatter;
+import com.tokyonth.weather.view.sunrisesunsetview.model.Time;
+import com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView;
 import com.tokyonth.weather.view.widget.EnglishTextView;
 
 import java.util.Locale;

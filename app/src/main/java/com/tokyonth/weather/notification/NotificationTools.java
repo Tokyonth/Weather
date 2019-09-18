@@ -5,26 +5,36 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.activity.MainActivity;
+import com.tokyonth.weather.model.WeatherModel;
+import com.tokyonth.weather.model.WeatherModelImpl;
+import com.tokyonth.weather.model.bean.DefaultCity;
+import com.tokyonth.weather.model.bean.Weather;
+import com.tokyonth.weather.presenter.OnWeatherListener;
+import com.tokyonth.weather.utils.WeatherInfoHelper;
+import com.tokyonth.weather.utils.sundry.DateUtil;
+
+import org.litepal.crud.DataSupport;
 
 import static android.app.Notification.VISIBILITY_SECRET;
 
-public class NotificationTools {
+public class NotificationTools implements OnWeatherListener {
 
     private Context context;
     private static NotificationTools utils;
 
     private String channel_id = BaseApplication.getContext().getResources().getString(R.string.app_name);
+    private RemoteViews remoteViews;
+    private NotificationCompat.Builder builder;
 
     public NotificationTools(Context context) {
         this.context = context;
@@ -55,28 +65,10 @@ public class NotificationTools {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channel_id, channel_id,
                     NotificationManager.IMPORTANCE_DEFAULT );
-            //是否绕过请勿打扰模式
-           // channel.canBypassDnd();
-            //闪光灯
             channel.enableLights(false);
             //锁屏显示通知
             channel.setLockscreenVisibility(VISIBILITY_SECRET);
-            //闪关灯的灯光颜色
-            channel.setLightColor(Color.RED);
-            //桌面launcher的消息角标
-            channel.canShowBadge();
-            //是否允许震动
-            channel.enableVibration(false);
-            //获取系统通知响铃声音的配置
-            channel.getAudioAttributes();
-            //获取通知取到组
-            channel.getGroup();
-            //设置可绕过  请勿打扰模式
-            channel.setBypassDnd(true);
-            //设置震动模式
-           // channel.setVibrationPattern( new long[]{100, 100, 200} );
-            //是否会有灯光
-            channel.shouldShowLights();
+            channel.setSound(null, null);
             NotificationUtil.getNotificationManager(context).createNotificationChannel(channel);
         }
         NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channel_id);
@@ -99,45 +91,55 @@ public class NotificationTools {
         if (!NotificationUtil.isOpenPermission(context)) {
             return;
         }
-
         if (isCreate) {
           //  Logs.eprintln( "只能创建一个自定义Notification" );
             isCreate = true;
             return;
         }
-        NotificationCompat.Builder builder = getNotificationBuilder();
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_custom_notifition );
-        remoteViews.setTextViewText(R.id.city, "鄞州区");
-        remoteViews.setTextViewText(R.id.weather, "多云 29 优");
-        remoteViews.setTextViewText(R.id.time, "20:00");
+
+        DefaultCity defaultCity = DataSupport.find(DefaultCity.class,1);
+        if(defaultCity != null){
+            WeatherModel weatherModel = new WeatherModelImpl();
+            weatherModel.loadLocationWeather(defaultCity,this);
+        } else {
+            Log.d("-------->", "默认城市不存在");
+        }
+
+        builder = getNotificationBuilder();
+        remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_custom_notifition);
 
         Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity( context, -1, intent, PendingIntent.FLAG_UPDATE_CURRENT );
-    //    remoteViews.setOnClickPendingIntent( R.id.turn_next, pendingIntent );
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, -1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.notification_cust_ll, pendingIntent);
 
-        Intent intent2 = new Intent( "close" );//过滤action为close
-        PendingIntent pendingIntentClose = PendingIntent.getBroadcast( context, 0, intent2, 0 );
-       // remoteViews.setOnClickPendingIntent( R.id.iv_close, pendingIntentClose );
+        builder.setOngoing(true);//设置无法取消
+        builder.setAutoCancel(false);//点击后不取消
+        builder.setCustomContentView(remoteViews);
 
-        builder.setOngoing( true );//设置无法取消
-        builder.setAutoCancel( false );//点击后不取消
-        builder.setCustomContentView( remoteViews );
-        NotificationUtil.getNotificationManager( context ).notify( notificationId, builder.build() );
     }
 
+    @Override
+    public void loadSuccess(Weather weather) {
+        int weatherIconPath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
+        //Icon icon = Icon.createWithResource(BaseApplication.getContext(), weatherIconPath);
+        //remoteViews.setImageViewIcon(R.id.notification_iv, icon);
+        remoteViews.setImageViewResource(R.id.notification_iv, weatherIconPath);
+        remoteViews.setTextViewText(R.id.city, weather.getInfo().getCityName());
+        remoteViews.setTextViewText(R.id.weather, weather.getInfo().getWeather() + "\t" + weather.getInfo().getTemp() + "℃");
+        remoteViews.setTextViewText(R.id.time, DateUtil.getSystemDate());
 
-    /**
-     * 自定义布局的按钮广播注册
-     *
-     * @param con
-     */
-    public static void registerBoradcastReceiver(Context con) {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction( "close" );//如果之定义布局有多个按钮则可以定义多个过滤条件
-        myIntentFilter.addAction( "next" );
-        myIntentFilter.addAction( "previous" );
-        //注册广播
-        con.registerReceiver( new NotificationBrodcaseRecever(), myIntentFilter );
+        NotificationUtil.getNotificationManager(context).notify(notificationId, builder.build());
     }
+
+    @Override
+    public void loadFailure(String msg) {
+
+    }
+
+    @Override
+    public void loadOffline() {
+
+    }
+
 }
 

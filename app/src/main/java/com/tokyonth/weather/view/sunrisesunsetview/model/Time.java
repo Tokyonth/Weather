@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.SunriseSunsetView.model;
+package com.tokyonth.weather.view.sunrisesunsetview.model;
 
 /**
  * 日出日落相关时间

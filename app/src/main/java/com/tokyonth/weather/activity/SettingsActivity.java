@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +21,9 @@ import com.tokyonth.weather.adapter.SettingsAdapter;
 import com.tokyonth.weather.model.bean.SettingsItemBean;
 import com.tokyonth.weather.notification.NotificationBrodcaseRecever;
 import com.tokyonth.weather.notification.NotificationTools;
+import com.tokyonth.weather.utils.SPUtils;
+import com.tokyonth.weather.utils.WeatherSettingsHelper;
+import com.tokyonth.weather.view.custom.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +33,8 @@ public class SettingsActivity extends AppCompatActivity {
     private RecyclerView rv;
     private SettingsAdapter adapter;
 
-    private String actionStr = "com.tokyonth.weather.receiver";
-    private NotificationBrodcaseRecever receiver;
+    private CustomDialog dialog;
+    private NotificationBrodcaseRecever recever;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         initView();
         initData();
+        initSettings();
     }
 
     private void initView() {
@@ -82,10 +87,20 @@ public class SettingsActivity extends AppCompatActivity {
         adapter.setOnItemClick(new SettingsAdapter.OnItemClick() {
             @Override
             public void onCommonClick(View view, int pos) {
-                Toast.makeText(getBaseContext(), "点击第" + pos + "个", Toast.LENGTH_LONG).show();
                 switch (pos) {
                     case 2:
-
+                        dialog = new CustomDialog(SettingsActivity.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("wwwwww");
+                        dialog.setYesOnclickListener("确定", new CustomDialog.onYesOnclickListener() {
+                            @Override
+                            public void onYesClick() {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.setCancelable(false);
+                        dialog.create();
+                        dialog.show();
                         break;
                 }
             }
@@ -95,28 +110,18 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onSwitch(View view, boolean bool, int pos) {
-                Intent intent = new Intent();
-                intent.setAction(actionStr);
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(actionStr);
-                receiver = new NotificationBrodcaseRecever();
-                registerReceiver(receiver, filter);
-
-                Toast.makeText(getBaseContext(), "点击第" + pos + "个,状态" + bool, Toast.LENGTH_LONG).show();
                 switch (pos) {
                     case 1:
-                        if (bool) {
-                            intent.putExtra("key", NotificationTools.OPEN_WEATHER_NOTIFICATION);
-                            sendBroadcast(intent);
-
-                        } else {
-                            intent.putExtra("key", NotificationTools.CLOSE_WEATHER_NOTIFICATION);
-                            sendBroadcast(intent);
-                        }
+                        recever = WeatherSettingsHelper.setWeatherNotification(SettingsActivity.this, bool);
                         break;
                 }
             }
         });
+    }
+
+    private void initSettings() {
+        boolean bool = (boolean) SPUtils.getData("switch_notification_weather", false);
+        adapter.setSettingsSwitchChecked(1, bool);
     }
 
     @Override
@@ -132,9 +137,10 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (receiver != null) {
-            unregisterReceiver(receiver);
+        if (recever != null) {
+            unregisterReceiver(recever);
         }
+
     }
 
 }

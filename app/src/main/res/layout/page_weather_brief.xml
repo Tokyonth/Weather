@@ -70,16 +70,6 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <com.tokyonth.weather.view.custom.WeatherChartView
-            android:id="@+id/line_char"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            app:dayColor="@color/colorAccent"
-            app:nightColor="@color/colorPrimary"
-            app:textColor="@android:color/white"
-            app:textSize="14sp"/>
-
         <com.tokyonth.weather.view.custom.LineWeatherView
             android:id="@+id/weather"
             android:layout_width="wrap_content"

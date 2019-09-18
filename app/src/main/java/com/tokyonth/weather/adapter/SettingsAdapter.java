@@ -28,6 +28,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private OnItemClick onItemCommonClick;
     private OnItemSwitchClick onItemSwitchClick;
 
+    private static boolean isSetChecked = false;
+    private static int index = 0;
+
     public SettingsAdapter(List<SettingsItemBean> list) {
         this.list = list;
     }
@@ -97,7 +100,15 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             });
             ((SwitchViewHolder) holder).cardView.setOnClickListener(null);
+            if (position == index) {
+                ((SwitchViewHolder) holder).switchButton.setChecked(isSetChecked);
+            }
         }
+    }
+
+    public void setSettingsSwitchChecked(int PutIndex, boolean PutIsSetChecked) {
+        index = PutIndex;
+        isSetChecked = PutIsSetChecked;
     }
 
     @Override
@@ -108,6 +119,11 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         return list.get(position).getType();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     class TitleViewHolder extends RecyclerView.ViewHolder {

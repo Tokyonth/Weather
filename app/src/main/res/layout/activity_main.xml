@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/weather_basic_coor"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
 
-    <com.tokyonth.weather.dynamic.DynamicWeatherView
-        android:id="@+id/weather_weatherview_container_rl"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/weather_basic_coor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <include layout="@layout/content_main"/>
+        <com.tokyonth.weather.dynamic.DynamicWeatherView
+            android:id="@+id/weather_weatherview_container_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include layout="@layout/content_main"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</merge>

@@ -97,7 +97,7 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             setWeatherInfo(savedCity,((CityViewHolder)holder));
             ((CityViewHolder)holder).view.setOnClickListener(v -> listener.onItemClick(v,holder.getAdapterPosition()-1));
             ((CityViewHolder)holder).view.setOnLongClickListener(v -> {
-                longClickListener.onItemLongClick(v,holder.getAdapterPosition()-1);
+                longClickListener.onItemLongClick(v,holder.getAdapterPosition());
                 return true;
             });
         }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.tokyonth.weather.utils.SPUtils;
 import com.tokyonth.weather.utils.file.FileUtil;
 
 import org.litepal.LitePal;
@@ -19,6 +20,7 @@ public class BaseApplication extends Application {
         LitePal.initialize(this);
         context = getApplicationContext();
 
+        SPUtils.getInstance(context, "config");
         if (!FileUtil.isFile("save_weather.json")) {
             FileUtil.saveFile("", "save_weather.json");
         }

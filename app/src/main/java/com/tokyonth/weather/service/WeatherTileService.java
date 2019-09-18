@@ -28,7 +28,7 @@ public class WeatherTileService extends TileService implements OnWeatherListener
         if(defaultCity != null){
             WeatherModel weatherModel = new WeatherModelImpl();
             weatherModel.loadLocationWeather(defaultCity,this);
-        }else {
+        } else {
             Toast.makeText(this, "默认城市不存在！", Toast.LENGTH_SHORT).show();
         }
     }
@@ -46,9 +46,10 @@ public class WeatherTileService extends TileService implements OnWeatherListener
         int weatherIconPath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
         Icon icon = Icon.createWithResource(this,weatherIconPath);
         String temp = weather.getInfo().getTemp() + "℃";
+        String local = weather.getInfo().getCityName();
         getQsTile().setState(Tile.STATE_INACTIVE);
         getQsTile().setIcon(icon);
-        getQsTile().setLabel(temp);
+        getQsTile().setLabel(local + temp);
         getQsTile().setState(Tile.STATE_ACTIVE);
         getQsTile().updateTile();
     }

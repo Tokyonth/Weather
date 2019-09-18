@@ -1,4 +1,4 @@
-package com.tokyonth.weather.view.SunriseSunsetView.ssv;
+package com.tokyonth.weather.view.sunrisesunsetview.ssv;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -17,9 +17,9 @@ import android.view.animation.LinearInterpolator;
 
 
 import com.tokyonth.weather.R;
-import com.tokyonth.weather.view.SunriseSunsetView.formatter.SimpleSunriseSunsetLabelFormatter;
-import com.tokyonth.weather.view.SunriseSunsetView.formatter.SunriseSunsetLabelFormatter;
-import com.tokyonth.weather.view.SunriseSunsetView.model.Time;
+import com.tokyonth.weather.view.sunrisesunsetview.formatter.SimpleSunriseSunsetLabelFormatter;
+import com.tokyonth.weather.view.sunrisesunsetview.formatter.SunriseSunsetLabelFormatter;
+import com.tokyonth.weather.view.sunrisesunsetview.model.Time;
 
 import java.util.Calendar;
 import java.util.Locale;
