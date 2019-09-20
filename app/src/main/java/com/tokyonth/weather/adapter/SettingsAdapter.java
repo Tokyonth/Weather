@@ -80,12 +80,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {
                 ((CommonViewHolder) holder).sub.setText(list.get(position).getSub());
             }
-            ((CommonViewHolder) holder).cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemCommonClick.onCommonClick(v, position);
-                }
-            });
+            ((CommonViewHolder) holder).cardView.setOnClickListener(v -> onItemCommonClick.onCommonClick(v, position));
         } else if (holder instanceof SwitchViewHolder) {
             ((SwitchViewHolder) holder).title.setText(list.get(position).getTitle());
             if (list.get(position).getSub() == null) {
@@ -93,12 +88,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {
                 ((SwitchViewHolder) holder).sub.setText(list.get(position).getSub());
             }
-            ((SwitchViewHolder) holder).switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    onItemSwitchClick.onSwitch(buttonView, isChecked, position);
-                }
-            });
+            ((SwitchViewHolder) holder).switchButton.setOnCheckedChangeListener((buttonView, isChecked) -> onItemSwitchClick.onSwitch(buttonView, isChecked, position));
             ((SwitchViewHolder) holder).cardView.setOnClickListener(null);
             if (position == index) {
                 ((SwitchViewHolder) holder).switchButton.setChecked(isSetChecked);
@@ -131,7 +121,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ImageView imageView;
         TextView textView;
 
-        public TitleViewHolder(View itemView) {
+        TitleViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.title_tv);
             imageView = (ImageView) itemView.findViewById(R.id.title_iv);
@@ -145,7 +135,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView sub;
         CardView cardView;
 
-        public CommonViewHolder(View itemView) {
+        CommonViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.settings_item_title);
             sub = (TextView) itemView.findViewById(R.id.settings_item_sub);
@@ -161,7 +151,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         SwitchButton switchButton;
         CardView cardView;
 
-        public SwitchViewHolder(View itemView) {
+        SwitchViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.settings_item_switch_title);
             sub = (TextView) itemView.findViewById(R.id.settings_item_switch_sub);

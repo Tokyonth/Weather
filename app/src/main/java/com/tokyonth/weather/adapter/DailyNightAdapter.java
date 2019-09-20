@@ -1,7 +1,11 @@
 package com.tokyonth.weather.adapter;
 
 import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ public class DailyNightAdapter extends RecyclerView.Adapter<DailyNightAdapter.Ni
         this.dailyList = dailyList;
     }
 
+    @NonNull
     @Override
     public NightViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_weather,parent,false);
@@ -50,7 +55,7 @@ public class DailyNightAdapter extends RecyclerView.Adapter<DailyNightAdapter.Ni
         private EnglishTextView timeTv , tempTv ;
         private ImageView weatherImageIv;
 
-        public NightViewHolder(View itemView) {
+        NightViewHolder(View itemView) {
             super(itemView);
             itemView.setBackgroundColor(Color.TRANSPARENT);
             weekTv = (TextView) itemView.findViewById(R.id.item_daily_week_tv);

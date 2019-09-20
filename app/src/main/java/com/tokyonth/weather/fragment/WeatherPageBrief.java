@@ -1,15 +1,17 @@
 package com.tokyonth.weather.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.activity.MainActivity;
+import com.tokyonth.weather.adapter.WeatherTrendAdapter;
 import com.tokyonth.weather.blur.BlurSingle;
 import com.tokyonth.weather.fragment.component.base.BaseSubscribeFragment;
 import com.tokyonth.weather.model.bean.DefaultCity;
@@ -20,7 +22,6 @@ import com.tokyonth.weather.model.bean.entity.Hourly;
 import com.tokyonth.weather.view.widget.EnglishTextView;
 import com.tokyonth.weather.utils.WeatherInfoHelper;
 import com.tokyonth.weather.view.widget.TempTextView;
-import com.tokyonth.weather.view.custom.LineWeatherView;
 
 import org.litepal.crud.DataSupport;
 
@@ -32,12 +33,11 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
     private EnglishTextView updateTimeTv;
     private TempTextView tempTv;
     private TextView weatherTextTv;
-    private LineWeatherView lineWeatherView;
-
     private LinearLayout blur_line_ll;
-    private BlurSingle.BlurLayout blur;
-    private ImageView weatherTextIv;
 
+    private BlurSingle.BlurLayout blur_single;
+    private ImageView weatherTextIv;
+    private RecyclerView weather_trend_rv;
 
     @Override
     protected int getLayoutId() {
@@ -47,22 +47,17 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         updateTimeTv = (EnglishTextView) view.findViewById(R.id.weather_update_time_tv);
-
         tempTv = (TempTextView) view.findViewById(R.id.weather_temp_tv);
-        lineWeatherView = (LineWeatherView) view.findViewById(R.id.weather);
         blur_line_ll = (LinearLayout) view.findViewById(R.id.blur_line_ll);
-
         weatherTextTv = (TextView) view.findViewById(R.id.weather_weather_text_tv);
         weatherTextIv = (ImageView) view.findViewById(R.id.weather_weather_text_image_iv);
+        weather_trend_rv = (RecyclerView) view.findViewById(R.id.weather_trend_rv);
         setBlur();
-
-
     }
 
-
     private void setBlur(){
-        final View view_test=((MainActivity)getActivity()).main_ll;
-        blur=new BlurSingle.BlurLayout(blur_line_ll,view_test);
+        View blur_box_view = ((MainActivity)getActivity()).main_ll;
+        blur_single = new BlurSingle.BlurLayout(blur_line_ll, blur_box_view);
     }
 
     @Override
@@ -90,7 +85,12 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
             WeatherBean bean = new WeatherBean(hourly.getWeather(), hourly.getTemp(), hourly.getTime());
             data.add(bean);
         }
-        lineWeatherView.setData(data);
+        WeatherTrendAdapter adapter = new WeatherTrendAdapter(data);
+        LinearLayoutManager ms= new LinearLayoutManager(getContext());
+        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 RecyclerView 布局方式为横向布局
+        weather_trend_rv.setLayoutManager(ms);
+        weather_trend_rv.setAdapter(adapter);
+
         String updateTime = WeatherInfoHelper.getUpdateTime(weather.getInfo().getUpdateTime());
         String tempInfo = weather.getInfo().getTemp() + "°";
 

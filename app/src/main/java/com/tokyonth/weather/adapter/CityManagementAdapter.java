@@ -2,6 +2,8 @@ package com.tokyonth.weather.adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -48,12 +50,13 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.savedCityList = savedCityList;
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == NORMAL){
+        if(viewType == NORMAL) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_city_management,parent,false);
             return new CityViewHolder(view);
-        }else {
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_city_management_default_city,parent,false);
             return new DefaultCityViewHolder(view);
         }
@@ -150,7 +153,7 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private ImageView weatherImageIv;
         private ImageView weatherBg;
 
-        public CityViewHolder(View itemView) {
+        CityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);
@@ -169,7 +172,7 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private ImageView weatherImageIv;
         private ImageView weatherBg;
 
-        public DefaultCityViewHolder(View itemView) {
+        DefaultCityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);

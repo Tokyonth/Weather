@@ -255,7 +255,9 @@ public class MainActivity extends BaseActivity implements WeatherView {
         // or Time t=new Time("GMT+8"); 加上Time Zone资料
         Time time = new Time();
         time.setToNow(); // 取得
-        int hour = time.hour;
+      //  int hour = time.hour;
+        int hour = 20;
+
 
         if (hour <= 18) {
             switch (weatherType) {

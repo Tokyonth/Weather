@@ -1,5 +1,6 @@
 package com.tokyonth.weather.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
         this.indexList = indexList;
     }
 
+    @NonNull
     @Override
     public IndexViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_index_weather,parent,false);
@@ -85,7 +87,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
         private TextView valueTv , detailTv, titleTv;
         private ImageView indexImageIv;
 
-        public IndexViewHolder(View itemView) {
+        IndexViewHolder(View itemView) {
             super(itemView);
             indexImageIv = (ImageView) itemView.findViewById(R.id.item_index_image_iv);
             valueTv = (TextView) itemView.findViewById(R.id.item_index_value_tv);

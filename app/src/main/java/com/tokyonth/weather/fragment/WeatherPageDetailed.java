@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,16 +50,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
     private SunriseSunsetView sunsetView;
     private View blur0, blur1, blur2,blur3, blur4;
-    private BlurSingle.BlurLayout blur;
-
-    private void setBlur(){
-        final View view_test = ((MainActivity)getActivity()).main_ll;
-        blur = new BlurSingle.BlurLayout(blur0,view_test);
-        blur = new BlurSingle.BlurLayout(blur1,view_test);
-        blur = new BlurSingle.BlurLayout(blur2,view_test);
-        blur = new BlurSingle.BlurLayout(blur3,view_test);
-        blur = new BlurSingle.BlurLayout(blur4,view_test);
-    }
+    private BlurSingle.BlurLayout blur_single;
 
     @Override
     protected int getLayoutId() {
@@ -112,6 +104,15 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
             }
         });
 
+    }
+
+    private void setBlur(){
+        View blur_box_view = ((MainActivity)getActivity()).main_ll;
+        blur_single = new BlurSingle.BlurLayout(blur0, blur_box_view);
+        blur_single = new BlurSingle.BlurLayout(blur1, blur_box_view);
+        blur_single = new BlurSingle.BlurLayout(blur2, blur_box_view);
+        blur_single = new BlurSingle.BlurLayout(blur3, blur_box_view);
+        blur_single = new BlurSingle.BlurLayout(blur4, blur_box_view);
     }
 
     private void refreshSSV(int sunriseHour, int sunriseMinute, int sunsetHour, int sunsetMinute) {
@@ -179,7 +180,6 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         indexRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         indexAdapter = new IndexAdapter(weather.getInfo().getIndexList());
         indexRv.setAdapter(indexAdapter);
-
     }
 
     private void setFlipAnimation(Weather weather) {

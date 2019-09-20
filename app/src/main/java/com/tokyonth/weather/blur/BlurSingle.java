@@ -73,8 +73,8 @@ public class BlurSingle extends Blur {
      * @param scaleFactor
      */
     public static void initBkg(View fromView, int radius, float scaleFactor){
-        BitmapDrawable bd=(BitmapDrawable) fromView.getBackground();
-        Bitmap bkg1=bd.getBitmap();
+        BitmapDrawable bd = (BitmapDrawable) fromView.getBackground();
+        Bitmap bkg1 = bd.getBitmap();
         fromView.destroyDrawingCache();
         fromView.setDrawingCacheEnabled(true);
         int height = (int) (fromView.getDrawingCache().getHeight());  //屏幕高度

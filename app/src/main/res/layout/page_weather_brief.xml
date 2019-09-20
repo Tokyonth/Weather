@@ -65,17 +65,17 @@
     <LinearLayout
         android:layout_margin="16dp"
         android:id="@+id/blur_line_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
         android:orientation="vertical"
         android:padding="10dp">
 
-        <com.tokyonth.weather.view.custom.LineWeatherView
-            android:id="@+id/weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:line_interval="60dp"
-            app:min_point_height="60dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weather_trend_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

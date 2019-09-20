@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
     private SettingsAdapter adapter;
 
     private CustomDialog dialog;
-    private NotificationBrodcaseRecever recever;
+    private NotificationBrodcaseRecever receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,37 +84,25 @@ public class SettingsActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
-        adapter.setOnItemClick(new SettingsAdapter.OnItemClick() {
-            @Override
-            public void onCommonClick(View view, int pos) {
-                switch (pos) {
-                    case 2:
-                        dialog = new CustomDialog(SettingsActivity.this);
-                        dialog.setTitle("提示");
-                        dialog.setMessage("wwwwww");
-                        dialog.setYesOnclickListener("确定", new CustomDialog.onYesOnclickListener() {
-                            @Override
-                            public void onYesClick() {
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog.setCancelable(false);
-                        dialog.create();
-                        dialog.show();
-                        break;
-                }
+        adapter.setOnItemClick((view, pos) -> {
+            switch (pos) {
+                case 2:
+                    dialog = new CustomDialog(SettingsActivity.this);
+                    dialog.setTitle("提示");
+                    dialog.setMessage("测试");
+                    dialog.setYesOnclickListener("确定", () -> dialog.dismiss());
+                    dialog.setCancelable(false);
+                    dialog.create();
+                    dialog.show();
+                    break;
             }
         });
 
-        adapter.setOnItemSwitchClick(new SettingsAdapter.OnItemSwitchClick() {
-
-            @Override
-            public void onSwitch(View view, boolean bool, int pos) {
-                switch (pos) {
-                    case 1:
-                        recever = WeatherSettingsHelper.setWeatherNotification(SettingsActivity.this, bool);
-                        break;
-                }
+        adapter.setOnItemSwitchClick((view, bool, pos) -> {
+            switch (pos) {
+                case 1:
+                    receiver = WeatherSettingsHelper.setWeatherNotification(SettingsActivity.this, bool);
+                    break;
             }
         });
     }
@@ -137,8 +125,8 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (recever != null) {
-            unregisterReceiver(recever);
+        if (receiver != null) {
+            unregisterReceiver(receiver);
         }
 
     }

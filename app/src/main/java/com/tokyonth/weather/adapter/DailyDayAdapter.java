@@ -1,5 +1,6 @@
 package com.tokyonth.weather.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class DailyDayAdapter extends RecyclerView.Adapter<DailyDayAdapter.DailyV
         this.dailyList = dailyList;
     }
 
+    @NonNull
     @Override
     public DailyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_weather,parent,false);
@@ -50,7 +52,7 @@ public class DailyDayAdapter extends RecyclerView.Adapter<DailyDayAdapter.DailyV
         private EnglishTextView timeTv , tempTv ;
         private ImageView weatherImageIv;
 
-        public DailyViewHolder(View itemView) {
+        DailyViewHolder(View itemView) {
             super(itemView);
             weekTv = (TextView) itemView.findViewById(R.id.item_daily_week_tv);
             timeTv = (EnglishTextView) itemView.findViewById(R.id.item_daily_time_tv);

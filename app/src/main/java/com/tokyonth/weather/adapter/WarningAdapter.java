@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == TYPE_BODY){
@@ -114,7 +117,7 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         private int hiddenLayoutHeight;
 
-        public ContentViewHolder(View itemView) {
+        ContentViewHolder(View itemView) {
             super(itemView);
             progressBar_load = (ProgressBar) itemView.findViewById(R.id.progress_load);
             iv_arrow = (ImageView) itemView.findViewById(R.id.iv_arrow);
@@ -161,7 +164,7 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         TextView footerTv;
 
-        public FooterViewHolder(View itemView) {
+        FooterViewHolder(View itemView) {
             super(itemView);
             footerTv = (TextView) itemView.findViewById(R.id.item_warning_footer_tv);
         }

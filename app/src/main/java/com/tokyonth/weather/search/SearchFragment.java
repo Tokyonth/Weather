@@ -96,7 +96,7 @@ public class SearchFragment extends DialogFragment implements
 
         //初始化recyclerView
         rvSearchCity.setLayoutManager(new LinearLayoutManager(getContext()));//list类型
-        searchCityAdapter = new SearchCityAdapter(getContext(), foundCityList);
+        searchCityAdapter = new SearchCityAdapter(foundCityList);
         rvSearchCity.setAdapter(searchCityAdapter);
 
         //监听编辑框文字改变
@@ -193,7 +193,7 @@ public class SearchFragment extends DialogFragment implements
             String str = charSequence.toString().trim();
             String queriedCity = str + "%";
             foundCityList = DataSupport.where("cityname like ?",queriedCity).find(City.class);
-            searchCityAdapter = new SearchCityAdapter(getContext(), foundCityList);
+            searchCityAdapter = new SearchCityAdapter(foundCityList);
             rvSearchCity.setAdapter(searchCityAdapter);
             searchCityAdapter.notifyDataSetChanged();
             searchCityAdapter.setOnItemClickListener(SearchFragment.this);

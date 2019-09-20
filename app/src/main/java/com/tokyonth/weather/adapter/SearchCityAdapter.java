@@ -1,6 +1,6 @@
 package com.tokyonth.weather.adapter;
 
-import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +15,8 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-import static com.tokyonth.weather.BaseApplication.getContext;
-
 public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.ViewHolder> {
 
-    private Context context;
     private List<City> cityList;
 
     private IOnItemClickListener iOnItemClickListener;
@@ -28,16 +25,16 @@ public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.Vi
         this.iOnItemClickListener = iOnItemClickListener;
     }
 
-    public SearchCityAdapter(Context context, List<City> cityList) {
-        this.context = context;
+    public SearchCityAdapter(List<City> cityList) {
         this.cityList = cityList;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder holder = new ViewHolder(LayoutInflater.from(context).
-                inflate(R.layout.item_search_city, parent, false));
-        return holder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_city,parent,false);
+     //   ViewHolder view = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_search_city, parent, false));
+        return new ViewHolder(view);
     }
 
     @Override
