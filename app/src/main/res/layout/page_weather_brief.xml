@@ -62,7 +62,7 @@
         tools:text="17:50:45" />
 
     <LinearLayout
-        android:background="@drawable/frame"
+        android:background="@drawable/frame_reveal_weather_msg"
         android:layout_margin="16dp"
         android:id="@+id/blur_line_ll"
         android:layout_width="match_parent"

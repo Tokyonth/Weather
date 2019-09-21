@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="16dp"
-            android:background="@drawable/frame">
+            android:background="@drawable/frame_reveal_weather_msg">
 
             <com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView
                 android:id="@+id/ssv"

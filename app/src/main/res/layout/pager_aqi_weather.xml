@@ -7,7 +7,7 @@
     android:padding="@dimen/weather_view_pager_margin"
     android:layout_margin="16dp"
     android:gravity="center"
-    android:background="@drawable/frame"
+    android:background="@drawable/frame_reveal_weather_msg"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView

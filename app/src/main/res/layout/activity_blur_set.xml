@@ -159,7 +159,7 @@
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_frame_shape"
+            android:background="@drawable/frame_button_shape"
             android:textColor="@color/colorWhite"
             android:text="选择图像"/>
 

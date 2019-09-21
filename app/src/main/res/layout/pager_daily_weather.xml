@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:layout_margin="16dp"
-    android:background="@drawable/frame"
+    android:background="@drawable/frame_reveal_weather_msg"
     android:orientation="vertical">
 
    <RelativeLayout

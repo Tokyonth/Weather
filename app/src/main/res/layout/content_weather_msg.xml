@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/weather_view_pager_margin"
     android:layout_margin="16dp"
-    android:background="@drawable/frame">
+    android:background="@drawable/frame_reveal_weather_msg">
 
     <LinearLayout
         android:layout_marginTop="10dp"
