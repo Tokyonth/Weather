@@ -41,8 +41,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.WarningActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -52,6 +53,8 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.BlurSetActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="com.amap.api.location.APSService" />
         <service

@@ -69,6 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "个性化", null, Color.parseColor("#4CAF50")));
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "使用高斯模糊背景", "这将会禁用动态天气背景", Color.BLUE));
+        list.add(new SettingsItemBean(SettingsItemBean.TYPE_SWITCH, "夜间模式", null, Color.BLUE));
 
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_TITLE, "数据源", null, Color.parseColor("#FF5722")));
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_SWITCH, "使用自己的KEY", null, Color.BLUE));
@@ -94,6 +95,11 @@ public class SettingsActivity extends AppCompatActivity {
                     dialog.setCancelable(false);
                     dialog.create();
                     dialog.show();
+                    break;
+                case 4:
+                    Intent intent = new Intent();
+                    intent.setClass(this, BlurSetActivity.class);
+                    startActivity(intent);
                     break;
             }
         });
