@@ -56,8 +56,8 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
     }
 
     private void setBlur(){
-        View blur_box_view = ((MainActivity)getActivity()).main_ll;
-        blur_single = new BlurSingle.BlurLayout(blur_line_ll, blur_box_view);
+       // View blur_box_view = ((MainActivity)getActivity()).weatherView;
+       // blur_single = new BlurSingle.BlurLayout(blur_line_ll, blur_box_view);
     }
 
     @Override

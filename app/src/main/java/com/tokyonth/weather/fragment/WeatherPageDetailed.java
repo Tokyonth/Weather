@@ -107,12 +107,14 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
     }
 
     private void setBlur(){
-        View blur_box_view = ((MainActivity)getActivity()).main_ll;
+       /* View blur_box_view = ((MainActivity)getActivity()).main_ll;
         blur_single = new BlurSingle.BlurLayout(blur0, blur_box_view);
         blur_single = new BlurSingle.BlurLayout(blur1, blur_box_view);
         blur_single = new BlurSingle.BlurLayout(blur2, blur_box_view);
         blur_single = new BlurSingle.BlurLayout(blur3, blur_box_view);
         blur_single = new BlurSingle.BlurLayout(blur4, blur_box_view);
+
+        */
     }
 
     private void refreshSSV(int sunriseHour, int sunriseMinute, int sunsetHour, int sunsetMinute) {

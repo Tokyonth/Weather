@@ -15,24 +15,31 @@
             android:id="@+id/content_weather_msg"
             layout="@layout/content_weather_msg"/>
 
-        <com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView
-            android:id="@+id/ssv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_margin="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="0dp"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:background="@drawable/frame"
-            app:ssv_label_text_color="@color/colorWhite"
-            app:ssv_label_text_size="16sp"
-            app:ssv_label_horizontal_offset="12dp"
-            app:ssv_label_vertical_offset="2dp"
-            app:ssv_shadow_color="@color/sun_view_shadow_color"
-            app:ssv_sun_radius="6dp"
-            app:ssv_track_color="@color/colorWhite"
-            app:ssv_track_width="1.5dp"/>
+            android:background="@drawable/frame">
+
+            <com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView
+                android:id="@+id/ssv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:ssv_label_text_color="@color/colorWhite"
+                app:ssv_label_text_size="12sp"
+                app:ssv_label_horizontal_offset="12dp"
+                app:ssv_label_vertical_offset="2dp"
+                app:ssv_shadow_color="@color/sun_view_shadow_color"
+                app:ssv_sun_radius="6dp"
+                app:ssv_track_color="@color/colorWhite"
+                app:ssv_track_width="1.5dp"/>
+
+        </LinearLayout>
 
         <include
             android:id="@+id/pager_aqi_weather"

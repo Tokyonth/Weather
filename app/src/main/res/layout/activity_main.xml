@@ -6,12 +6,12 @@
     tools:context=".activity.MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/weather_basic_coor"
+        android:id="@+id/weather_basic_cdl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.tokyonth.weather.dynamic.DynamicWeatherView
-            android:id="@+id/weather_weatherview_container_rl"
+            android:id="@+id/dynamic_weather_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

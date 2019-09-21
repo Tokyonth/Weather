@@ -54,7 +54,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements WeatherView {
 
     private WeatherPresenter weather_presenter;
-    private DynamicWeatherView weatherView;
+    private DynamicWeatherView dynamic_weatherView;
     private VerticalSwipeRefreshLayout weatherRefresh;
     private CoordinatorLayout weatherBasic;
 
@@ -63,10 +63,8 @@ public class MainActivity extends BaseActivity implements WeatherView {
     private Weather offline_weather;
 
     private boolean isDefaultCity = true;
-    private ViewPager2 weather_page;
+    private ViewPager2 weather_pages;
     private WeatherPagerAdapter weather_page_adapter;
-
-    public LinearLayout main_ll;
     private ImageView default_city_iv;
 
     @Override
@@ -125,16 +123,15 @@ public class MainActivity extends BaseActivity implements WeatherView {
         setTitle(null);
 
         default_city_iv = (ImageView) findViewById(R.id.default_city_iv);
-        main_ll = (LinearLayout) findViewById(R.id.main_ll);
         toolbar_tv_city = (TextView) findViewById(R.id.weather_city_name_tv);
-        weatherBasic = (CoordinatorLayout) findViewById(R.id.weather_basic_coor);
+        weatherBasic = (CoordinatorLayout) findViewById(R.id.weather_basic_cdl);
         weatherRefresh = (VerticalSwipeRefreshLayout) findViewById(R.id.refresh_city);
-        weatherView = (DynamicWeatherView) findViewById(R.id.weather_weatherview_container_rl);
-        weather_page = (ViewPager2) findViewById(R.id.viewpager2);
-        weather_page.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
-        weather_page.setAdapter(weather_page_adapter);
-        weather_page.setOffscreenPageLimit(2);
-        weather_page.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        dynamic_weatherView = (DynamicWeatherView) findViewById(R.id.dynamic_weather_view);
+        weather_pages = (ViewPager2) findViewById(R.id.viewpager2);
+        weather_pages.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        weather_pages.setAdapter(weather_page_adapter);
+        weather_pages.setOffscreenPageLimit(2);
+        weather_pages.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
@@ -206,20 +203,20 @@ public class MainActivity extends BaseActivity implements WeatherView {
     @Override
     protected void onResume() {
         super.onResume();
-        weatherView.onResume();
+        dynamic_weatherView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        weatherView.onPause();
+        dynamic_weatherView.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        weatherView.onDestroy();
+        dynamic_weatherView.onDestroy();
     }
 
     @Override
@@ -256,55 +253,55 @@ public class MainActivity extends BaseActivity implements WeatherView {
         Time time = new Time();
         time.setToNow(); // 取得
       //  int hour = time.hour;
-        int hour = 20;
+        int hour = 2;
 
 
         if (hour <= 18) {
             switch (weatherType) {
                 case R.string.weatherview_sunny:
-                    weatherView.setDrawerType(BaseDrawer.Type.CLEAR_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLEAR_D);
                     break;
                 case R.string.weatherview_cloudy:
-                    weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_D);
                     break;
                 case R.string.weatherview_rainy:
-                    weatherView.setDrawerType(BaseDrawer.Type.RAIN_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.RAIN_D);
                     break;
                 case R.string.weatherview_snowy:
-                    weatherView.setDrawerType(BaseDrawer.Type.SNOW_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SNOW_D);
                     break;
                 case R.string.weatherview_foggy:
-                    weatherView.setDrawerType(BaseDrawer.Type.FOG_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.FOG_D);
                     break;
                 case R.string.weatherview_sand:
-                    weatherView.setDrawerType(BaseDrawer.Type.SAND_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SAND_D);
                     break;
                 case R.string.weatherview_hazy:
-                    weatherView.setDrawerType(BaseDrawer.Type.HAZE_D);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.HAZE_D);
                     break;
             }
         } else {
             switch (weatherType) {
                 case R.string.weatherview_sunny:
-                    weatherView.setDrawerType(BaseDrawer.Type.CLEAR_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLEAR_N);
                     break;
                 case R.string.weatherview_cloudy:
-                    weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_N);
                     break;
                 case R.string.weatherview_rainy:
-                    weatherView.setDrawerType(BaseDrawer.Type.RAIN_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.RAIN_N);
                     break;
                 case R.string.weatherview_snowy:
-                    weatherView.setDrawerType(BaseDrawer.Type.SNOW_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SNOW_N);
                     break;
                 case R.string.weatherview_foggy:
-                    weatherView.setDrawerType(BaseDrawer.Type.FOG_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.FOG_N);
                     break;
                 case R.string.weatherview_sand:
-                    weatherView.setDrawerType(BaseDrawer.Type.SAND_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SAND_N);
                     break;
                 case R.string.weatherview_hazy:
-                    weatherView.setDrawerType(BaseDrawer.Type.HAZE_N);
+                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.HAZE_N);
                     break;
             }
 
