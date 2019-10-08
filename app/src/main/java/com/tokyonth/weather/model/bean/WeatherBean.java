@@ -3,10 +3,10 @@ package com.tokyonth.weather.model.bean;
 public class WeatherBean {
 
     public static final String SUN = "晴";
-    public static final String CLOUDY ="阴";
+    public static final String OVERCAST = "阴";
     public static final String SNOW = "雪";
     public static final String RAIN = "雨";
-    public static final String SUN_CLOUD = "多云";
+    public static final String CLOUDY = "多云";
     public static final String THUNDER = "雷";
 
     public static final String LIGHT_RAIN = "小雨";
@@ -33,7 +33,7 @@ public class WeatherBean {
     }
 
     public static String[] getAllWeathers(){
-        String[] str = {SUN,RAIN,CLOUDY,SUN_CLOUD,SNOW,THUNDER,SHOWER,LIGHT_RAIN};
+        String[] str = {SUN, RAIN, OVERCAST, CLOUDY, SNOW, THUNDER, SHOWER, LIGHT_RAIN};
         return str;
     }
 

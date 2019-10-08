@@ -24,34 +24,31 @@ public class WeatherTrendAdapter extends RecyclerView.Adapter<WeatherTrendAdapte
     }
 
     private int getIconResId(String weather) {
-        int resId;
+        int resId = R.drawable.weather_sunny;
         switch (weather) {
             case WeatherBean.SUN:
-                resId = R.drawable.clear_day;
+                resId = R.drawable.weather_sunny;
                 break;
-            case WeatherBean.CLOUDY:
-                resId = R.drawable.cloudy;
+            case WeatherBean.OVERCAST:
+                resId = R.drawable.weather_overcast;
                 break;
             case WeatherBean.RAIN:
-                resId = R.drawable.rain;
+                resId = R.drawable.weather_heavy_rain;
                 break;
             case WeatherBean.SNOW:
-                resId = R.drawable.snow;
+                resId = R.drawable.weather_light_snow;
                 break;
-            case WeatherBean.SUN_CLOUD:
-                resId = R.drawable.partly_cloudy_day;
+            case WeatherBean.CLOUDY:
+                resId = R.drawable.weather_cloudy;
                 break;
             case WeatherBean.THUNDER:
-                resId = R.drawable.thunder;
+                resId = R.drawable.weather_thunder;
                 break;
             case WeatherBean.LIGHT_RAIN:
-                resId = R.drawable.rain;
+                resId = R.drawable.weather_light_rain;
                 break;
             case WeatherBean.SHOWER:
-                resId = R.drawable.rain;
-                break;
-            default:
-                resId = R.drawable.clear_day;
+                resId = R.drawable.weather_rain_shower;
                 break;
         }
         return resId;
