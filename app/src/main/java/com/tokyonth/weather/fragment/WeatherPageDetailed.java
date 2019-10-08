@@ -134,14 +134,8 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
     @Override
     protected void setWeather(Weather weather) {
-        String levelInfo = "空气质量" + weather.getInfo().getAqi().getAqiInfo().getLevel();
-        String primaryPolluteInfo = "首要污染物:" + weather.getInfo().getAqi().getPrimarypollutant();
-        int color = WeatherInfoHelper.getAirqualityColor(weather.getInfo().getAqi().getQuality());
 
-        tv_level.setText(levelInfo);
-        tv_level.setTextColor(WeatherInfoHelper.getAirqualityColor(weather.getInfo().getAqi().getQuality()));
-        tv_primary_pollute.setText(primaryPolluteInfo);
-        tv_affect.setText(weather.getInfo().getAqi().getAqiInfo().getAffect());
+        // 空气污染内容
         tv_pm25.setText("PM2.5 : " + weather.getInfo().getAqi().getPm2_5() + " μg/m³");
         tv_pm10.setText("PM10 : " + weather.getInfo().getAqi().getPm10() + " μg/m³");
         tv_so2.setText("SO₂ : " + weather.getInfo().getAqi().getSo2() + " μg/m³");
@@ -149,16 +143,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         tv_o3.setText("O₃ : " + weather.getInfo().getAqi().getO3() + " μg/m³");
         tv_co.setText("CO : " + weather.getInfo().getAqi().getCo() + " μg/m³");
 
-        int aqi_index = Integer.parseInt(weather.getInfo().getAqi().getAqi());
-        int default_max = 100;
-        if (aqi_index > default_max) {
-            default_max += 100;
-            semicircle_progress_view.setSesameValues(aqi_index, default_max);
-        }
-
-        semicircle_progress_view.setSemicircletitleColor(color);
-        semicircle_progress_view.setFrontLineColor(color);
-
+        // 24小时天气
         List<WeatherBean> data = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {
             Hourly hourly = weather.getInfo().getHourlyList().get(i);
@@ -167,28 +152,44 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         }
         WeatherTrendAdapter adapter = new WeatherTrendAdapter(data);
         LinearLayoutManager ms = new LinearLayoutManager(getContext());
-        // 设置 RecyclerView 布局方式为横向布局
         ms.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_weather_trend.setLayoutManager(ms);
         rv_weather_trend.setAdapter(adapter);
 
-        tv_forecast_day.setText(WeatherInfoHelper.getDayWeatherTipsInfo(weather.getInfo().getDailyList()));
-        tv_forecast_hourly.setText(WeatherInfoHelper.getHourlyWeatherTipsInfo(weather.getInfo().getHourlyList()));
-
+        // 湿度、大气压等
         String humidityInfo = "空气湿度 : " + weather.getInfo().getHumidity() + "%";
         String windInfo = weather.getInfo().getWindDirect() + "\n" +  weather.getInfo().getWindPower();
-
-        String airquality = weather.getInfo().getAqi().getQuality();
-        int airqualityColor = WeatherInfoHelper.getAirqualityColor(airquality);
-
-        tv_air_quality.setText(airquality);
-        tv_air_quality.setTextColor(airqualityColor);
-        iv_air_quality.setColorFilter(airqualityColor);
-
         tv_wind.setText(windInfo);
         tv_humidity.setText(humidityInfo);
         tv_pressure.setText("气体压强 : " + weather.getInfo().getPressure() + "hPa");
+        tv_forecast_day.setText(WeatherInfoHelper.getDayWeatherTipsInfo(weather.getInfo().getDailyList()));
+        tv_forecast_hourly.setText(WeatherInfoHelper.getHourlyWeatherTipsInfo(weather.getInfo().getHourlyList()));
 
+        // 空气质量
+        String air_quality = weather.getInfo().getAqi().getQuality();
+        int air_quality_color = WeatherInfoHelper.getAirqualityColor(air_quality);
+        String levelInfo = "空气质量" + weather.getInfo().getAqi().getAqiInfo().getLevel();
+        String primaryPolluteInfo = "首要污染物 : " + weather.getInfo().getAqi().getPrimarypollutant();
+        int color = WeatherInfoHelper.getAirqualityColor(weather.getInfo().getAqi().getQuality());
+
+        tv_level.setTextColor(WeatherInfoHelper.getAirqualityColor(weather.getInfo().getAqi().getQuality()));
+        tv_affect.setText(weather.getInfo().getAqi().getAqiInfo().getAffect());
+        tv_primary_pollute.setText(primaryPolluteInfo);
+        tv_level.setText(levelInfo);
+        tv_air_quality.setText(air_quality);
+        tv_air_quality.setTextColor(air_quality_color);
+        iv_air_quality.setColorFilter(air_quality_color);
+
+        int aqi_index = Integer.parseInt(weather.getInfo().getAqi().getAqi());
+        int default_max = 100;
+        if (aqi_index > default_max) {
+            default_max += 100;
+            semicircle_progress_view.setSesameValues(aqi_index, default_max);
+        }
+        semicircle_progress_view.setSemicircletitleColor(color);
+        semicircle_progress_view.setFrontLineColor(color);
+
+        // 日出日落
         String Sunrise = weather.getInfo().getDailyList().get(0).getSunrise();
         String Sunset = weather.getInfo().getDailyList().get(0).getSunset();
 
@@ -200,7 +201,6 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
         int Sunrise_h = Integer.parseInt(SunriseBefore);
         int Sunrise_m = Integer.parseInt(SunriseAfter);
-
         int Sunset_h = Integer.parseInt(SunsetBefore);
         int Sunset_m = Integer.parseInt(SunsetAfter);
 
@@ -212,13 +212,14 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         list.add(Sunset_m);
         EventBus.getDefault().post(list);
 
-        rv_index.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // 生活指数
         IndexAdapter index_adapter = new IndexAdapter(weather.getInfo().getIndexList());
+        rv_index.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_index.setAdapter(index_adapter);
 
+        // 风车
         windmill_big.startAnimation();
         windmill_small.startAnimation();
-
         String str = weather.getInfo().getWindSpeed();
         double wind_speed = Double.parseDouble(str);
         windmill_big.setWindSpeed(wind_speed);
