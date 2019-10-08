@@ -33,12 +33,11 @@ public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_city,parent,false);
-     //   ViewHolder view = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_search_city, parent, false));
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final City city = cityList.get(position);
         List<City> parentCityList = DataSupport.where("cityid = ?" , city.getParentId()).limit(1).find(City.class);
         if(!parentCityList.isEmpty()){
@@ -64,7 +63,7 @@ public class SearchCityAdapter extends RecyclerView.Adapter<SearchCityAdapter.Vi
 
         ViewHolder(View view) {
             super(view);
-            cityInfoTv = (TextView) view.findViewById(R.id.tv_item_search_city);
+            cityInfoTv = view.findViewById(R.id.tv_item_search_city);
         }
     }
 

@@ -1,58 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/weather_view_pager_margin"
     android:layout_margin="16dp"
-    android:gravity="center"
-    android:background="@drawable/frame_reveal_weather_msg"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@drawable/frame_reveal_weather_msg">
 
-    <TextView
-        android:id="@+id/aqi_quality_level_tv"
+<!--    android:background="@drawable/frame_reveal_weather_msg"-->
+
+    <LinearLayout
+        android:paddingStart="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:padding="@dimen/text_view_padding"
-        android:textColor="@android:color/white"
-        tools:text="空气质量一级"/>
+        android:orientation="horizontal"
+        android:gravity="center|start">
 
-    <TextView
-        android:id="@+id/aqi_primary_pollute_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="@dimen/text_view_padding"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        tools:text="首要污染物:PM10"/>
+        <ImageView
+            android:id="@+id/weather_airquality_image_iv"
+            android:layout_width="@dimen/default_weather_image_view_size"
+            android:layout_height="@dimen/default_weather_image_view_size"
+            android:tint="@android:color/white"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/icon_airquality"/>
 
+        <TextView
+            android:id="@+id/weather_airquality_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="6dp"
+            tools:text="轻度污染"/>
 
-    <TextView
-        android:id="@+id/aqi_affect_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:padding="@dimen/text_view_padding"
-        android:lineSpacingExtra="4dp"
-        android:textColor="@android:color/white"
-        tools:text="空气质量可接受，但某些污染物可能对极少数异常敏感人群健康有较弱影响"/>
+        <TextView
+            android:id="@+id/aqi_quality_level_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textColor="@android:color/white"
+            tools:text="@string/default_aqi_quality_level"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.tokyonth.weather.view.custom.SemicircleProgressView
+            android:id="@+id/semicircle_progress_view"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:semicircleSize="110dp"
+            app:semicirclebackgroundLineColor="@color/colorPrimary"
+            app:semicirclefrontLineColor="@color/colorAccent"
+            app:semicirclelineSize="8dp"
+            app:semicirclesubtitleColor="@color/colorPrimary"
+            app:semicirclesubtitleSize="12sp"
+            app:semicirclesubtitleText="AQI"
+            app:semicircletitleColor="@color/colorAccent"
+            app:semicircletitleSize="14sp"
+            app:semicircletitleText="指数" />
+
+        <TextView
+            android:id="@+id/aqi_primary_pollute_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            tools:text="@string/default_aqi_primary_pollute"/>
+
+        <TextView
+            android:id="@+id/aqi_affect_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textColor="@android:color/white"
+            tools:text="@string/default_aqi_affect"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/aqi_pm25_tv"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/text_view_padding"
             android:textSize="14sp"
@@ -61,14 +113,55 @@
 
         <TextView
             android:id="@+id/aqi_pm10_tv"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/text_view_padding"
             android:textSize="14sp"
             android:textColor="@android:color/white"
             tools:text="PM10:30"/>
+
+        <TextView
+            android:id="@+id/aqi_so2_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            tools:text="SO2:30"/>
+
+        <TextView
+            android:id="@+id/aqi_no2_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            tools:text="NO2:30"/>
+
+        <TextView
+            android:id="@+id/aqi_co_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            tools:text="CO:30"/>
+
+        <TextView
+            android:id="@+id/aqi_o3_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_view_padding"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            tools:text="O3:30"/>
+
+    </LinearLayout>
 
     </LinearLayout>
 

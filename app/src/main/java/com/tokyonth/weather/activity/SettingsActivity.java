@@ -3,7 +3,6 @@ package com.tokyonth.weather.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,27 +10,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.adapter.SettingsAdapter;
 import com.tokyonth.weather.model.bean.SettingsItemBean;
 import com.tokyonth.weather.notification.NotificationBrodcaseRecever;
-import com.tokyonth.weather.notification.NotificationTools;
-import com.tokyonth.weather.utils.SPUtils;
-import com.tokyonth.weather.utils.WeatherSettingsHelper;
-import com.tokyonth.weather.view.custom.CustomDialog;
+import com.tokyonth.weather.utils.tools.SPUtils;
+import com.tokyonth.weather.utils.helper.WeatherSettingsHelper;
+import com.tokyonth.weather.view.widget.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private RecyclerView rv;
-    private SettingsAdapter adapter;
+    private RecyclerView rv_settings_list;
+    private SettingsAdapter settings_adapter;
 
     private CustomDialog dialog;
     private NotificationBrodcaseRecever receiver;
@@ -49,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_title_arrow_left);
         setTitle(null);
         setSupportActionBar(toolbar);
@@ -58,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        rv = (RecyclerView) findViewById(R.id.setting_rv);
+        rv_settings_list = findViewById(R.id.setting_rv);
     }
 
     private void initData() {
@@ -81,11 +77,10 @@ public class SettingsActivity extends AppCompatActivity {
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "关于", null, Color.BLUE));
         list.add(new SettingsItemBean(SettingsItemBean.TYPE_COMMON, "捐赠", null, Color.BLUE));
 
-        adapter = new SettingsAdapter(list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
-
-        adapter.setOnItemClick((view, pos) -> {
+        settings_adapter = new SettingsAdapter(list);
+        rv_settings_list.setLayoutManager(new LinearLayoutManager(this));
+        rv_settings_list.setAdapter(settings_adapter);
+        settings_adapter.setOnItemClick((view, pos) -> {
             switch (pos) {
                 case 2:
                     dialog = new CustomDialog(SettingsActivity.this);
@@ -103,11 +98,13 @@ public class SettingsActivity extends AppCompatActivity {
                     break;
             }
         });
-
-        adapter.setOnItemSwitchClick((view, bool, pos) -> {
+        settings_adapter.setOnItemSwitchClick((view, bool, pos) -> {
             switch (pos) {
                 case 1:
                     receiver = WeatherSettingsHelper.setWeatherNotification(SettingsActivity.this, bool);
+                    break;
+                case 4:
+
                     break;
             }
         });
@@ -115,15 +112,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initSettings() {
         boolean bool = (boolean) SPUtils.getData("switch_notification_weather", false);
-        adapter.setSettingsSwitchChecked(1, bool);
+        settings_adapter.setSettingsSwitchChecked(1, bool);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -134,7 +130,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (receiver != null) {
             unregisterReceiver(receiver);
         }
-
     }
 
 }

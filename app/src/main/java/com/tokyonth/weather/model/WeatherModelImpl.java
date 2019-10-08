@@ -8,7 +8,7 @@ import com.tokyonth.weather.presenter.OnWeatherListener;
 import com.tokyonth.weather.utils.api.Api;
 import com.tokyonth.weather.utils.network.NetworkUtil;
 import com.tokyonth.weather.utils.sundry.PreferencesLoader;
-import com.tokyonth.weather.utils.RetrofitFactory;
+import com.tokyonth.weather.utils.api.RetrofitFactory;
 import com.tokyonth.weather.utils.file.FileUtil;
 
 import java.io.IOException;

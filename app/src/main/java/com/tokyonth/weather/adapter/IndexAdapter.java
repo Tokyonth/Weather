@@ -30,7 +30,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     }
 
     @Override
-    public void onBindViewHolder(IndexViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IndexViewHolder holder, int position) {
         Index index = indexList.get(position);
         if(index != null){
             switch (index.getName()){
@@ -89,10 +89,10 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
 
         IndexViewHolder(View itemView) {
             super(itemView);
-            indexImageIv = (ImageView) itemView.findViewById(R.id.item_index_image_iv);
-            valueTv = (TextView) itemView.findViewById(R.id.item_index_value_tv);
-            detailTv = (TextView) itemView.findViewById(R.id.item_index_detail_tv);
-            titleTv = (TextView) itemView.findViewById(R.id.item_index_title_tv);
+            indexImageIv = itemView.findViewById(R.id.item_index_image_iv);
+            valueTv = itemView.findViewById(R.id.item_index_value_tv);
+            detailTv = itemView.findViewById(R.id.item_index_detail_tv);
+            titleTv = itemView.findViewById(R.id.item_index_title_tv);
         }
     }
 

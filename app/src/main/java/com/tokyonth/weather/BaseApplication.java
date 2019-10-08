@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.tokyonth.weather.utils.SPUtils;
+import com.tokyonth.weather.utils.tools.SPUtils;
 import com.tokyonth.weather.utils.file.FileUtil;
 
 import org.litepal.LitePal;

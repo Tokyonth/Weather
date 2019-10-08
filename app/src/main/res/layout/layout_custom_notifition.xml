@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/city"
-            android:text="city"
+            android:text="@string/default_test_city_name"
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -37,15 +37,15 @@
 
             <TextView
                 android:id="@+id/weather"
-                android:text="msg"
+                android:text="@string/default_test_weather"
                 android:textSize="14sp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/time"
-                android:text="time"
+                android:text="@string/default_test_time"
                 android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

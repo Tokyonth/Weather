@@ -1,43 +1,41 @@
 package com.tokyonth.weather.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.activity.MainActivity;
-import com.tokyonth.weather.adapter.WeatherTrendAdapter;
 import com.tokyonth.weather.blur.BlurSingle;
 import com.tokyonth.weather.fragment.component.base.BaseSubscribeFragment;
 import com.tokyonth.weather.model.bean.DefaultCity;
 import com.tokyonth.weather.model.bean.SavedCity;
 import com.tokyonth.weather.model.bean.Weather;
-import com.tokyonth.weather.model.bean.WeatherBean;
-import com.tokyonth.weather.model.bean.entity.Hourly;
 import com.tokyonth.weather.view.widget.EnglishTextView;
-import com.tokyonth.weather.utils.WeatherInfoHelper;
+import com.tokyonth.weather.utils.helper.WeatherInfoHelper;
 import com.tokyonth.weather.view.widget.TempTextView;
+import com.tokyonth.weather.view.custom.WeekWeatherView;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherPageBrief extends BaseSubscribeFragment {
 
-    private EnglishTextView updateTimeTv;
-    private TempTextView tempTv;
-    private TextView weatherTextTv;
+    private EnglishTextView tv_update_time;
+    private TempTextView tv_temp;
+    private TextView tv_weather_text, tv_temp_max_min;
     private LinearLayout blur_line_ll;
+    private ImageView iv_weather_text;
 
     private BlurSingle.BlurLayout blur_single;
-    private ImageView weatherTextIv;
-    private RecyclerView weather_trend_rv;
+    private WeekWeatherView week_view;
 
     @Override
     protected int getLayoutId() {
@@ -46,18 +44,28 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        updateTimeTv = (EnglishTextView) view.findViewById(R.id.weather_update_time_tv);
-        tempTv = (TempTextView) view.findViewById(R.id.weather_temp_tv);
+        tv_update_time = (EnglishTextView) view.findViewById(R.id.weather_update_time_tv);
+        tv_temp = (TempTextView) view.findViewById(R.id.weather_temp_tv);
         blur_line_ll = (LinearLayout) view.findViewById(R.id.blur_line_ll);
-        weatherTextTv = (TextView) view.findViewById(R.id.weather_weather_text_tv);
-        weatherTextIv = (ImageView) view.findViewById(R.id.weather_weather_text_image_iv);
-        weather_trend_rv = (RecyclerView) view.findViewById(R.id.weather_trend_rv);
-        setBlur();
+        tv_weather_text = (TextView) view.findViewById(R.id.weather_weather_text_tv);
+        iv_weather_text = (ImageView) view.findViewById(R.id.weather_weather_text_image_iv);
+        week_view = view.findViewById(R.id.week_view);
+        tv_temp_max_min = (EnglishTextView) view.findViewById(R.id.weather_temp_max_min_tv);
+        // setBlur();
     }
 
     private void setBlur(){
-       // View blur_box_view = ((MainActivity)getActivity()).weatherView;
-       // blur_single = new BlurSingle.BlurLayout(blur_line_ll, blur_box_view);
+        View blur_box_view = ((MainActivity)getActivity()).weather_basic;
+        blur_single = new BlurSingle.BlurLayout(blur_line_ll, blur_box_view);
+        blur_single.setRadius(5);
+    }
+
+    @Subscribe
+    public void getImgPath(String path) {
+        if (path != null) {
+            Bitmap bmp = BitmapFactory.decodeFile(path);
+            ((MainActivity) getActivity()).weather_basic.setBackground(new BitmapDrawable(bmp));
+        }
     }
 
     @Override
@@ -79,27 +87,22 @@ public class WeatherPageBrief extends BaseSubscribeFragment {
             //  }
         }
 
-        List<WeatherBean> data = new ArrayList<>();
-        for (int i = 0; i <= 23; i++) {
-            Hourly hourly = weather.getInfo().getHourlyList().get(i);
-            WeatherBean bean = new WeatherBean(hourly.getWeather(), hourly.getTemp(), hourly.getTime());
-            data.add(bean);
-        }
-        WeatherTrendAdapter adapter = new WeatherTrendAdapter(data);
-        LinearLayoutManager ms= new LinearLayoutManager(getContext());
-        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 RecyclerView 布局方式为横向布局
-        weather_trend_rv.setLayoutManager(ms);
-        weather_trend_rv.setAdapter(adapter);
+        String tempLow = weather.getInfo().getTempLow();
+        String tempHigh = weather.getInfo().getTempHigh();
+        tv_temp_max_min.setText(tempHigh + "° / " + tempLow + "°");
+
+        week_view.setData(weather.getInfo().getDailyList());
+        week_view.invalidate();
 
         String updateTime = WeatherInfoHelper.getUpdateTime(weather.getInfo().getUpdateTime());
         String tempInfo = weather.getInfo().getTemp() + "°";
 
-        updateTimeTv.setText("提供商数据更新时间:" + updateTime);
-        tempTv.setText(tempInfo);
+        tv_update_time.setText("提供商数据更新时间:" + updateTime);
+        tv_temp.setText(tempInfo);
 
         int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
-        weatherTextIv.setImageResource(weatherImagePath);
-        weatherTextTv.setText(weather.getInfo().getWeather());
+        iv_weather_text.setImageResource(weatherImagePath);
+        tv_weather_text.setText(weather.getInfo().getWeather());
     }
 
 }

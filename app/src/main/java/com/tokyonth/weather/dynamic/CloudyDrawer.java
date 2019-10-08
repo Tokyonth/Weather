@@ -10,13 +10,11 @@ import android.graphics.drawable.Drawable;
 
 public class CloudyDrawer extends BaseDrawer {
 
-	// final ArrayList<CloudHolder> holders = new ArrayList<CloudHolder>();
 	final ArrayList<CircleHolder> holders = new ArrayList<CircleHolder>();
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
 	public CloudyDrawer(Context context, boolean isNight) {
 		super(context, isNight);
-
 	}
 
 	@Override
@@ -24,11 +22,11 @@ public class CloudyDrawer extends BaseDrawer {
 		super.setSize(width, height);
 		if (holders.size() == 0) {
 			holders.add(new CircleHolder(0.20f * width, -0.30f * width, 0.06f * width, 0.022f * width, 0.56f * width,
-					0.0015f, isNight ? 0x183c6b8c : 0x28ffffff));
+					0.015f, isNight ? 0x183c6b8c : 0x28ffffff));
 			holders.add(new CircleHolder(0.58f * width, -0.35f * width, -0.15f * width, 0.032f * width, 0.6f * width,
-					0.00125f, isNight ? 0x223c6b8c : 0x33ffffff));
+					0.0125f, isNight ? 0x223c6b8c : 0x33ffffff));
 			holders.add(new CircleHolder(0.9f * width, -0.19f * width, 0.08f * width, -0.015f * width, 0.44f * width,
-					0.0025f, isNight ? 0x153c6b8c : 0x15ffffff));
+					0.025f, isNight ? 0x153c6b8c : 0x15ffffff));
 		}
 	}
 
@@ -46,6 +44,7 @@ public class CloudyDrawer extends BaseDrawer {
 	}
 
 	public static class CircleHolder {
+
 		private final float cx, cy, dx, dy, radius;
 		private final int color;
 		private boolean isGrowing = true;
@@ -89,6 +88,7 @@ public class CloudyDrawer extends BaseDrawer {
 	}
 
 	public static class CloudHolder {
+
 		private final Drawable drawable;
 		private final float percentWidthPerframe;
 		final float screenWidth;
@@ -107,7 +107,7 @@ public class CloudyDrawer extends BaseDrawer {
 		 * @param screenWidth
 		 * @param drawableWidth
 		 * @param maxAlpha
-		 * @param canLoop是否可以循环移动
+		 * @param canLoop 是否可以循环移动
 		 *            （如果左边正好接上右边就设置为true)
 		 */
 		public CloudHolder(Drawable drawable, float percentWidthPerframe, float screenWidth, float drawableWidth,

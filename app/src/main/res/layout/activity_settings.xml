@@ -28,7 +28,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#444444"
-                android:text="设置"/>
+                android:text="@string/act_text_settings"/>
 
         </androidx.appcompat.widget.Toolbar>
 

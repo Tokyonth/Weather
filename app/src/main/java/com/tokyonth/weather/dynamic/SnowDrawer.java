@@ -13,6 +13,7 @@ import android.graphics.drawable.GradientDrawable;
  * 
  */
 public class SnowDrawer extends BaseDrawer {
+
 	static final String TAG = SnowDrawer.class.getSimpleName();
 
 	private GradientDrawable drawable;

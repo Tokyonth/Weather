@@ -15,24 +15,22 @@ import android.util.Log;
  */
 public class HazeDrawer extends BaseDrawer {
 
-
 	public HazeDrawer(Context context, boolean isNight) {
 		super(context, isNight);
 		drawable = new GradientDrawable(GradientDrawable.Orientation.BL_TR,
 				isNight ? new int[] { 0x55d4ba3f, 0x22d4ba3f } : new int[] { 0x88cca667, 0x33cca667 });//d4ba3f
-		drawable.setShape(GradientDrawable.OVAL);  
+		drawable.setShape(GradientDrawable.OVAL);
 		drawable.setGradientType(GradientDrawable.RADIAL_GRADIENT);
-//		drawable.setGradientRadius((float)(Math.sqrt(2) * 60));  
 		minDX = 0.04f;
 		maxDX = 0.065f;//dp2px(1.5f);
 		minDY = -0.02f;//-dp2px(0.5f);
 		maxDY = 0.02f;//dp2px(0.5f);
 
 	}
+
 	private GradientDrawable drawable;
 	private ArrayList<HazeHolder> holders = new ArrayList<HazeHolder>();
 	private final float minDX,maxDX,minDY, maxDY;
-	
 
 	@Override
 	public boolean drawWeather(Canvas canvas,float alpha) {
@@ -43,9 +41,8 @@ public class HazeDrawer extends BaseDrawer {
 				try {
 					drawable.draw(canvas);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Log.e("FUCK", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
+					Log.e("HazeDrawer", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
 				}
 			}
 		return true;
@@ -65,7 +62,6 @@ public class HazeDrawer extends BaseDrawer {
 //			holders.add(new StarHolder(360, 360, 200, 200));
 		}
 	}
-	
 
 	public static class HazeHolder {
 		public float x;
@@ -79,7 +75,6 @@ public class HazeDrawer extends BaseDrawer {
 			this.y = y;
 			this.w = w;
 			this.h = h;
-
 		}
 
 		public void updateRandom(GradientDrawable drawable, float minDX, float maxDX, 
@@ -88,7 +83,7 @@ public class HazeDrawer extends BaseDrawer {
 			if (maxDX < minDX || (maxDY < minDY)) {
 				throw new IllegalArgumentException("max should bigger than min!!!!");
 			}
-			this.x += (getRandom(minDX, maxDX) * w);;
+			this.x += (getRandom(minDX, maxDX) * w);
 			this.y += (getRandom(minDY, maxDY) * h);
 //			this.x = Math.min(maxX, Math.max(this.x, minX));
 //			this.y = Math.min(maxY, Math.max(this.y, minY));

@@ -22,6 +22,6 @@
         android:layout_marginTop="12dp"
         android:textSize="14sp"
         android:padding="@dimen/text_view_padding"
-        android:text="正在导入城市数据..."/>
+        android:text="@string/act_text_import_city_data"/>
 
 </RelativeLayout>

@@ -36,14 +36,14 @@
                 android:layout_height="match_parent"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                tools:text="高温预警" />
+                tools:text="@string/settings_item_title" />
 
             <TextView
                 android:layout_marginTop="4dp"
                 android:id="@+id/settings_item_switch_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Sub"/>
+                tools:text="@string/settings_item_msg"/>
 
         </LinearLayout>
 

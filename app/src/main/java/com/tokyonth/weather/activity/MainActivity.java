@@ -4,14 +4,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.text.format.Time;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +24,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.tokyonth.weather.BaseActivity;
 import com.tokyonth.weather.R;
+import com.tokyonth.weather.assembly.WeatherType;
 import com.tokyonth.weather.adapter.WeatherPagerAdapter;
-import com.tokyonth.weather.dynamic.BaseDrawer;
 import com.tokyonth.weather.dynamic.DynamicWeatherView;
 import com.tokyonth.weather.entirety.FragmentLifecycle;
 import com.tokyonth.weather.fragment.WeatherPageBrief;
@@ -35,14 +37,14 @@ import com.tokyonth.weather.presenter.LocationPresenter;
 import com.tokyonth.weather.presenter.LocationPresenterImpl;
 import com.tokyonth.weather.presenter.WeatherPresenter;
 import com.tokyonth.weather.presenter.WeatherPresenterImpl;
+import com.tokyonth.weather.utils.network.NetworkUtil;
+import com.tokyonth.weather.utils.sundry.DateUtil;
 import com.tokyonth.weather.utils.sundry.PhoneUtil;
 import com.tokyonth.weather.utils.sundry.PreferencesLoader;
-import com.tokyonth.weather.utils.RefreshWeather;
-import com.tokyonth.weather.utils.WeatherInfoHelper;
+import com.tokyonth.weather.utils.tools.RefreshWeather;
+import com.tokyonth.weather.utils.helper.WeatherInfoHelper;
 import com.tokyonth.weather.utils.file.FileUtil;
 import com.tokyonth.weather.presenter.WeatherView;
-import com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,42 +57,41 @@ public class MainActivity extends BaseActivity implements WeatherView {
 
     private WeatherPresenter weather_presenter;
     private DynamicWeatherView dynamic_weatherView;
-    private VerticalSwipeRefreshLayout weatherRefresh;
-    private CoordinatorLayout weatherBasic;
+    private SwipeRefreshLayout weather_refresh;
 
-    private String city;
     private TextView toolbar_tv_city;
-    private Weather offline_weather;
+    private ImageView default_city_iv;
+    private WeatherPagerAdapter weather_page_adapter;
 
     private boolean isDefaultCity = true;
-    private ViewPager2 weather_pages;
-    private WeatherPagerAdapter weather_page_adapter;
-    private ImageView default_city_iv;
+    private List<Integer> time_list = null;
+    private Weather offline_weather;
+    private String city;
+
+    public LinearLayout weather_basic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startSplashActivity();
-        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         initLayout();
         initView();
-
         if (!PhoneUtil.isLocServiceEnable(this)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("检测到你未打开定位功能,请打开后重试")
-                    .setNegativeButton("确定", (dialog, which) -> finish());
+                    .setTitle(getResources().getString(R.string.dialog_text_title))
+                    .setMessage(getResources().getString(R.string.not_opened_location))
+                    .setNegativeButton(getResources().getString(R.string.btn_ok), (dialog, which) -> finish());
                     builder.setCancelable(false);
                     builder.create().show();
         } else {
-
             String weather_data = FileUtil.getFile(FileUtil.SAVE_WEATHER_NAME);
             assert weather_data != null;
             if (!weather_data.equals("")) {
                 offline_weather = new Gson().fromJson(weather_data, Weather.class);
+                EventBus.getDefault().post(offline_weather);
                 setWeatherBackground(offline_weather);
-            //    toolbar_tv_city.setText(FileUtil.getFile(FileUtil.PRECISE_LOCATION_NAME));
+                weather_refresh.setRefreshing(true);
             }
             weather_presenter = new WeatherPresenterImpl(this);
             LocationPresenter location_presenter = new LocationPresenterImpl();
@@ -113,21 +114,20 @@ public class MainActivity extends BaseActivity implements WeatherView {
         page_list.add(weatherPageBrief);
         page_list.add(weatherPageDetailed);
         weather_page_adapter = new WeatherPagerAdapter(getSupportFragmentManager(), new FragmentLifecycle(), page_list);
-
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_title_more));
         setSupportActionBar(toolbar);
         setTitle(null);
 
-        default_city_iv = (ImageView) findViewById(R.id.default_city_iv);
-        toolbar_tv_city = (TextView) findViewById(R.id.weather_city_name_tv);
-        weatherBasic = (CoordinatorLayout) findViewById(R.id.weather_basic_cdl);
-        weatherRefresh = (VerticalSwipeRefreshLayout) findViewById(R.id.refresh_city);
-        dynamic_weatherView = (DynamicWeatherView) findViewById(R.id.dynamic_weather_view);
-        weather_pages = (ViewPager2) findViewById(R.id.viewpager2);
+        default_city_iv = findViewById(R.id.default_city_iv);
+        toolbar_tv_city = findViewById(R.id.weather_city_name_tv);
+        weather_basic = findViewById(R.id.main_ll);
+        weather_refresh = findViewById(R.id.refresh_city);
+        dynamic_weatherView = findViewById(R.id.dynamic_weather_view);
+        ViewPager2 weather_pages = findViewById(R.id.viewpager2);
         weather_pages.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
         weather_pages.setAdapter(weather_page_adapter);
         weather_pages.setOffscreenPageLimit(2);
@@ -135,17 +135,16 @@ public class MainActivity extends BaseActivity implements WeatherView {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                //Log.d("2.page滑动---->", position + "");
                 if (position == 1) {
-                    weatherRefresh.setEnabled(false);
+                    weather_refresh.setEnabled(false);
                 } else if (position == 0) {
-                    weatherRefresh.setEnabled(true);
+                    weather_refresh.setEnabled(true);
                 }
             }
 
         });
 
-        weatherRefresh.setOnRefreshListener(this::WeatherRefresh);
+        weather_refresh.setOnRefreshListener(this::WeatherRefresh);
     }
 
     private void startSplashActivity() {
@@ -215,7 +214,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
         dynamic_weatherView.onDestroy();
     }
 
@@ -223,6 +221,9 @@ public class MainActivity extends BaseActivity implements WeatherView {
     public void showWeather(Weather weather) {
         setWeatherBackground(weather);
         EventBus.getDefault().post(weather);
+        // 至少加载1.5秒再关闭
+        new Handler().postDelayed(() -> weather_refresh.setRefreshing(false), 1500);
+
         toolbar_tv_city.setText(DataSupport.find(DefaultCity.class,1).getCityName());
         String cityName = weather.getInfo().getCityName();
         List<SavedCity> savedCityList = DataSupport.findAll(SavedCity.class);
@@ -232,12 +233,11 @@ public class MainActivity extends BaseActivity implements WeatherView {
                 break;
             }
         }
-        //toolbar_tv_city.setText(FileUtil.getFile(FileUtil.PRECISE_LOCATION_NAME));
     }
 
     @Override
     public void showErrorInfo(String error) {
-        Snackbar.make(weatherBasic,error + "已为你加载上一次天气信息",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(weather_basic,error + getResources().getString(R.string.load_last_time_msg),Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -245,86 +245,45 @@ public class MainActivity extends BaseActivity implements WeatherView {
         EventBus.getDefault().post(offline_weather);
     }
 
-    public void setWeatherBackground(Weather weather) {
+    @Subscribe
+    public void getMap(List<Integer> list) {
+        time_list = new ArrayList<>();
+        time_list = list;
+    }
 
+    public void setWeatherBackground(Weather weather) {
         String img = weather.getInfo().getImg();
         int weatherType = WeatherInfoHelper.getWeatherType(img);
-        // or Time t=new Time("GMT+8"); 加上Time Zone资料
-        Time time = new Time();
-        time.setToNow(); // 取得
-      //  int hour = time.hour;
-        int hour = 2;
-
-
-        if (hour <= 18) {
-            switch (weatherType) {
-                case R.string.weatherview_sunny:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLEAR_D);
-                    break;
-                case R.string.weatherview_cloudy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_D);
-                    break;
-                case R.string.weatherview_rainy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.RAIN_D);
-                    break;
-                case R.string.weatherview_snowy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SNOW_D);
-                    break;
-                case R.string.weatherview_foggy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.FOG_D);
-                    break;
-                case R.string.weatherview_sand:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SAND_D);
-                    break;
-                case R.string.weatherview_hazy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.HAZE_D);
-                    break;
-            }
-        } else {
-            switch (weatherType) {
-                case R.string.weatherview_sunny:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLEAR_N);
-                    break;
-                case R.string.weatherview_cloudy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.CLOUDY_N);
-                    break;
-                case R.string.weatherview_rainy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.RAIN_N);
-                    break;
-                case R.string.weatherview_snowy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SNOW_N);
-                    break;
-                case R.string.weatherview_foggy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.FOG_N);
-                    break;
-                case R.string.weatherview_sand:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.SAND_N);
-                    break;
-                case R.string.weatherview_hazy:
-                    dynamic_weatherView.setDrawerType(BaseDrawer.Type.HAZE_N);
-                    break;
-            }
-
+        boolean isInTime = false;
+        if (time_list != null) {
+            isInTime = DateUtil.isCurrentInTimeScope(time_list.get(0), time_list.get(1), time_list.get(2), time_list.get(3));
         }
-        //PreferencesLoader.putInt(PreferencesLoader.WEATHER_COLOR, weatherColor);
+        dynamic_weatherView.setDrawerType(WeatherType.getType(isInTime, weatherType));
+
     }
 
     private void WeatherRefresh() {
-        new RefreshWeather(isDefaultCity, city).setOnRefresh(new RefreshWeather.OnRefresh() {
-            @Override
-            public void onSuccess(Weather weather) {
-                setWeatherBackground(weather);
-                EventBus.getDefault().post(weather);
-                Snackbar.make(weatherBasic,"刷新成功!",Snackbar.LENGTH_LONG).show();
-                weatherRefresh.setRefreshing(false);
-            }
+        if (NetworkUtil.isWifiConnected() || NetworkUtil.isMobileConnected()) {
+            new RefreshWeather(isDefaultCity, city).setOnRefresh(new RefreshWeather.OnRefresh() {
+                @Override
+                public void onSuccess(Weather weather) {
+                    setWeatherBackground(weather);
+                    EventBus.getDefault().post(weather);
+                    Snackbar.make(weather_basic,getResources().getString(R.string.refresh_success),Snackbar.LENGTH_LONG).show();
+                    weather_refresh.setRefreshing(false);
+                }
 
-            @Override
-            public void onFail(String error) {
-                Snackbar.make(weatherBasic,"刷新失败!" + error,Snackbar.LENGTH_LONG).show();
-                weatherRefresh.setRefreshing(false);
-            }
-        });
+                @Override
+                public void onFail(String error) {
+                    Snackbar.make(weather_basic,getResources().getString(R.string.refresh_failed) + error,Snackbar.LENGTH_LONG).show();
+                    weather_refresh.setRefreshing(false);
+                }
+            });
+        } else {
+            Snackbar.make(weather_basic,"网络未连接!",Snackbar.LENGTH_LONG).show();
+            weather_refresh.setRefreshing(false);
+        }
+
     }
 
 }

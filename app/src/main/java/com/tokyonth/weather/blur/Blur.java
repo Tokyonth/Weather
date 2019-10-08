@@ -28,7 +28,6 @@ public class Blur {
     public static Map<Object,Bitmap> bkgMaps=new HashMap<>();
     public static double brightness=-0.1;
 
-
     /**
      * 模糊处理Bitmap
      * @param sentBitmap
@@ -61,7 +60,6 @@ public class Blur {
         int hm = h - 1;
         int wh = w * h;
         int div = radius + radius + 1;
-
 
         int r[] = new int[wh];
         int g[] = new int[wh];
@@ -246,7 +244,6 @@ public class Blur {
         return setBitmapBrightness(bitmap,brightness);
     }
 
-
     /**
      * 更具layout的位置以及大小，从已经模糊处理过的图片中截取所需要的部分
      * @param fromView
@@ -268,7 +265,6 @@ public class Blur {
           initBkg(fromView,radius,scaleFactor);
        }
 
-
         int top,left;
         int[] location=new int[2];
         toView.getLocationInWindow(location);
@@ -286,9 +282,6 @@ public class Blur {
             bdr.setCornerRadius(roundCorner);
             toView.setBackground(bdr);
         }
-
-
-
 
     }
 
@@ -322,11 +315,8 @@ public class Blur {
         }
     }
 
-
-
     //调节亮度
-    public static Bitmap setBitmapBrightness(Bitmap bitmap, double depth)
-    {
+    public static Bitmap setBitmapBrightness(Bitmap bitmap, double depth) {
         Bitmap bm = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), bitmap.getConfig());
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -341,14 +331,14 @@ public class Blur {
                 red += (depth * gray);
                 if(red > 255) {
                     red = 255;
-                }else if(red<0){
+                } else if(red<0){
                     red=0;
                 }
 
                 green += (depth * gray);
                 if(green > 255) {
                     green = 255;
-                }else if(green<0){
+                } else if (green<0){
                     green=0;
                 }
 
@@ -381,18 +371,15 @@ public class Blur {
 
         public BlurLayout(final View layoutView, final View layoutBkg){
             positionX=positionY=0;
-            layoutView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    int position[]=new int[2];
-                    layoutView.getLocationInWindow(position);
-                    if(positionX!=position[0]||positionY!=position[1]){
-                        Blur.cutBluredBitmap(layoutBkg,layoutView,radius,scaleFactor,RoundCorner);
-                        positionX=position[0];
-                        positionY=position[1];
-                    }
-                    return true;
+            layoutView.getViewTreeObserver().addOnPreDrawListener(() -> {
+                int position[]=new int[2];
+                layoutView.getLocationInWindow(position);
+                if(positionX!=position[0]||positionY!=position[1]){
+                    Blur.cutBluredBitmap(layoutBkg,layoutView,radius,scaleFactor,RoundCorner);
+                    positionX=position[0];
+                    positionY=position[1];
                 }
+                return true;
             });
         }
 

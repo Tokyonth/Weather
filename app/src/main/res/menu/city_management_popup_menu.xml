@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/city_management_popup_menu_delete"
-        android:title="删除"
-        android:icon="@drawable/ic_bt_delete"/>
+        android:icon="@drawable/ic_bt_delete"
+        android:title="@string/menu_popup_delete"/>
 </menu>

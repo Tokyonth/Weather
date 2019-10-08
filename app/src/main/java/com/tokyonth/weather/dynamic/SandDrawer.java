@@ -15,6 +15,7 @@ public class SandDrawer extends BaseDrawer{
 		super(context, isNight);
 		paint.setStyle(Style.STROKE);
 	}
+
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	final int count = 30;
 	private ArrayList<ArcHolder> holders = new ArrayList<ArcHolder>();
@@ -85,9 +86,5 @@ public class SandDrawer extends BaseDrawer{
 	protected int[] getSkyBackgroundGradient() {
 		return isNight ? SkyBackground.SAND_N : SkyBackground.SAND_D;
 	}
-	
-	
-	
-	
 	
 }

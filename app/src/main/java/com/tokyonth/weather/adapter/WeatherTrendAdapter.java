@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tokyonth.weather.R;
 import com.tokyonth.weather.model.bean.WeatherBean;
-import com.tokyonth.weather.view.widget.VerticalProgressBar;
+import com.tokyonth.weather.view.custom.VerticalProgressBar;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class WeatherTrendAdapter extends RecyclerView.Adapter<WeatherTrendAdapte
                 resId = R.drawable.rain;
                 break;
             case WeatherBean.SHOWER:
-                resId = R.drawable.thunderstorm;
+                resId = R.drawable.rain;
                 break;
             default:
                 resId = R.drawable.clear_day;
@@ -87,11 +87,11 @@ public class WeatherTrendAdapter extends RecyclerView.Adapter<WeatherTrendAdapte
 
         WeatherTrendHolder(@NonNull View itemView) {
             super(itemView);
-            temp = (TextView) itemView.findViewById(R.id.weather_trend_item_tv_temp);
-            time = (TextView) itemView.findViewById(R.id.weather_trend_item_tv_time);
-            iv = (ImageView) itemView.findViewById(R.id.weather_trend_item_iv_info);
-            weather = (TextView) itemView.findViewById(R.id.weather_trend_item_tv_weather);
-            progressBar = (VerticalProgressBar) itemView.findViewById(R.id.weather_trend_item_progressbar);
+            temp = itemView.findViewById(R.id.weather_trend_item_tv_temp);
+            time = itemView.findViewById(R.id.weather_trend_item_tv_time);
+            iv = itemView.findViewById(R.id.weather_trend_item_iv_info);
+            weather = itemView.findViewById(R.id.weather_trend_item_tv_weather);
+            progressBar = itemView.findViewById(R.id.weather_trend_item_progressbar);
         }
     }
 

@@ -17,6 +17,7 @@ import com.tokyonth.weather.dynamic.SnowDrawer.SnowHolder;
  * 
  */
 public class RainAndSnowDrawer extends BaseDrawer {
+
 	static final String TAG = RainAndSnowDrawer.class.getSimpleName();
 
 	private GradientDrawable snowDrawable;

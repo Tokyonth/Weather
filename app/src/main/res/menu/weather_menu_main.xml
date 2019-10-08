@@ -5,21 +5,21 @@
     
     <item
         android:id="@+id/action_city"
-        android:orderInCategory="1"
+        android:orderInCategory="0"
         android:icon="@drawable/ic_bt_city_management"
-        android:title="城市选择"
-        app:showAsAction="always"/>
+        android:title="@string/menu_city_management"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_warning"
-        android:orderInCategory="0"
+        android:orderInCategory="1"
         app:showAsAction="never"
-        android:title="预警"/>
+        android:title="@string/menu_warning"/>
 
      <item
         android:id="@+id/action_settings"
         android:orderInCategory="2"
         app:showAsAction="never"
-        android:title="设置"/>
+        android:title="@string/menu_settings"/>
 
 </menu>

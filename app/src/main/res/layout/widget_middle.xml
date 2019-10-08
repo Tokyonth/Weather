@@ -61,7 +61,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:textColor="@android:color/white"
-                tools:text="轻度\n污染"/>
+                tools:text="@string/widget_weather_contaminated"/>
 
         </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical|right"
                 android:textColor="@android:color/white"
-                tools:text="东北风\n那级"/>
+                tools:text="@string/widget_weather_wind"/>
 
             <ImageView
                 android:layout_width="20dp"

@@ -14,6 +14,7 @@ import android.util.Log;
  * 
  */
 public class StarDrawer extends BaseDrawer {
+
 	static final String TAG = StarDrawer.class.getSimpleName();
 
 	private GradientDrawable drawable;
@@ -40,9 +41,8 @@ public class StarDrawer extends BaseDrawer {
 				try {
 					drawable.draw(canvas);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Log.e("FUCK", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
+					Log.e("StarDrawer", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
 				}
 			}
 		return true;
@@ -72,6 +72,7 @@ public class StarDrawer extends BaseDrawer {
 	}
 
 	public static class StarHolder {
+
 		public float x;
 		public float y;
 		public float w;

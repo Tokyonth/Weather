@@ -7,8 +7,8 @@
     <color name="transparent">#0000</color>
     <color name="text_black">#737373</color>
     <color name="text_grey">#9DA0A3</color>
-    <color name="colorWhite">#FFF</color>
-    <color name="divider">#e6e6e6</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="divider">#E6E6E6</color>
     <color name="sun_view_shadow_color">#2CEBEBEB</color>
 
     <color name="card_daily_night">#212121</color>

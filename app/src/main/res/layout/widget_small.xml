@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/widget_small_image_iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:padding="12dp"
         android:layout_weight="1"
         android:tint="@android:color/white"

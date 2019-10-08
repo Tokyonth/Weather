@@ -1,5 +1,6 @@
 package com.tokyonth.weather.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
@@ -21,8 +22,8 @@ import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.utils.api.Api;
 import com.tokyonth.weather.view.widget.EnglishTextView;
 import com.tokyonth.weather.utils.sundry.PreferencesLoader;
-import com.tokyonth.weather.utils.RetrofitFactory;
-import com.tokyonth.weather.utils.WeatherInfoHelper;
+import com.tokyonth.weather.utils.api.RetrofitFactory;
+import com.tokyonth.weather.utils.helper.WeatherInfoHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
@@ -52,7 +53,7 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == NORMAL) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_city_management,parent,false);
             return new CityViewHolder(view);
@@ -71,26 +72,27 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
             final DefaultCity defaultCity = DataSupport.find(DefaultCity.class,1);
             ((DefaultCityViewHolder)holder).cityName.setText(defaultCity.getCityName());
             int temp = PreferencesLoader.getInt(PreferencesLoader.DEFAULT_CITY_TEMP,0);
             int img = PreferencesLoader.getInt(PreferencesLoader.DEFAULT_CITY_IMG,0);
-            ((DefaultCityViewHolder)holder).tempTv.setText(String.valueOf(temp) + " °C");
+            ((DefaultCityViewHolder)holder).tempTv.setText(temp + activity.getResources().getString(R.string.celsius));
             Drawable drawable = WeatherInfoHelper.getWeatherColor(String.valueOf(img));
             int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(String.valueOf(img));
             ((DefaultCityViewHolder)holder).weatherBg.setImageDrawable(drawable);
             ((DefaultCityViewHolder)holder).weatherImageIv.setImageResource(weatherImagePath);
-        //    ((DefaultCityViewHolder)holder).imageViewLocal.setImageDrawable(BaseApplication.getContext().getResources().getDrawable(R.drawable.ic_location));
+
             ((DefaultCityViewHolder)holder).view.setOnClickListener(v -> {
                 EventBus.getDefault().post(defaultCity);
                 defaultClickListener.onClick();
             });
             ((DefaultCityViewHolder)holder).view.setOnLongClickListener(v -> {
-                CoordinatorLayout cityManagementCon = (CoordinatorLayout) activity.findViewById(R.id.city_management_con);
-                Snackbar.make(cityManagementCon,"默认城市不能删除",Snackbar.LENGTH_SHORT)
+                CoordinatorLayout cityManagementCon = activity.findViewById(R.id.city_management_con);
+                Snackbar.make(cityManagementCon, activity.getResources().getString(R.string.cannot_del_default_city),Snackbar.LENGTH_SHORT)
                         .show();
                 return true;
             });
@@ -118,15 +120,17 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                     }
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onNext(Weather weather) {
                         Drawable drawable = WeatherInfoHelper.getWeatherColor(weather.getInfo().getImg());
                         holder.weatherBg.setImageDrawable(drawable);
-                        holder.tempTv.setText(weather.getInfo().getTemp() + " °C");
+                        holder.tempTv.setText(weather.getInfo().getTemp() + activity.getResources().getString(R.string.celsius));
                         int weatherImagePath = WeatherInfoHelper.getWeatherImagePath(weather.getInfo().getImg());
                         holder.weatherImageIv.setImageResource(weatherImagePath);
                     }
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onError(Throwable e) {
                         holder.tempTv.setText("00");
@@ -156,10 +160,10 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         CityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);
-            cityName = (TextView) itemView.findViewById(R.id.city_management_city_name_tv);
-            tempTv = (EnglishTextView) itemView.findViewById(R.id.city_management_weather_temp_tv);
-            weatherImageIv = (ImageView) itemView.findViewById(R.id.city_management_weather_image_iv);
+            weatherBg = itemView.findViewById(R.id.city_management_bg);
+            cityName = itemView.findViewById(R.id.city_management_city_name_tv);
+            tempTv = itemView.findViewById(R.id.city_management_weather_temp_tv);
+            weatherImageIv = itemView.findViewById(R.id.city_management_weather_image_iv);
         }
 
     }
@@ -175,10 +179,10 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         DefaultCityViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            weatherBg = (ImageView) itemView.findViewById(R.id.city_management_bg);
-            cityName = (TextView) itemView.findViewById(R.id.city_management_default_city_name_tv);
-            tempTv = (EnglishTextView) itemView.findViewById(R.id.city_management_default_weather_temp_tv);
-            weatherImageIv = (ImageView) itemView.findViewById(R.id.city_management_default_weather_image_iv);
+            weatherBg = itemView.findViewById(R.id.city_management_bg);
+            cityName = itemView.findViewById(R.id.city_management_default_city_name_tv);
+            tempTv = itemView.findViewById(R.id.city_management_default_weather_temp_tv);
+            weatherImageIv = itemView.findViewById(R.id.city_management_default_weather_image_iv);
         }
 
     }

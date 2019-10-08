@@ -19,19 +19,20 @@ public class SupportFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.pager_support;
+      //  return R.layout.pager_support;
+        return 0;
     }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        coolapkTv = (TextView) view.findViewById(R.id.support_coolapk_tv);
+      //  coolapkTv = (TextView) view.findViewById(R.id.support_coolapk_tv);
         coolapkTv.setOnClickListener(v -> {
             String url = "https://www.coolapk.com/apk/136267";
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
         });
-        alipayTv = (TextView) view.findViewById(R.id.support_alipay_tv);
+      //  alipayTv = (TextView) view.findViewById(R.id.support_alipay_tv);
         alipayTv.setOnClickListener(v -> {
             ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData cd = ClipData.newPlainText("alipay_account","chrissen0814@gmail.com");

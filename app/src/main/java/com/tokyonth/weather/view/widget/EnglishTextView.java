@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-import com.tokyonth.weather.utils.FontHelper;
+import com.tokyonth.weather.utils.helper.FontHelper;
 
 public class EnglishTextView extends androidx.appcompat.widget.AppCompatTextView {
 

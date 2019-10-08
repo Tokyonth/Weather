@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="搜索关键字"
+                android:hint="@string/city_search_hint"
                 android:imeOptions="actionSearch"
                 android:padding="6dp"
                 android:singleLine="true"

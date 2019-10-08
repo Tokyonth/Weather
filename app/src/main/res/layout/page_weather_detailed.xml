@@ -11,23 +11,36 @@
         android:orientation="vertical"
         android:background="@color/transparent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weather_trend_rv"
+            android:background="@drawable/frame_reveal_weather_msg"
+            android:layout_margin="16dp"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <include
             android:id="@+id/content_weather_msg"
             layout="@layout/content_weather_msg"/>
 
+        <include
+            android:id="@+id/pager_aqi_weather"
+            layout="@layout/pager_aqi_weather"/>
+
         <LinearLayout
+            android:id="@+id/ll_ssv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="16dp"
             android:background="@drawable/frame_reveal_weather_msg">
 
-            <com.tokyonth.weather.view.sunrisesunsetview.ssv.SunriseSunsetView
+            <com.tokyonth.weather.view.SunriseSunsetView.SunriseSunsetView
                 android:id="@+id/ssv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
-                android:paddingBottom="0dp"
+                android:paddingBottom="10dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 app:ssv_label_text_color="@color/colorWhite"
@@ -42,14 +55,6 @@
         </LinearLayout>
 
         <include
-            android:id="@+id/pager_aqi_weather"
-            layout="@layout/pager_aqi_weather"/>
-
-        <include
-            android:id="@+id/pager_daily_weather"
-            layout="@layout/pager_daily_weather"/>
-
-        <include
             android:id="@+id/pager_index_weather"
             layout="@layout/pager_index_weather"/>
 
@@ -59,8 +64,8 @@
             android:gravity="center"
             android:padding="6dp"
             android:textSize="12sp"
-            android:textColor="@color/text_grey"
-            android:text="数据来源于极数据"/>
+            android:textColor="@color/divider"
+            android:text="@string/pop_tips"/>
 
     </LinearLayout>
 

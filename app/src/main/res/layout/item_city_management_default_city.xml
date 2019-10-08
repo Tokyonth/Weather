@@ -32,7 +32,7 @@
             android:layout_centerVertical="true">
 
             <ImageView
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_location"/>
@@ -44,7 +44,7 @@
                 android:textSize="18sp"
                 android:padding="@dimen/text_view_padding"
                 android:textColor="@android:color/white"
-                tools:text="南通"/>
+                tools:text="@string/default_test_city_name"/>
 
         </LinearLayout>
 
@@ -62,8 +62,8 @@
             android:id="@+id/city_management_default_weather_image_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:tint="@android:color/white"
             tools:src="@drawable/weather_sunny"/>

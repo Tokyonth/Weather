@@ -19,6 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:text="数据来源于极数据"/>
+        android:text="@string/pop_tips"/>
 
 </LinearLayout>

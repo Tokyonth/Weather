@@ -33,14 +33,14 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:tint="@color/colorWhite"
-                    android:src="@drawable/ic_titile_local" />
+                    android:src="@drawable/ic_title_local" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:id="@+id/weather_city_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="位置"
+                    android:text="@string/text_location"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -51,18 +51,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_city"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar"
         android:visibility="visible">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    </com.tokyonth.weather.view.custom.VerticalSwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

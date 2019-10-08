@@ -28,6 +28,7 @@ import com.tokyonth.weather.presenter.CityPresenter;
 import com.tokyonth.weather.presenter.CityPresenterImpl;
 import com.tokyonth.weather.presenter.LoadCitySituationListener;
 import com.tokyonth.weather.utils.sundry.PreferencesLoader;
+import com.tokyonth.weather.view.widget.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +47,9 @@ public class SplashActivity extends AppCompatActivity {
             initLayout();
         } else {
             new AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("你似乎没有连接到网络，请连接网络后重试")
-                    .setPositiveButton("退出", (dialogInterface, i) -> finish())
+                    .setTitle(getResources().getString(R.string.dialog_text_title))
+                    .setMessage(getResources().getString(R.string.no_network_connection))
+                    .setPositiveButton(getResources().getString(R.string.btn_exit), (dialogInterface, i) -> finish())
                     .create().show();
         }
 
@@ -62,8 +63,8 @@ public class SplashActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        containerRl = (RelativeLayout) findViewById(R.id.splash_container_rl);
-        ImageView loadingIv = (ImageView) findViewById(R.id.splash_loading_iv);
+        containerRl = findViewById(R.id.splash_container_rl);
+        ImageView loadingIv = findViewById(R.id.splash_loading_iv);
 
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         loadingIv.startAnimation(rotateAnimation);
@@ -72,7 +73,7 @@ public class SplashActivity extends AppCompatActivity {
         cityPresenter.saveCityList(new LoadCitySituationListener() {
             @Override
             public void Success() {
-                Snackbar.make(containerRl, "导入成功", Snackbar.LENGTH_LONG)
+                Snackbar.make(containerRl, getResources().getString(R.string.import_success), Snackbar.LENGTH_LONG)
                         .show();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     showTips();
@@ -83,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void Fail() {
-                Snackbar.make(containerRl, "导入失败!请稍后重试", Snackbar.LENGTH_LONG)
+                Snackbar.make(containerRl, getResources().getString(R.string.import_failed), Snackbar.LENGTH_LONG)
                         .show();
             }
         });
@@ -103,11 +104,16 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void showTips() {
-        new AlertDialog.Builder(this)
-                .setTitle("权限说明")
-                .setMessage("定位权限用于获取所在地点的城市信息，存储权限用于高德定位写入离线定位数据。")
-                .setPositiveButton("确定", (dialog, which) -> requestPermission())
-                .create().show();
+        CustomDialog dialog = new CustomDialog(this);
+        dialog.setTitle(getResources().getString(R.string.permission_explain_title));
+        dialog.setMessage(getResources().getString(R.string.permission_explain_msg));
+        dialog.setYesOnclickListener(getResources().getString(R.string.btn_ok), () -> {
+            requestPermission();
+            dialog.dismiss();
+        });
+        dialog.setCancelable(false);
+        dialog.create();
+        dialog.show();
     }
 
     private void requestPermission() {
@@ -140,18 +146,17 @@ public class SplashActivity extends AppCompatActivity {
             if (grantResults.length > 0) {
                 for (int result : grantResults) {
                     if (result != PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(this, "必须同意所有权限才能使用本应用程序！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getResources().getString(R.string.must_allow_permission), Toast.LENGTH_SHORT).show();
                         finish();
                         return;
                     }
                 }
                 startHomeActivity();
             } else {
-                Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.unknown_error), Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
     }
-
 
 }

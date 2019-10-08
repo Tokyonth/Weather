@@ -14,6 +14,7 @@ import android.graphics.drawable.GradientDrawable;
  * 
  */
 public class SunnyDrawer extends BaseDrawer {
+
 	static final String TAG = SunnyDrawer.class.getSimpleName();
 
 	private GradientDrawable drawable;
@@ -70,14 +71,15 @@ public class SunnyDrawer extends BaseDrawer {
 	}
 
 	public static class SunnyHolder {
+
 		public float x;
 		public float y;
 		public float w;
 		public float h;
-		public final float maxAlpha = 1f;
+		public final float maxAlpha = 2.0f;
 		public float curAlpha;// [0,1]
 		public boolean alphaIsGrowing = true;
-		private final float minAlpha = 0.5f;
+		private final float minAlpha = 1.3f;
 
 		public SunnyHolder(float x, float y, float w, float h) {
 			super();
@@ -91,7 +93,7 @@ public class SunnyDrawer extends BaseDrawer {
 		public void updateRandom(GradientDrawable drawable,float alpha) {
 			// curAlpha += getRandom(-0.01f, 0.01f);
 			// curAlpha = Math.max(0f, Math.min(maxAlpha, curAlpha));
-			final float delta = getRandom(0.002f * maxAlpha, 0.005f * maxAlpha);
+			final float delta = getRandom(0.003f * maxAlpha, 0.008f * maxAlpha);
 			if (alphaIsGrowing) {
 				curAlpha += delta;
 				if (curAlpha > maxAlpha) {

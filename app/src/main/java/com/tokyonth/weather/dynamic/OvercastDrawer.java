@@ -14,13 +14,12 @@ import com.tokyonth.weather.dynamic.CloudyDrawer.CircleHolder;
  *
  */
 public class OvercastDrawer extends BaseDrawer{
-	
-//	final ArrayList<CloudHolder> holders = new ArrayList<CloudHolder>();
+
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	final ArrayList<CircleHolder> holders = new ArrayList<CircleHolder>();
+
 	public OvercastDrawer(Context context, boolean isNight) {
 		super(context, isNight);
-		
 	}
 	@Override
 	protected void setSize(int width, int height) {

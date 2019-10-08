@@ -14,5 +14,4 @@ public class UnknownDrawer extends BaseDrawer {
 		return true;//这里返回false会出现有时候不刷新的问题
 	}
 
-
 }

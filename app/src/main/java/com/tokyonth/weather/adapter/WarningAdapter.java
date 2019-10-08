@@ -3,6 +3,7 @@ package com.tokyonth.weather.adapter;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
@@ -44,10 +45,9 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         warningList.add("强对流天气预警");
     }
 
-
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == TYPE_BODY){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_warning,parent,false);
             return new ContentViewHolder(view);
@@ -58,7 +58,7 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
         if(holder instanceof ContentViewHolder){
             String warningTitle = warningList.get(position);
@@ -119,12 +119,12 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         ContentViewHolder(View itemView) {
             super(itemView);
-            progressBar_load = (ProgressBar) itemView.findViewById(R.id.progress_load);
-            iv_arrow = (ImageView) itemView.findViewById(R.id.iv_arrow);
-            titleLl = (LinearLayout) itemView.findViewById(R.id.item_warning_title_ll);
-            contentLl = (LinearLayout) itemView.findViewById(R.id.item_warning_content_ll);
-            titleTv = (TextView) itemView.findViewById(R.id.item_warning_title);
-            contentTv = (TextView) itemView.findViewById(R.id.item_warning_content_tv);
+            progressBar_load = itemView.findViewById(R.id.progress_load);
+            iv_arrow = itemView.findViewById(R.id.iv_arrow);
+            titleLl = itemView.findViewById(R.id.item_warning_title_ll);
+            contentLl = itemView.findViewById(R.id.item_warning_content_ll);
+            titleTv = itemView.findViewById(R.id.item_warning_title);
+            contentTv = itemView.findViewById(R.id.item_warning_content_tv);
             hiddenLayoutHeight = contentLl.getLayoutParams().height;
         }
 
@@ -166,11 +166,12 @@ public class WarningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         FooterViewHolder(View itemView) {
             super(itemView);
-            footerTv = (TextView) itemView.findViewById(R.id.item_warning_footer_tv);
+            footerTv = itemView.findViewById(R.id.item_warning_footer_tv);
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void getWarningContent(String url , final ContentViewHolder holder){
 
         HttpUtil.doGetAsyn(url, result -> {

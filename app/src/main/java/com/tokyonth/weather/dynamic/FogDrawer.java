@@ -16,13 +16,10 @@ import com.tokyonth.weather.dynamic.CloudyDrawer.CircleHolder;
  */
 public class FogDrawer extends BaseDrawer {
 
-//	final ArrayList<CloudHolder> holders = new ArrayList<CloudHolder>();
-
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	final ArrayList<CircleHolder> holders = new ArrayList<CircleHolder>();
 	public FogDrawer(Context context, boolean isNight) {
 		super(context, isNight);
-
 	}
 
 	@Override
@@ -46,4 +43,5 @@ public class FogDrawer extends BaseDrawer {
 	protected int[] getSkyBackgroundGradient() {
 		return isNight ? SkyBackground.FOG_N : SkyBackground.FOG_D;
 	}
+
 }

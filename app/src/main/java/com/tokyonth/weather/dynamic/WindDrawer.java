@@ -15,6 +15,7 @@ public class WindDrawer extends BaseDrawer{
 		super(context, isNight);
 		paint.setStyle(Style.STROKE);
 	}
+
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	final int count = 30;
 	private ArrayList<ArcHolder> holders = new ArrayList<ArcHolder>();
@@ -34,8 +35,8 @@ public class WindDrawer extends BaseDrawer{
 						isNight ? 0x33ffffff:0x66ffffff));
 			}
 		}
-		
 	}
+
 	@Override
 	public boolean drawWeather(Canvas canvas, float alpha) {
 			for (ArcHolder holder : this.holders) {
@@ -45,11 +46,13 @@ public class WindDrawer extends BaseDrawer{
 	}
 	
 	public static class ArcHolder{
+
 		private final float cx, cy, radiusWidth, radiusHeight,strokeWidth, fromDegree,endDegree, sizeDegree;
 		private final int color;
 		private float curDegree;
 		private final float stepDegree;
 		private RectF rectF = new RectF();
+
 		public ArcHolder(float cx, float cy, float radiusWidth,float radiusHeight, float strokeWidth, float fromDegree, float endDegree,
 				float sizeDegree, int color) {
 			super();
@@ -65,6 +68,7 @@ public class WindDrawer extends BaseDrawer{
 			this.curDegree = getRandom(fromDegree, endDegree);
 			this.stepDegree = getRandom(0.5f, 0.9f);
 		}
+
 		public void updateAndDraw(Canvas canvas, Paint paint, float alpha){
 			paint.setColor(convertAlphaColor(alpha * (Color.alpha(color) / 255f), color));
 			paint.setStrokeWidth(strokeWidth);
@@ -72,6 +76,7 @@ public class WindDrawer extends BaseDrawer{
 			if(curDegree > (endDegree -sizeDegree)){
 				curDegree = fromDegree - sizeDegree;
 			}
+
 			float startAngle = curDegree;
 			float sweepAngle = sizeDegree;
 			rectF.left=cx - radiusWidth;
@@ -86,9 +91,5 @@ public class WindDrawer extends BaseDrawer{
 	protected int[] getSkyBackgroundGradient() {
 		return isNight ? SkyBackground.RAIN_N : SkyBackground.RAIN_D;
 	}
-	
-	
-	
-	
 	
 }

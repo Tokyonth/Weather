@@ -39,9 +39,8 @@ public class StarDrawerBak extends BaseDrawer {
 			try {
 				drawable.draw(canvas);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.e("FUCK", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
+				Log.e("StarDrawerBak", "drawable.draw(canvas)->" + drawable.getBounds().toShortString());
 			}
 		}
 		return true;

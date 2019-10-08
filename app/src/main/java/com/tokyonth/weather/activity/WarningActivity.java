@@ -26,12 +26,15 @@ public class WarningActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_title_arrow_left);
-        RecyclerView mWarningRv = (RecyclerView) findViewById(R.id.warning_rv);
+        RecyclerView mWarningRv = findViewById(R.id.warning_rv);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setTitle(null);
 
         WarningAdapter mWarningAdapter = new WarningAdapter(this);

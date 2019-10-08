@@ -94,7 +94,6 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 	}
 
 	public void onResume() {
-		// Let the drawing thread resume running.
 		synchronized (mDrawThread) {
 			mDrawThread.mRunning = true;
 			mDrawThread.notify();
@@ -103,7 +102,6 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 	}
 
 	public void onPause() {
-		// Make sure the drawing thread is not running while we are paused.
 		synchronized (mDrawThread) {
 			mDrawThread.mRunning = false;
 			mDrawThread.notify();
@@ -112,7 +110,6 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 	}
 
 	public void onDestroy() {
-		// Make sure the drawing thread goes away.
 		synchronized (mDrawThread) {
 			mDrawThread.mQuit = true;
 			mDrawThread.notify();
@@ -136,8 +133,6 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// We need to tell the drawing thread to stop, and block until
-		// it has done so.
 		synchronized (mDrawThread) {
 			surfaceHolder = holder;
 			mDrawThread.notify();

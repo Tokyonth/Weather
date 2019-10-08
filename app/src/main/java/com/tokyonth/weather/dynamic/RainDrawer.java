@@ -14,6 +14,7 @@ import android.graphics.Paint.Style;
  * 
  */
 public class RainDrawer extends BaseDrawer {
+
 	static final String TAG = RainDrawer.class.getSimpleName();
 	
 	public static class RainDrawable{
@@ -27,6 +28,7 @@ public class RainDrawer extends BaseDrawer {
 //			paint.setStrokeJoin(Paint.Join.ROUND);
 //			paint.setStrokeCap(Paint.Cap.ROUND);
 		}
+
 		public void setColor(int color){
 			this.paint.setColor(color);
 		}

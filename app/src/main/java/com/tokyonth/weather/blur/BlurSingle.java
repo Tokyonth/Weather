@@ -14,6 +14,8 @@ import android.view.ViewTreeObserver;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import java.util.List;
+
 public class BlurSingle extends Blur {
 
     protected static Bitmap blurBkg;
@@ -113,8 +115,8 @@ public class BlurSingle extends Blur {
 
         //毛玻璃效果参数,可以动态修改
 
-        public static int RoundCorner=50;
-        public static int radius=10;
+        public static int RoundCorner=32;
+        public static int radius=5;
         public static int scaleFactor=26;
 
       /*  private int RoundCorner = ConstValue.RoundCorner;
@@ -124,19 +126,34 @@ public class BlurSingle extends Blur {
 
         public BlurLayout(final View layoutView, final View layoutBkg){
             positionX=positionY=0;
-            layoutView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
+            layoutView.getViewTreeObserver().addOnPreDrawListener(() -> {
+                int position[]=new int[2];
+                layoutView.getLocationInWindow(position);
+                if(positionX!=position[0]||positionY!=position[1]){
+                    BlurSingle.cutBluredBitmap(layoutBkg,layoutView,radius,scaleFactor,RoundCorner);
+                    positionX=position[0];
+                    positionY=position[1];
+                }
+                return true;
+            });
+        }
+
+        public BlurLayout(final List<View> layoutView, final View layoutBkg){
+            positionX=positionY=0;
+
+            for (View view : layoutView) {
+                view.getViewTreeObserver().addOnPreDrawListener(() -> {
                     int position[]=new int[2];
-                    layoutView.getLocationInWindow(position);
+                    view.getLocationInWindow(position);
                     if(positionX!=position[0]||positionY!=position[1]){
-                        BlurSingle.cutBluredBitmap(layoutBkg,layoutView,radius,scaleFactor,RoundCorner);
+                        BlurSingle.cutBluredBitmap(layoutBkg,view,radius,scaleFactor,RoundCorner);
                         positionX=position[0];
                         positionY=position[1];
                     }
                     return true;
-                }
-            });
+                });
+            }
+
         }
 
         public void setLayoutView(View layoutView) {

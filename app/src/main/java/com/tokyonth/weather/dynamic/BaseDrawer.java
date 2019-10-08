@@ -17,35 +17,31 @@ public abstract class BaseDrawer {
 
 	public static final class SkyBackground {
 
-		public static final int[] BLACK = new int[] { 0xff000000, 0xff000000 };
-//		public static final int[] CLEAR_D = new int[] { 0xff3d99c2, 0xff4f9ec5 };
-//		public static final int[] CLEAR_N = new int[] { 0xff0d1229, 0xff262c42 };
+		static final int[] BLACK = new int[] { 0xff000000, 0xff000000 };
 
-		public static final int[] CLEAR_D = new int[] { 0xff3d99c2, 0xff4f9ec5 };
-		public static final int[] CLEAR_N = new int[] { 0xff0b0f25, 0xff252b42 };
-		// ////////////
-		public static final int[] OVERCAST_D = new int[] { 0xff33425f, 0xff617688 };//0xff748798, 0xff617688
-		public static final int[] OVERCAST_N = new int[] { 0xff262921, 0xff23293e };//0xff1b2229, 0xff262921
-		// ////////////
-		public static final int[] RAIN_D = new int[] { 0xff4f80a0, 0xff4d748e };
-		public static final int[] RAIN_N = new int[] { 0xff0d0d15, 0xff22242f };
-		// ////////////
-		public static final int[] FOG_D = new int[] { 0xff688597, 0xff44515b };
-		public static final int[] FOG_N = new int[] { 0xff2f3c47, 0xff24313b };
+		static final int[] CLEAR_D = new int[] { 0xff3d99c2, 0xff4f9ec5 };
+		static final int[] CLEAR_N = new int[] { 0xff0b0f25, 0xff252b42 };
 
-		// ////////////
-		public static final int[] SNOW_D = new int[] { 0xff4f80a0, 0xff4d748e };//临时用RAIN_D凑数的
-		public static final int[] SNOW_N = new int[] { 0xff1e2029, 0xff212630 };
-		// ////////////
-		public static final int[] CLOUDY_D = new int[] { 0xff4f80a0, 0xff4d748e };//临时用RAIN_D凑数的
-		public static final int[] CLOUDY_N = new int[] { 0xff071527,0xff252b42};// 0xff193353 };//{ 0xff0e1623, 0xff222830 }
-		// ////////////
-		public static final int[] HAZE_D = new int[] {  0xff616e70,0xff474644 };// 0xff999b95, 0xff818e90 
-		public static final int[] HAZE_N = new int[] { 0xff373634, 0xff25221d };
-		
-		// ////////////
-		public static final int[] SAND_D = new int[] { 0xffb5a066, 0xffd5c086 };//0xffa59056
-		public static final int[] SAND_N = new int[] { 0xff312820, 0xff514840 };
+		static final int[] OVERCAST_D = new int[] { 0xff33425f, 0xff617688 };//0xff748798, 0xff617688
+		static final int[] OVERCAST_N = new int[] { 0xff262921, 0xff23293e };//0xff1b2229, 0xff262921
+
+		static final int[] RAIN_D = new int[] { 0xff000000, 0xff4d748e };
+		static final int[] RAIN_N = new int[] { 0xff0d0d15, 0xff22242f };
+
+		static final int[] FOG_D = new int[] { 0xff688597, 0xff44515b };
+		static final int[] FOG_N = new int[] { 0xff2f3c47, 0xff24313b };
+
+		static final int[] SNOW_D = new int[] { 0xff4f80a0, 0xff4d748e };//临时用RAIN_D凑数的
+		static final int[] SNOW_N = new int[] { 0xff1e2029, 0xff212630 };
+
+		static final int[] CLOUDY_D = new int[] { 0xff94bbe7, 0xff4d748e };//临时用RAIN_D凑数的
+		static final int[] CLOUDY_N = new int[] { 0xff071527,0xff252b42};// 0xff193353 };//{ 0xff0e1623, 0xff222830 }
+
+		static final int[] HAZE_D = new int[] {  0xff616e70,0xff474644 };// 0xff999b95, 0xff818e90
+		static final int[] HAZE_N = new int[] { 0xff373634, 0xff25221d };
+
+		static final int[] SAND_D = new int[] { 0xffb5a066, 0xffd5c086 };//0xffa59056
+		static final int[] SAND_N = new int[] { 0xff312820, 0xff514840 };
 	}
 
 	public static BaseDrawer makeDrawerByType(Context context, Type type) {
@@ -101,18 +97,17 @@ public abstract class BaseDrawer {
 		}
 	}
 
-	static final String TAG = BaseDrawer.class.getSimpleName();
-	protected Context context;
-	//	private float curPercent = 0f;
-	private final float desity;
-	protected int width, height;
+	private final float density;
 	private GradientDrawable skyDrawable;
+
+	protected int width, height;
 	protected final boolean isNight;
+	protected Context context;
 
 	public BaseDrawer(Context context, boolean isNight) {
 		super();
 		this.context = context;
-		this.desity = context.getResources().getDisplayMetrics().density;
+		this.density = context.getResources().getDisplayMetrics().density;
 		this.isNight = isNight;
 	}
 
@@ -139,17 +134,7 @@ public abstract class BaseDrawer {
 	 */
 	public boolean draw(Canvas canvas, float alpha) {
 		drawSkyBackground(canvas, alpha);
-		//long start = AnimationUtils.currentAnimationTimeMillis();
-		boolean needDrawNextFrame = drawWeather(canvas, alpha);
-//		if (needDrawNextFrame) {
-//			curPercent += getFrameOffsetPercent();
-//			if (curPercent > 1) {
-//				curPercent = 0f;
-//			}
-//		}
-		// Log.i(TAG, getClass().getSimpleName() + " drawWeather: "
-		// + (AnimationUtils.currentAnimationTimeMillis() - start) + "ms");
-		return needDrawNextFrame;
+		return drawWeather(canvas, alpha);
 	}
 
 	public abstract boolean drawWeather(Canvas canvas, float alpha);// return
@@ -163,7 +148,6 @@ public abstract class BaseDrawer {
 		if(this.width != width && this.height != height){
 			this.width = width;
 			this.height = height;
-			Log.d(TAG, "setSize");
 			if (this.skyDrawable != null) {
 				skyDrawable.setBounds(0, 0, width, height);
 			}
@@ -171,7 +155,8 @@ public abstract class BaseDrawer {
 		
 	}
 
-	protected float getFrameOffsetPercent() {// 每一帧的百分比
+	// 每一帧的百分比
+	protected float getFrameOffsetPercent() {
 		return 1f / 40f;
 	}
 
@@ -185,15 +170,15 @@ public abstract class BaseDrawer {
 	}
 
 	public float dp2px(float dp) {
-		return dp * desity;
+		return dp * density;
 	}
 
 	// 获得0--n之内的不等概率随机整数，0概率最大，1次之，以此递减，n最小
 	public static int getAnyRandInt(int n) {
 		int max = n + 1;
-		int bigend = ((1 + max) * max) / 2;
+		int begin = ((1 + max) * max) / 2;
 		Random rd = new Random();
-		int x = Math.abs(rd.nextInt() % bigend);
+		int x = Math.abs(rd.nextInt() % begin);
 		int sum = 0;
 		for (int i = 0; i < max; i++) {
 			sum += (max - i);
@@ -213,9 +198,9 @@ public abstract class BaseDrawer {
 	 * @return
 	 */
 	public static float getDownRandFloat(float min, float max) {
-		float bigend = ((min + max) * max) / 2f;
+		float begin = ((min + max) * max) / 2f;
 		// Random rd = new Random();
-		float x = getRandom(min, bigend);// Math.abs(rd.nextInt() % bigend);
+		float x = getRandom(min, begin);// Math.abs(rd.nextInt() % bigend);
 		int sum = 0;
 		for (int i = 0; i < max; i++) {
 			sum += (max - i);

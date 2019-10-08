@@ -19,7 +19,7 @@
             android:textSize="22sp"
             android:gravity="center"
             android:textColor="@android:color/white"
-            tools:text="未来7天无雨雪天气"/>
+            tools:text="@string/widget_weather_prediction"/>
 
     </LinearLayout>
 
