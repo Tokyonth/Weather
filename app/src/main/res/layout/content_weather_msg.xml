@@ -128,6 +128,30 @@
         <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/default_weather_image_view_size"
+                android:layout_height="@dimen/default_weather_image_bottom_size"
+                android:padding="2dp"
+                android:tint="@android:color/white"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_wind_speed"/>
+
+            <com.tokyonth.weather.view.widget.EnglishTextView
+                android:id="@+id/weather_wind_speed_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="12dp"
+                android:gravity="center_vertical"
+                tools:text="900"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|start">
 

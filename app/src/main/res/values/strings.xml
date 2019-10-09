@@ -32,7 +32,7 @@
     <string name="act_text_settings">设置</string>
     <string name="act_text_import_city_data">正在导入城市数据...</string>
     <string name="act_text_weather_warn">气象预警</string>
-    <string name="pop_tips">数据来源于极数据</string>
+    <string name="pop_tips">数据来源于极速数据</string>
     <string name="text_location">位置</string>
     <string name="dialog_text_title">提示</string>
     <string name="dialog_text_msg">内容</string>
@@ -65,5 +65,15 @@
     <string name="unknown_error">发生未知错误</string>
     <string name="must_allow_permission">必须同意所有权限才能使用本应用程序！</string>
     <string name="cannot_del_default_city">默认城市不能删除</string>
+    <string name="contributor_1"><u>@零下一度</u></string>
+    <string name="contributor_2"><u>https://github.com/Mixiaoxiao/Weather</u></string>
+    <string name="contributor_3"><u>https://github.com/YugengWang/Windmill</u></string>
+    <string name="title_donate">捐赠</string>
+    <string name="text_donate">你好，欢迎使用天气岛，我还是一个在校生，没有什么收入，而天气岛使用的付费的API，需要一些费用。
+        \n如果你觉得这个程序有用，可以打赏作者，费用都将用于APP的维护，谢谢你的支持。\n\n当然你也可以自己申请API，这是开放功能。\n有任何问题、建议，请在酷安上联系我。</string>
+    <string name="title_alipay">支付宝</string>
+    <string name="title_wechat">微信</string>
+    <string name="text_qr_code_saved">二维码已保存</string>
+    <string name="text_save_qr_code">保存二维码</string>
 
 </resources>

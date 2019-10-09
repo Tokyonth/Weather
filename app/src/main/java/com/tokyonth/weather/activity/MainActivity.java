@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,7 +65,6 @@ public class MainActivity extends BaseActivity implements WeatherView {
     private WeatherPagerAdapter weather_page_adapter;
 
     private boolean isDefaultCity = true;
-    private List<Integer> time_list = null;
     private Weather offline_weather;
     private String city;
 
@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements WeatherView {
             assert weather_data != null;
             if (!weather_data.equals("")) {
                 offline_weather = new Gson().fromJson(weather_data, Weather.class);
-                EventBus.getDefault().post(offline_weather);
+               // EventBus.getDefault().post(offline_weather);
                 setWeatherBackground(offline_weather);
                 weather_refresh.setRefreshing(true);
             }
@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity implements WeatherView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.weather_menu_main, menu);
+        getMenuInflater().inflate(R.menu.weather_main_menu, menu);
         return true;
     }
 
@@ -245,19 +245,13 @@ public class MainActivity extends BaseActivity implements WeatherView {
         EventBus.getDefault().post(offline_weather);
     }
 
-    @Subscribe
-    public void getMap(List<Integer> list) {
-        time_list = new ArrayList<>();
-        time_list = list;
-    }
-
     public void setWeatherBackground(Weather weather) {
         String img = weather.getInfo().getImg();
         int weatherType = WeatherInfoHelper.getWeatherType(img);
-        boolean isInTime = false;
-        if (time_list != null) {
-            isInTime = DateUtil.isCurrentInTimeScope(time_list.get(0), time_list.get(1), time_list.get(2), time_list.get(3));
-        }
+
+        List<Integer> list = WeatherInfoHelper.getSunriseSunset(weather);
+        boolean isInTime = DateUtil.isCurrentInTimeScope(list.get(0), list.get(1), list.get(2), list.get(3));
+
         dynamic_weatherView.setDrawerType(WeatherType.getType(isInTime, weatherType));
 
     }

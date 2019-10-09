@@ -1,6 +1,7 @@
 package com.tokyonth.weather.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
     private TextView tv_level, tv_primary_pollute, tv_affect, tv_pressure;
     private TextView tv_pm25, tv_pm10, tv_so2, tv_no2, tv_co, tv_o3;
-    private TextView tv_air_quality, tv_wind, tv_forecast_day, tv_forecast_hourly;
+    private TextView tv_air_quality, tv_wind, tv_wind_speed, tv_forecast_day, tv_forecast_hourly;
     private RecyclerView rv_index, rv_weather_trend;
     private ImageView iv_air_quality;
 
@@ -81,6 +82,7 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
 
         tv_air_quality = view.findViewById(R.id.weather_airquality_tv);
         tv_wind = view.findViewById(R.id.weather_wind_tv);
+        tv_wind_speed = view.findViewById(R.id.weather_wind_speed_tv);
         tv_humidity = view.findViewById(R.id.weather_humidity_tv);
         tv_forecast_hourly = view.findViewById(R.id.weather_forecast_hourly_tips_tv);
         tv_forecast_day = view.findViewById(R.id.weather_forecast_day_tips_tv);
@@ -124,12 +126,6 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
         list.add(blur4);
         blur_single = new BlurSingle.BlurLayout(list, blur_box_view);
         blur_single.setRadius(2);
-    }
-
-    private void refreshSSV(int sunriseHour, int sunriseMinute, int sunsetHour, int sunsetMinute) {
-        sunset_view.setSunriseTime(new Time(sunriseHour, sunriseMinute));
-        sunset_view.setSunsetTime(new Time(sunsetHour, sunsetMinute));
-        sunset_view.startAnimate();
     }
 
     @Override
@@ -186,42 +182,30 @@ public class WeatherPageDetailed extends BaseSubscribeFragment {
             default_max += 100;
             semicircle_progress_view.setSesameValues(aqi_index, default_max);
         }
+        semicircle_progress_view.setSesameValues(aqi_index, default_max);
         semicircle_progress_view.setSemicircletitleColor(color);
         semicircle_progress_view.setFrontLineColor(color);
-
-        // 日出日落
-        String Sunrise = weather.getInfo().getDailyList().get(0).getSunrise();
-        String Sunset = weather.getInfo().getDailyList().get(0).getSunset();
-
-        int index = Sunrise.indexOf(":");
-        String SunriseBefore = Sunrise.substring(0,index);
-        String SunriseAfter = Sunrise.substring(index+1);
-        String SunsetBefore = Sunset.substring(0,index);
-        String SunsetAfter = Sunset.substring(index+1);
-
-        int Sunrise_h = Integer.parseInt(SunriseBefore);
-        int Sunrise_m = Integer.parseInt(SunriseAfter);
-        int Sunset_h = Integer.parseInt(SunsetBefore);
-        int Sunset_m = Integer.parseInt(SunsetAfter);
-
-        refreshSSV(Sunrise_h, Sunrise_m, Sunset_h, Sunset_m);
-        List<Integer> list = new ArrayList<>();
-        list.add(Sunrise_h);
-        list.add(Sunrise_m);
-        list.add(Sunset_h);
-        list.add(Sunset_m);
-        EventBus.getDefault().post(list);
 
         // 生活指数
         IndexAdapter index_adapter = new IndexAdapter(weather.getInfo().getIndexList());
         rv_index.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_index.setAdapter(index_adapter);
 
-        // 风车
-        windmill_big.startAnimation();
-        windmill_small.startAnimation();
+        // 日出日落
+        List<Integer> list = WeatherInfoHelper.getSunriseSunset(weather);
+        sunset_view.setSunriseTime(new Time(list.get(0), list.get(1)));
+        sunset_view.setSunsetTime(new Time(list.get(2), list.get(3)));
+        sunset_view.startAnimate();
+
+        //refreshSSV(Sunrise_h, Sunrise_m, Sunset_h, Sunset_m);
+
+        // 风车、风速
         String str = weather.getInfo().getWindSpeed();
         double wind_speed = Double.parseDouble(str);
+        tv_wind_speed.setText("风速 : " + str + "m/s");
+        windmill_big.startAnimation();
+        windmill_small.startAnimation();
+
         windmill_big.setWindSpeed(wind_speed);
         windmill_small.setWindSpeed(wind_speed);
     }

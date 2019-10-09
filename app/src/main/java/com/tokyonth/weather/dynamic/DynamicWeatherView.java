@@ -17,7 +17,7 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 
 	private static final String TAG = DynamicWeatherView.class.getSimpleName();
 	private DrawThread mDrawThread;
-	private SurfaceHolder surfaceHolder = getHolder();
+	private SurfaceHolder surfaceHolder;
 	private Canvas canvas;
 
     private BaseDrawer preDrawer, curDrawer;
@@ -33,6 +33,7 @@ public class DynamicWeatherView extends SurfaceView implements SurfaceHolder.Cal
 	private void init() {
 		curDrawerAlpha = 0f;
 		mDrawThread = new DrawThread();
+		surfaceHolder = getHolder();
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setFormat(PixelFormat.RGBA_8888);
 		mDrawThread.start();

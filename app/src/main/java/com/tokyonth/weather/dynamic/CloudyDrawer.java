@@ -21,12 +21,16 @@ public class CloudyDrawer extends BaseDrawer {
 	protected void setSize(int width, int height) {
 		super.setSize(width, height);
 		if (holders.size() == 0) {
+			holders.add(new CircleHolder(0.08f * width, 0.01f * width, 0.04f * width, 0.045f * width, 0.44f * width,
+					0.018f, isNight ? 0x153c6b8c : 0x45ffffff));
 			holders.add(new CircleHolder(0.20f * width, -0.30f * width, 0.06f * width, 0.022f * width, 0.56f * width,
 					0.015f, isNight ? 0x183c6b8c : 0x28ffffff));
-			holders.add(new CircleHolder(0.58f * width, -0.35f * width, -0.15f * width, 0.032f * width, 0.6f * width,
+			holders.add(new CircleHolder(0.58f * width, -0.05f * width, -0.15f * width, 0.052f * width, 0.6f * width,
 					0.0125f, isNight ? 0x223c6b8c : 0x33ffffff));
-			holders.add(new CircleHolder(0.9f * width, -0.19f * width, 0.08f * width, -0.015f * width, 0.44f * width,
-					0.025f, isNight ? 0x153c6b8c : 0x15ffffff));
+			holders.add(new CircleHolder(0.9f * width, 0.19f * width, 0.08f * width, -0.015f * width, 0.44f * width,
+					0.021f, isNight ? 0x153c6b8c : 0x15ffffff));
+			holders.add(new CircleHolder(0.8f * width, -0.10f * width, 0.04f * width, 0.045f * width, 0.44f * width,
+					0.018f, isNight ? 0x153c6b8c : 0x45ffffff));
 		}
 	}
 

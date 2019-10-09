@@ -25,7 +25,7 @@ public class RefreshWeather {
 
         if (!isDefaultCity) {
             new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                    .getWeather(Api.JISU_APP_KEY, city)
+                    .getWeather(Api.getJisuAppKey(), city)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<Weather>() {
@@ -49,7 +49,7 @@ public class RefreshWeather {
                     });
         } else {
             new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                    .getLocationWeather(Api.JISU_APP_KEY, city)
+                    .getLocationWeather(Api.getJisuAppKey(), city)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<ResponseBody>() {

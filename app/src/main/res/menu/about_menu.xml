@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.AboutActivity">
+
+    <item
+        android:id="@+id/action_about_shard"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_shard"
+        android:title="分享"
+        app:showAsAction="always"/>
+
+</menu>

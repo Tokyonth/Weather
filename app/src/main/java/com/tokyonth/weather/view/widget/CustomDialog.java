@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -22,12 +23,14 @@ public class CustomDialog extends Dialog {
     private TextView messageTv;
     private View line_v;
     private View line_h;
-    private LinearLayout ll;
+    private LinearLayout ll, show_cust;
     private String title;
     private String message;
     private String yesStr;
     private String noStr;
     private Context context;
+
+    private View cust_view;
 
     //  接口监听
     private onNoOnclickListener noOnclickListener;
@@ -73,7 +76,10 @@ public class CustomDialog extends Dialog {
         initData();
         //初始化界面控件的事件
         initEvent();
+
     }
+
+
 
     /**
      * 初始化界面的确定和取消监听器
@@ -83,12 +89,14 @@ public class CustomDialog extends Dialog {
         yesBtn.setOnClickListener(v -> {
             if (yesOnclickListener != null) {
                 yesOnclickListener.onYesClick();
+                dismiss();
             }
         });
         //设置取消按钮被点击后，向外界提供监听
         noBtn.setOnClickListener(v -> {
             if (noOnclickListener != null) {
                 noOnclickListener.onNoClick();
+              //  dismiss();
             }
         });
     }
@@ -97,6 +105,11 @@ public class CustomDialog extends Dialog {
      * 初始化界面控件的显示数据
      */
     private void initData() {
+        if (cust_view != null) {
+            show_cust.addView(cust_view);
+            messageTv.setVisibility(View.GONE);
+        }
+
         //如果用户自定了title和message
         if (title != null) {
             titleTv.setText(title);
@@ -138,6 +151,8 @@ public class CustomDialog extends Dialog {
         line_h = findViewById(R.id.line_h);
         ll = findViewById(R.id.column);
 
+        show_cust = findViewById(R.id.cust_view);
+
         Window dialogWindow = getWindow();
         if (dialogWindow != null) {
             dialogWindow.setGravity(Gravity.CENTER);//设置窗口位置
@@ -159,6 +174,10 @@ public class CustomDialog extends Dialog {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setCustView(View view) {
+        cust_view = view;
     }
 
 }

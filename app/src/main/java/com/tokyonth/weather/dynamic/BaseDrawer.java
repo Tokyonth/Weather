@@ -34,7 +34,7 @@ public abstract class BaseDrawer {
 		static final int[] SNOW_D = new int[] { 0xff4f80a0, 0xff4d748e };//临时用RAIN_D凑数的
 		static final int[] SNOW_N = new int[] { 0xff1e2029, 0xff212630 };
 
-		static final int[] CLOUDY_D = new int[] { 0xff94bbe7, 0xff4d748e };//临时用RAIN_D凑数的
+		static final int[] CLOUDY_D = new int[] { 0xff93a4ae, 0xff4d748e };//临时用RAIN_D凑数的
 		static final int[] CLOUDY_N = new int[] { 0xff071527,0xff252b42};// 0xff193353 };//{ 0xff0e1623, 0xff222830 }
 
 		static final int[] HAZE_D = new int[] {  0xff616e70,0xff474644 };// 0xff999b95, 0xff818e90

@@ -25,7 +25,7 @@ public class WeatherModelImpl implements WeatherModel {
     public void loadCityWeather(SavedCity savedCity, final OnWeatherListener listener) {
         if (NetworkUtil.isWifiConnected() || NetworkUtil.isMobileConnected()) {
             new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                    .getWeather(Api.JISU_APP_KEY,savedCity.getCityCode())
+                    .getWeather(Api.getJisuAppKey(),savedCity.getCityCode())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<Weather>() {
@@ -58,7 +58,7 @@ public class WeatherModelImpl implements WeatherModel {
         String city = defaultCity.getCityName();
         if (NetworkUtil.isWifiConnected() || NetworkUtil.isMobileConnected()) {
             new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                    .getLocationWeather(Api.JISU_APP_KEY, city)
+                    .getLocationWeather(Api.getJisuAppKey(), city)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<ResponseBody>() {

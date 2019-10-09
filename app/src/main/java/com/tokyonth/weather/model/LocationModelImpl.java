@@ -38,7 +38,7 @@ public class LocationModelImpl implements LocationModel {
         AMapLocationClientOption mOption = new AMapLocationClientOption();
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
         mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
-        mOption.setHttpTimeOut(8000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效(已设置8秒超时)
+        mOption.setHttpTimeOut(6000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效(已设置6秒超时)
         mOption.setInterval(1000);//可选，设置定位间隔。默认为2秒(已设置1秒)
         mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
         mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
@@ -65,9 +65,16 @@ public class LocationModelImpl implements LocationModel {
                     String districtName = aMapLocation.getDistrict();
                     String longitude = String.valueOf(aMapLocation.getLongitude());
                     String latitude = String.valueOf(aMapLocation.getLatitude());
-                //    DefaultCity defaultCity = new DefaultCity(districtName,cityName,longitude,latitude);
 
-                    DefaultCity defaultCity = new DefaultCity(cityName,districtName,longitude,latitude);
+                    // 区级定位
+                    DefaultCity defaultCity = new DefaultCity(districtName,cityName,longitude,latitude);
+                    // 市级定位
+                    // DefaultCity defaultCity = new DefaultCity(cityName,districtName,longitude,latitude);
+
+                    // 临时解决极速数据郫都区不能识别为郫县问题
+                    if (defaultCity.getCityName().equals("郫都区")) {
+                        defaultCity.setCityName("郫县");
+                    }
 
                     if(DataSupport.count(DefaultCity.class) == 0){
                         defaultCity.save();
@@ -83,7 +90,6 @@ public class LocationModelImpl implements LocationModel {
                     Log.d(TAG, "高德定位 定位成功");
                     Log.d(TAG, "经纬度 " + districtName  + "----" + longitude + "," + latitude);
                 } else {
-                    //定位失败
                     Log.d(TAG, "高德定位 定位失败");
                 }
             } else {

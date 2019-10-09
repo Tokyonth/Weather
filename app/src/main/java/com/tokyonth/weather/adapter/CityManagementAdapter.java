@@ -111,7 +111,7 @@ public class CityManagementAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private void setWeatherInfo(SavedCity savedCity , final CityViewHolder holder){
         new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                .getWeather(Api.JISU_APP_KEY,savedCity.getCityCode())
+                .getWeather(Api.getJisuAppKey(),savedCity.getCityCode())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Weather>() {

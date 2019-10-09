@@ -5,9 +5,11 @@ import android.graphics.drawable.Drawable;
 
 import com.tokyonth.weather.BaseApplication;
 import com.tokyonth.weather.R;
+import com.tokyonth.weather.model.bean.Weather;
 import com.tokyonth.weather.model.bean.entity.Daily;
 import com.tokyonth.weather.model.bean.entity.Hourly;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -181,19 +183,19 @@ public class WeatherInfoHelper {
 
         if (!img.isEmpty()) {
             int imgCode = Integer.parseInt(img);
-            if(imgCode == 0){
+            if(imgCode == 0) {
                 weatherType = R.string.weather_view_sunny;
-            }else if(imgCode == 1 || imgCode == 2){
+            } else if (imgCode == 1 || imgCode == 2) {
                 weatherType = R.string.weather_view_cloudy;
-            }else if(imgCode >= 3 && imgCode <= 12 || imgCode == 19 || imgCode>= 21 && imgCode <= 25 || imgCode == 301){
+            } else if (imgCode >= 3 && imgCode <= 12 || imgCode == 19 || imgCode>= 21 && imgCode <= 25 || imgCode == 301) {
                weatherType = R.string.weather_view_rainy;
-            }else if(imgCode >= 13 && imgCode <= 17 || imgCode >= 26 && imgCode <= 28 || imgCode == 302){
+            } else if (imgCode >= 13 && imgCode <= 17 || imgCode >= 26 && imgCode <= 28 || imgCode == 302) {
                 weatherType = R.string.weather_view_snowy;
-            }else if(imgCode == 18 || imgCode == 32 || imgCode == 49 || imgCode == 57 || imgCode == 58){
+            } else if (imgCode == 18 || imgCode == 32 || imgCode == 49 || imgCode == 57 || imgCode == 58) {
                 weatherType = R.string.weather_view_foggy;
-            }else if(imgCode == 20 || imgCode == 29 || imgCode == 30 || imgCode == 31){
+            } else if (imgCode == 20 || imgCode == 29 || imgCode == 30 || imgCode == 31) {
                 weatherType = R.string.weather_view_sand;
-            }else if(imgCode >= 53 && imgCode <= 56){
+            } else if (imgCode >= 53 && imgCode <= 56) {
                 weatherType = R.string.weather_view_hazy;
             }
             return weatherType;
@@ -201,5 +203,29 @@ public class WeatherInfoHelper {
         return weatherType;
     }
 
+    public static List<Integer> getSunriseSunset(Weather weather) {
+        String Sunrise = weather.getInfo().getDailyList().get(0).getSunrise();
+        String Sunset = weather.getInfo().getDailyList().get(0).getSunset();
+
+        int index = Sunrise.indexOf(":");
+        String SunriseBefore = Sunrise.substring(0,index);
+        String SunriseAfter = Sunrise.substring(index+1);
+        String SunsetBefore = Sunset.substring(0,index);
+        String SunsetAfter = Sunset.substring(index+1);
+
+        int Sunrise_h = Integer.parseInt(SunriseBefore);
+        int Sunrise_m = Integer.parseInt(SunriseAfter);
+        int Sunset_h = Integer.parseInt(SunsetBefore);
+        int Sunset_m = Integer.parseInt(SunsetAfter);
+
+        // list 0 - 3 分别是 日出的小时和分钟 和 日落的小时和分钟
+        List<Integer> list = new ArrayList<>();
+        list.add(Sunrise_h);
+        list.add(Sunrise_m);
+        list.add(Sunset_h);
+        list.add(Sunset_m);
+
+        return list;
+    }
 
 }

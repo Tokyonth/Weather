@@ -24,7 +24,7 @@ public class CityModelImpl implements CityModel {
     public void loadCityList() {
 
         new RetrofitFactory(Api.JISU_URL).getApiInterface()
-                .getCityList(Api.JISU_APP_KEY)
+                .getCityList(Api.getJisuAppKey())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CityList>() {
